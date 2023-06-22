@@ -62,7 +62,7 @@ const InitialVariable = () => {
             subtitle: "",
             link: "lhan"
         }, {
-            img: "",
+            img: "/activities2.jpg",
             title: "Lễ tri ân và trưởng thành",
             subtitle: "",
             link: "lta&th"

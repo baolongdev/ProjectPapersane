@@ -15,9 +15,9 @@ function Footer({ initial }: any) {
                 </h3>
 
                 <div className="footer__subscribe">
-                    <input type="email" placeholder="Enter your email" className="footer__input" />
+                    <input type="email" required placeholder="Enter your email" className="footer__input" />
 
-                    <button className="button button--flex footer__button">
+                    <button type="submit" value="Submit" className="button button--flex footer__button">
                         Subscribe
                         <i className="ri-arrow-right-up-line button__icon"></i>
                     </button>

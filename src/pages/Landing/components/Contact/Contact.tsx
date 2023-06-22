@@ -1,6 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import emailjs from '@emailjs/browser';
 import './Contact.css'
 function Contact({ initial }: any) {
+    useEffect(() => {
+        const contactForm = document.getElementById('contact-form');
+
+        const sendEmail = (e: { preventDefault: () => void; }) => {
+            e.preventDefault();
+            emailjs
+                .sendForm('service_go52r4s', 'template_c48awlc', '#contact-form', 'rVVDXI6hJpjlepF4j')
+                .then(
+                    () => {
+                        // Show sent message
+                        console.log('Message sent successfully');
+                        // contactForm.onreset();
+                    },
+                    () => {
+                        console.log('Message not sent (service error)');
+                    }
+                );
+        };
+
+        contactForm?.addEventListener('submit', sendEmail);
+
+        return () => {
+            // Clean up the event listener when the component unmounts
+            contactForm?.removeEventListener('submit', sendEmail);
+        };
+    }, []); // Empty dependency array to run the effect only once
+
+
     return <section className="contact section container" id="contact">
         <div className="contact__container grid">
             <div className="contact__box">
@@ -27,25 +56,25 @@ function Contact({ initial }: any) {
                 </div>
             </div>
 
-            <form action="" className="contact__form">
+            <form action="" className="contact__form" id='contact-form'>
                 <div className="contact__inputs">
                     <div className="contact__content">
-                        <input type="email" placeholder=" " className="contact__input" />
+                        <input type="text" name='user_name' required placeholder=" " className="contact__input" />
+                        <label htmlFor="" className="contact__label">Name</label>
+                    </div>
+
+                    <div className="contact__content">
+                        <input type="email" name='user_email' required placeholder=" " className="contact__input" />
                         <label htmlFor="" className="contact__label">Email</label>
                     </div>
 
-                    <div className="contact__content">
-                        <input type="text" placeholder=" " className="contact__input" />
-                        <label htmlFor="" className="contact__label">Subject</label>
-                    </div>
-
                     <div className="contact__content contact__area">
-                        <textarea name="message" placeholder=" " className="contact__input"></textarea>
+                        <textarea name="user_message" required placeholder=" " className="contact__input"></textarea>
                         <label htmlFor="" className="contact__label">Message</label>
                     </div>
                 </div>
 
-                <button className="button button--flex">
+                <button type="submit" className="button button--flex">
                     Send Message
                     <i className="ri-arrow-right-up-line button__icon"></i>
                 </button>

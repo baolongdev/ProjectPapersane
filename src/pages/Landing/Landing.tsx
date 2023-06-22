@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Fragment } from 'react';
-import { Header, Home, About, Steps, Products, Questions, Contact, Footer, Scrollup } from "./components"
+import { Header, Home, About, Activities, Products, Questions, Contact, Footer, Scrollup } from "./components"
 import InitialVariable from "../../store/InitialVariable";
 function Landing() {
     const initialVar = InitialVariable();
@@ -70,7 +70,7 @@ function Landing() {
         sr.reveal('.home__social', { delay: 600 });
         sr.reveal('.about__img, .contact__box', { origin: 'left' });
         sr.reveal('.about__data, .contact__form', { origin: 'right' });
-        sr.reveal('.steps__card, .product__card, .questions__group, .footer', { interval: 100 });
+        sr.reveal('.activities__card, .product__card, .questions__group, .footer', { interval: 100 });
         // Clean up the ScrollReveal instance
         return () => {
             sr.destroy();
@@ -83,7 +83,7 @@ function Landing() {
         <main className="main">
             <Home initial={initialVar} />
             <About initial={initialVar} />
-            <Steps initial={initialVar} />
+            <Activities initial={initialVar} />
             {/* <Products initial={initialVar} /> */}
             <Questions initial={initialVar} />
             <Contact initial={initialVar} />

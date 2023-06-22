@@ -5,7 +5,7 @@ function Footer({ initial }: any) {
         <div className="footer__container container grid">
             <div className="footer__content">
                 <a href="#" className="footer__logo">
-                    <img src="src\assets\img\LogoDoan.png" className='footer__logo-icon' alt="" />
+                    <img src="/LogoDoan.png" className='footer__logo-icon' alt="" />
                     Đoàn trường THPT chuyên <br /> Trần Đại Nghĩa
                 </a>
 
@@ -24,7 +24,7 @@ function Footer({ initial }: any) {
                 </div>
             </div>
             <div className="footer__content">
-                <h3 className="footer__title">ĐỊa chỉ</h3>
+                <h3 className="footer__title">Địa chỉ</h3>
 
                 <ul className="footer__data">
                     <a href="https://goo.gl/maps/skM11oc3NCbksCvF9" target='_blank' className="footer__social-link">

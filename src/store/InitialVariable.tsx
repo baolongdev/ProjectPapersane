@@ -5,7 +5,7 @@ const InitialVariable = () => {
         "link": "#home",
         "class": ""
     }, {
-        "title": "Chúng tôi",
+        "title": "Giới thiệu",
         "link": "#about",
         "class": ""
     }, {
@@ -55,9 +55,26 @@ const InitialVariable = () => {
             ]
         }
     ]
-
+    const ativities = [
+        {
+            img: "/activities1.jpg",
+            title: "Lễ hội âm nhạc",
+            subtitle: "",
+            link: "lhan"
+        }, {
+            img: "",
+            title: "Lễ tri ân và trưởng thành",
+            subtitle: "",
+            link: "lta&th"
+        }, {
+            img: "/activities3.jpg",
+            title: "HOA PHƯỢNG ĐỎ",
+            subtitle: "Chiến dịch Tình nguyện hè",
+            link: "hpd"
+        }
+    ]
     return {
-        titleTab, questions
+        titleTab, questions, ativities
     };
 };
 

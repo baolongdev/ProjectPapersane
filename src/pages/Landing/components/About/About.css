@@ -25,7 +25,8 @@
 .about__details-description {
   display: inline-flex;
   column-gap: 0.5rem;
-  font-size: var(--small-font-size);
+  font-size: var(--normal-font-size);
+  font-weight: 500;
 }
 
 .about__details-icon {
@@ -49,6 +50,6 @@
 
 @media screen and (min-width: 1200px) {
   .about__container {
-    column-gap: 7rem;
+    column-gap: 1rem;
   }
 }

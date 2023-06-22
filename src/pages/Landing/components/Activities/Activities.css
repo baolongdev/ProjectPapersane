@@ -1,0 +1,127 @@
+/*=============== activities ===============*/
+.activities__bg {
+  background-color: var(--first-color);
+  padding: 3rem 2rem 2rem;
+  border-radius: 1rem;
+}
+
+.activities__container {
+  gap: 2rem;
+  padding-top: 1rem;
+}
+
+.activities__card {
+  background-color: var(--container-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  transition: 0.3s;
+}
+.activities__card:hover {
+  transform: translateY(-0.5rem);
+}
+
+.activities__title {
+  color: #fff;
+}
+.activities__card-frame {
+  overflow-y: scroll;
+  border-radius: 1rem;
+  margin-bottom: 0.75rem;
+  max-height: 250px;
+}
+.activities__card-frame::-webkit-scrollbar {
+  width: 0;
+}
+.activities__card-img {
+  border-radius: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.activities__card-title {
+  font-size: var(--h2-font-size);
+  line-height: 1.25rem; /* 20px */
+  font-weight: 600;
+  margin-bottom: var(--mb-0-5);
+}
+
+.activities__card-subtitle {
+  font-size: var(--h3-font-size);
+  line-height: 1.25rem; /* 20px */
+  font-weight: 600;
+  margin-bottom: var(--mb-0-5);
+}
+.activities__card-button {
+  /* width: max-content; */
+  font-size: var(--small-font-size);
+  line-height: 1rem; /* 16px */
+  display: flex;
+  align-items: center;
+  column-gap: 0.25rem;
+}
+.activities__card-button:hover .activities__icon {
+  transform: translateX(0.25rem);
+}
+.activities__icon {
+  font-size: var(--small-font-size);
+  line-height: 1.5rem; /* 24px */
+  transition: 0.4s;
+}
+
+.activities__card-number {
+  display: inline-block;
+  background-color: var(--first-color-alt);
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: var(--h2-font-size);
+  margin-bottom: var(--mb-1-5);
+  transition: 0.3s;
+}
+
+.activities__card-description {
+  font-size: var(--small-font-size);
+}
+
+.activities__card:hover .activities__card-number {
+  transform: translateY(-0.25rem);
+}
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 320px) {
+  .activities__bg {
+    padding: 2rem 1rem;
+  }
+  .activities__card {
+    padding: 1.5rem;
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .activities__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 992px) {
+  .activities__container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .activities__bg {
+    padding: 3.5rem 2.5rem;
+  }
+  .activities__card-title {
+    font-size: var(--h2-font-size);
+    line-height: 1.25rem; /* 20px */
+    font-weight: 600;
+    margin-bottom: var(--mb-0-5);
+  }
+
+  .activities__card-subtitle {
+    font-size: var(--normal-font-size);
+    line-height: 1.25rem; /* 20px */
+    font-weight: 500;
+    margin-bottom: var(--mb-0-5);
+  }
+}

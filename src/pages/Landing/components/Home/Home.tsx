@@ -3,7 +3,7 @@ import './Home.css'
 function Home({ initial }: any) {
     return <section className='home' id='home'>
         <div className="home__container container grid">
-            <img src=".\src\assets\img\home.png" alt="" className="home__img" />
+            <img src="/home1.png" alt="" className="home__img" />
 
             <div className="home__data">
                 <h1 className="home__title">
@@ -14,7 +14,7 @@ function Home({ initial }: any) {
                     Add fresness to your new ideas.
                 </p>
                 <a href="#about" className="button button--flex">
-                    Explore <i className="ri-arrow-right-down-line button__icon"></i>
+                    Tim hiểu thêm<i className="ri-arrow-right-down-line button__icon"></i>
                 </a>
             </div>
 

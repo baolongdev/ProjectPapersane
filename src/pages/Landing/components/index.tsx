@@ -1,7 +1,7 @@
 export { default as Header } from './Header/Header'
 export { default as Home } from './Home/Home'
 export { default as About } from './About/About'
-export { default as Steps } from './Steps/Steps'
+export { default as Activities } from './Activities/Activities'
 export { default as Products } from './Products/Products'
 export { default as Questions } from './Questions/Questions'
 export { default as Contact } from './Contact/Contact'

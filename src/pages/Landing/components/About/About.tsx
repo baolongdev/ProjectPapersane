@@ -3,11 +3,11 @@ import './About.css'
 function About({ initial }: any) {
     return <section className="about section container" id="about">
         <div className="about__container grid">
-            <img src="src\assets\img\about.png" alt="" className="about__img" />
+            <img src="/about.png" alt="" className="about__img" />
 
             <div className="about__data">
                 <h2 className="section__title about__title">
-                    Who we really are & <br /> why choose us
+                    Đoàn trường THPT Chuyên <br /> Trần Đại Nghĩa
                 </h2>
 
                 <p className="about__description">
@@ -18,24 +18,24 @@ function About({ initial }: any) {
                 <div className="about__details">
                     <p className="about__details-description">
                         <i className="ri-checkbox-fill about__details-icon"></i>
-                        We always deliver on time.
+                        Học để biết.
                     </p>
                     <p className="about__details-description">
                         <i className="ri-checkbox-fill about__details-icon"></i>
-                        We give you guides to protect and care for your plants.
+                        Học để làm.
                     </p>
                     <p className="about__details-description">
                         <i className="ri-checkbox-fill about__details-icon"></i>
-                        We always come over for a check-up after sale.
+                        Học để tự khẳng định bản mình.
                     </p>
                     <p className="about__details-description">
                         <i className="ri-checkbox-fill about__details-icon"></i>
-                        100% money back guaranteed.
+                        Học để cùng chung sống.
                     </p>
                 </div>
 
-                <a href="#" className="button--link button--flex">
-                    Shop Now <i className="ri-arrow-right-down-line button__icon"></i>
+                <a href="#activities" className="button--link button--flex">
+                    Các hoạt động <i className="ri-arrow-right-down-line button__icon"></i>
                 </a>
             </div>
         </div>

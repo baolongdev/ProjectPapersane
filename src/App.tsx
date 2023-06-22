@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import ScrollReveal from 'scrollreveal';
 import { publicRoutes } from './routes'
 import Landing from './pages/Landing/Landing';
-import Libary from './pages/Libary/Libary';
+import Libary from './pages/Bookflix/Bookflix';
 import "./App.css";
 function App() {
 

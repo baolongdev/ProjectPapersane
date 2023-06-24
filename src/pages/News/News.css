@@ -1,0 +1,7 @@
+.news-page-title {
+    background-color: var(--first-color-lighten);
+}
+
+body.dark-theme .news-page-title {
+    background-color: var(--first-color-dark);
+}

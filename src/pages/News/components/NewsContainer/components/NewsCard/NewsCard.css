@@ -1,0 +1,21 @@
+.news-card {
+    background-color: var(--container-color);
+}
+
+.news-card__title {
+    color: var(--title-color);
+    font-size: var(--h1-font-size);
+}
+
+.news-card__summary {
+    word-break: break-word;
+}
+
+.news-card__button .news-card__button-icon {
+    transition: transform 0.3s ease;
+    /* Add transition property to default state */
+}
+
+.news-card__button:hover .news-card__button-icon {
+    transform: translateX(0.25rem);
+}

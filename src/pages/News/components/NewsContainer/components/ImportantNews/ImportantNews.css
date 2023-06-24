@@ -1,0 +1,35 @@
+.important-news {
+    background-color: var(--container-color);
+}
+
+@media only screen and (min-width: 320px) {
+    .important-news {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+}
+
+@media only screen and (min-width: 640px) {
+    .important-news {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.important-news__title {
+    color: var(--title-color);
+    font-size: var(--h1-font-size);
+}
+
+.important-news__summary {
+    word-break: break-word;
+}
+
+.important-news__button .important-news__button-icon {
+    transition: transform 0.3s ease;
+    /* Add transition property to default state */
+}
+
+.important-news__button:hover .important-news__button-icon {
+    transform: translateX(0.25rem);
+}

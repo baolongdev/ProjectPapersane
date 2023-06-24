@@ -1,0 +1,13 @@
+.news-container {
+    background-color: var(--first-color-lighten);
+}
+
+body.dark-theme .news-container {
+    background-color: var(--first-color-dark);
+}
+
+.horizontal-line {
+    margin: 0 13% 0 13%;
+    background-color: white;
+    height: 5px;
+}

@@ -5,6 +5,7 @@ import {
     Letrianvatruongthanh,
     Notfound,
     Bookflix,
+    News
 } from "../pages"
 
 
@@ -14,6 +15,7 @@ const publicRoutes = [
     { path: "/hpd", compnent: Hoaphuongdo },
     { path: "/lhan", compnent: Lehoiamnhac },
     { path: "/lta&th", compnent: Letrianvatruongthanh },
+    { path: "/news", compnent: News },
     { path: "*", compnent: Notfound }
 ]
 

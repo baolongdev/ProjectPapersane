@@ -13,7 +13,7 @@ function Contact({ initial }: any) {
                     () => {
                         // Show sent message
                         console.log('Message sent successfully');
-                        // contactForm.onreset();
+                        (contactForm as HTMLFormElement).reset();
                     },
                     () => {
                         console.log('Message not sent (service error)');

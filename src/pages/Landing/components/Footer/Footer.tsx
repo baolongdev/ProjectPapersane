@@ -5,8 +5,7 @@ function Footer({ initial }: any) {
         <div className="footer__container container grid">
             <div className="footer__content">
                 <a href="#" className="footer__logo">
-                    <img src="/LogoDoan.png" className='footer__logo-icon' alt="" />
-                    Đoàn trường THPT chuyên <br /> Trần Đại Nghĩa
+                    <img src="/logoDT.png" className='footer__logo-icon' alt="" />
                 </a>
 
                 <h3 className="footer__title">

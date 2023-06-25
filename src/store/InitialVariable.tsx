@@ -9,10 +9,6 @@ const InitialVariable = () => {
         "link": "#about",
         "class": ""
     }, {
-        "title": "Sản phẩm",
-        "link": "#products",
-        "class": ""
-    }, {
         "title": "FAQs",
         "link": "#faqs",
         "class": ""
@@ -22,9 +18,14 @@ const InitialVariable = () => {
         "class": ""
     }, {
         "title": "BOOKFLIX",
-        "link": "/bookflix",
+        "link": "/bookflix/books",
         "class": "btn-link"
     }];
+    // {
+    //     "title": "Sản phẩm",
+    //         "link": "#products",
+    //             "class": ""
+    // },
     const questions = [
         {
             'Group': [
@@ -61,6 +62,16 @@ const InitialVariable = () => {
             title: "Lễ hội âm nhạc",
             subtitle: "",
             link: "lhan"
+        }, {
+            img: "/activities2.jpg",
+            title: "Lễ tri ân và trưởng thành",
+            subtitle: "",
+            link: "lta&th"
+        }, {
+            img: "/activities3.jpg",
+            title: "HOA PHƯỢNG ĐỎ",
+            subtitle: "Chiến dịch Tình nguyện hè",
+            link: "hpd"
         }, {
             img: "/activities2.jpg",
             title: "Lễ tri ân và trưởng thành",

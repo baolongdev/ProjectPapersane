@@ -10,7 +10,7 @@ import {
 
 const publicRoutes = [
     { path: "/", compnent: Landing },
-    { path: "/bookflix", compnent: Bookflix },
+    { path: "/bookflix/books", compnent: Bookflix },
     { path: "/hpd", compnent: Hoaphuongdo },
     { path: "/lhan", compnent: Lehoiamnhac },
     { path: "/lta&th", compnent: Letrianvatruongthanh },

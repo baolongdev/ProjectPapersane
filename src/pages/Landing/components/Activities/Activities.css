@@ -11,6 +11,7 @@
 }
 
 .activities__card {
+  height: fit-content;
   background-color: var(--container-color);
   padding: 1rem;
   border-radius: 1rem;
@@ -57,6 +58,7 @@
   display: flex;
   align-items: center;
   column-gap: 0.25rem;
+  color: var(--text-color);
 }
 .activities__card-button:hover .activities__icon {
   transform: translateX(0.25rem);

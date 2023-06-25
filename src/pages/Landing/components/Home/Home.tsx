@@ -7,11 +7,10 @@ function Home({ initial }: any) {
 
             <div className="home__data">
                 <h1 className="home__title">
-                    Plants will make <br /> your life better
+                    Trường THPT chuyên <br /> Trần Đại Nghĩa
                 </h1>
                 <p className="home__description">
-                    Create incredible plant design for your offices or apastaments.
-                    Add fresness to your new ideas.
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi, vitae maxime, cumque iusto ut ab expedita, alias qui corporis commodi delectus velit totam sapiente saepe quaerat dolorum enim consequatur repellat!
                 </p>
                 <a href="#about" className="button button--flex">
                     Tim hiểu thêm<i className="ri-arrow-right-down-line button__icon"></i>

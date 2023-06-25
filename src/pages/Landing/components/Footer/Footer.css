@@ -17,7 +17,7 @@
 }
 
 .footer__logo-icon {
-  height: 42px;
+  max-height: 8.5rem;
   color: var(--first-color);
 }
 

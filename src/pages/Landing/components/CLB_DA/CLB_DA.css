@@ -32,12 +32,14 @@
   border-radius: 0.75rem;
 }
 .clbdas__filters-icon {
-  font-size: var(--small-font-size);
+  font-size: var(--h2-font-size);
   line-height: 1.5rem;
   transition: 0.4s;
+  color: var(--title-color);
 }
 .clbdas__filters-btn {
-  padding: 0.5rem 0.75rem !important;
+  background-color: transparent !important;
+  padding: 0 !important;
 }
 .clbdas__slider::-webkit-scrollbar {
   height: 0;
@@ -99,12 +101,7 @@
   .clbdas__slider {
     width: 90vw;
   }
-  .clbdas__filters-btn {
-    background-color: transparent !important;
-    padding: 0 !important;
-  }
   .clbdas__filters-icon {
-    color: var(--title-color);
     font-size: var(--h1-font-size);
   }
   .clbdas__filters {

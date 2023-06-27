@@ -11,11 +11,13 @@
 
   /*========== Colors ==========*/
   /*Color mode HSL(hue, saturation, lightness)*/
-  --hue: 152;
-  --first-color: hsl(var(--hue), 24%, 32%);
-  --first-color-alt: hsl(var(--hue), 24%, 28%);
-  --first-color-light: hsl(var(--hue), 24%, 66%);
-  --first-color-lighten: hsl(var(--hue), 24%, 92%);
+  --hue: 219;
+  --sat: 51%;
+  --lig: 52%;
+  --first-color: hsl(var(--hue), var(--sat), var(--lig));
+  --first-color-alt: hsl(var(--hue), var(--sat), calc(var(--lig) - 4%));
+  --first-color-light: hsl(var(--hue), var(--sat), 66%);
+  --first-color-lighten: hsl(var(--hue), var(--sat), 92%);
   --title-color: hsl(var(--hue), 4%, 15%);
   --text-color: hsl(var(--hue), 4%, 35%);
   --text-color-light: hsl(var(--hue), 4%, 55%);
@@ -171,6 +173,7 @@ the website, in dark theme
   font-size: var(--h2-font-size);
   margin-bottom: var(--mb-2);
   line-height: 140%;
+  text-transform: uppercase;
 }
 
 .section__title-center {

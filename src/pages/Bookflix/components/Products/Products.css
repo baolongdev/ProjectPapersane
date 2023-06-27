@@ -55,10 +55,7 @@
   position: relative;
   width: 94%;
   left: 0.65rem;
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+  border-radius: 0.25rem;
 }
 /* 3D BOOK */
 .products__book {
@@ -90,6 +87,7 @@
   left: 13%;
   background-color: #5a2d18;
   box-shadow: 14px 6px 13px 0px #333;
+  border-radius: 0.25rem;
 }
 .products__book:after {
   background-color: #efefef;
@@ -199,5 +197,17 @@
   }
   .products__book {
     width: 200px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .products__book {
+    width: 150px;
+  }
+  .products__book-img,
+  .products__book:before {
+    border-radius: 2px;
+  }
+  .products__book:after {
+    left: 101%;
   }
 }

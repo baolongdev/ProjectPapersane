@@ -47,10 +47,10 @@ function Contact({ initial }: any) {
                     </div>
 
                     <div className="contact__information">
-                        <h3 className="contact__subtitle">Write us by mail</h3>
+                        <h3 className="contact__subtitle">Viết cho chúng tôi qua thư</h3>
                         <span className="contact__description">
                             <i className="ri-mail-line contact__icon"></i>
-                            info@trandainghia.edu.vn
+                            doantruongtdn@trandainghia.edu.vn
                         </span>
                     </div>
                 </div>

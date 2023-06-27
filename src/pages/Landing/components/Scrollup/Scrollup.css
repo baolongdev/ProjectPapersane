@@ -5,7 +5,7 @@
   right: 1rem;
   bottom: -30%;
   display: inline-flex;
-  padding: 0.45rem 0.65rem;
+  padding: 0.45rem 0.5rem;
   border-radius: 0.25rem;
   z-index: var(--z-tooltip);
   opacity: 0.8;

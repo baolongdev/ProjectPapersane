@@ -1,0 +1,46 @@
+.Blog {
+  background-color: #f9f3ee;
+}
+.css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  color: #fff;
+  background-color: #daaa63 !important;
+}
+.paging {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+.blog__container {
+  margin: 5rem 0;
+}
+.blog__card {
+  align-items: center;
+  grid-template-columns: 30% 70%;
+  position: relative;
+  row-gap: 2rem;
+  height: fit-content;
+  background-color: var(--container-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  transition: 0.3s;
+}
+.blog__card-img {
+  border-radius: 1rem;
+  margin-bottom: 0.75rem;
+}
+.blog__card-img img {
+  width: ;
+}
+.blog__card-data {
+  height: 100%;
+}
+.blog__card-title {
+}
+.blog__card-subtitle {
+}
+.blog__card-date {
+}
+.Blog .main {
+  /* margin-top: 3rem; */
+}

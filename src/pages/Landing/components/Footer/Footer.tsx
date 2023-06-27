@@ -42,8 +42,8 @@ function Footer({ initial }: any) {
                 <h3 className="footer__title">Liên lạc</h3>
 
                 <ul className="footer__data">
-                    <li className="footer__information">ĐT: 028 38 229 040 </li>
-                    <li className="footer__information">Fax: 08 38 258 368</li>
+                    <li className="footer__information">Cô Phúc: 070 280 6028 </li>
+                    <li className="footer__information">Thầy Phương: 0944 461 267</li>
 
                     <div className="footer__social">
                         <a href="https://www.facebook.com/doantruongtdn" target='_blank' className="footer__social-link">
@@ -52,7 +52,7 @@ function Footer({ initial }: any) {
                         <a href="http://www.trandainghia.edu.vn/" target='_blank' className="footer__social-link">
                             <i className="ri-google-fill"></i>
                         </a>
-                        <a href="mailto:info@trandainghia.edu.vn" target='_blank' className="footer__social-link">
+                        <a href="mailto:doantruongtdn@trandainghia.edu.vn" target='_blank' className="footer__social-link">
                             <i className="ri-mail-fill"></i>
                         </a>
                     </div>

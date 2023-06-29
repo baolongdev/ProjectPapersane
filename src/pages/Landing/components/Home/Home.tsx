@@ -10,8 +10,27 @@ function Home({ initial }: any) {
                     Trường THPT chuyên <br /> Trần Đại Nghĩa
                 </h1>
                 <p className="home__description">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi, vitae maxime, cumque iusto ut ab expedita, alias qui corporis commodi delectus velit totam sapiente saepe quaerat dolorum enim consequatur repellat!
+                    Lửa Trần Chuyên truyền đi là không bao giờ tắt
                 </p>
+
+                <div className="home__details">
+                    <p className="home__details-description">
+                        <i className="ri-checkbox-fill home__details-icon"></i>
+                        Học để biết.
+                    </p>
+                    <p className="home__details-description">
+                        <i className="ri-checkbox-fill home__details-icon"></i>
+                        Học để làm.
+                    </p>
+                    <p className="home__details-description">
+                        <i className="ri-checkbox-fill home__details-icon"></i>
+                        Học để tự khẳng định mình.
+                    </p>
+                    <p className="home__details-description">
+                        <i className="ri-checkbox-fill home__details-icon"></i>
+                        Học để cùng chung sống.
+                    </p>
+                </div>
                 <a href="#about" className="button button--flex">
                     Tim hiểu thêm<i className="ri-arrow-right-down-line button__icon"></i>
                 </a>

@@ -1,6 +1,6 @@
 /*=============== clbdas ===============*/
 .clbdas {
-  background-color: var(--first-color-light);
+  background-color: var(--first-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,6 +78,7 @@
 }
 .clbdas__img {
   border-radius: 1rem;
+  box-shadow: 5px 5px 5px hsla(var(--hue), 4%, 15%, 0.2);
 }
 .clbdas__card:hover {
   transform: translateY(-1rem);

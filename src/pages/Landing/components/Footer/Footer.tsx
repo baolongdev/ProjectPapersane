@@ -42,8 +42,8 @@ function Footer({ initial }: any) {
                 <h3 className="footer__title">Liên lạc</h3>
 
                 <ul className="footer__data">
-                    <li className="footer__information">Cô Phúc: 070 280 6028 </li>
-                    <li className="footer__information">Thầy Phương: 0944 461 267</li>
+                    <li className="footer__information">Cô Phúc: 070 280 6028 <br />(Trợ lý thanh niên)</li>
+                    <li className="footer__information">Thầy Phương: 0944 461 267 <br />(Giáo viên hỗ trợ công tác Đoàn)</li>
 
                     <div className="footer__social">
                         <a href="https://www.facebook.com/doantruongtdn" target='_blank' className="footer__social-link">
@@ -72,7 +72,11 @@ function Footer({ initial }: any) {
                 </div>
             </div> */}
         </div>
-        <p className="footer__copy">&#169; LBL. All rigths reserved</p>
+        <p
+            onClick={() => {
+                window.location.href = "https://www.facebook.com/blong1204";
+            }}
+            className="footer__copy">&#169; blong1204. All rigths reserved</p>
     </footer>
 }
 

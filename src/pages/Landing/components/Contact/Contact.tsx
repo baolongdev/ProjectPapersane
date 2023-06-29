@@ -34,20 +34,25 @@ function Contact({ initial }: any) {
         <div className="contact__container grid">
             <div className="contact__box">
                 <h2 className="section__title">
-                    Hãy liên hệ với chúng tôi ngay hôm nay <br /> qua bất kỳ thông tin nào dưới đây
+                    CONTACT US HERE
                 </h2>
 
                 <div className="contact__data">
                     <div className="contact__information">
-                        <h3 className="contact__subtitle">Hãy gọi cho chúng tôi</h3>
+                        <h3 className="contact__subtitle">Phone</h3>
                         <span className="contact__description">
                             <i className="ri-phone-line contact__icon"></i>
-                            028 38 229 040
+                            070 280 6028 (Cô Phúc)
+                        </span>
+                        <br />
+                        <span className="contact__description">
+                            <i className="ri-phone-line contact__icon"></i>
+                            0944 461 267 (Thầy Phương)
                         </span>
                     </div>
 
                     <div className="contact__information">
-                        <h3 className="contact__subtitle">Viết cho chúng tôi qua thư</h3>
+                        <h3 className="contact__subtitle">Email</h3>
                         <span className="contact__description">
                             <i className="ri-mail-line contact__icon"></i>
                             doantruongtdn@trandainghia.edu.vn

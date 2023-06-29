@@ -8,6 +8,9 @@ declare module 'mixitup' {
     };
     animation?: {
       duration?: number;
+      nudge?: boolean;
+      reverseOut?: boolean;
+      effects?: string;
     };
     // Add more options as needed
   }

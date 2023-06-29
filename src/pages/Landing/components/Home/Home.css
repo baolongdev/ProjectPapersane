@@ -1,5 +1,6 @@
 /*=============== HOME ===============*/
 .home {
+  height: calc(100vh);
   padding: 3.5rem 0 2rem;
 }
 
@@ -21,6 +22,8 @@
 
 .home__description {
   margin-bottom: var(--mb-2-5);
+  font-size: var(--h2-font-size);
+  font-style: italic;
 }
 
 .home__social {
@@ -65,7 +68,23 @@
 .home__social-link:hover {
   transform: translateX(0.25rem);
 }
+.home__details {
+  display: grid;
+  row-gap: 1rem;
+  margin-bottom: var(--mb-2-5);
+}
+.home__details-description {
+  display: inline-flex;
+  column-gap: 0.5rem;
+  font-size: var(--normal-font-size);
+  font-weight: 500;
+}
 
+.home__details-icon {
+  font-size: 1rem;
+  color: var(--first-color);
+  margin-top: 0.15rem;
+}
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
 @media screen and (max-width: 320px) {
@@ -116,7 +135,7 @@
 
 @media screen and (min-width: 767px) {
   .home__container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 60% 30%;
   }
 
   .home {
@@ -135,6 +154,11 @@
 }
 
 /* For large devices */
+@media screen and (max-width: 992px) {
+  .home {
+    height: auto;
+  }
+}
 @media screen and (min-width: 992px) {
   .home {
     padding: 6.5rem 0 5rem;

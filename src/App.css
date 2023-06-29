@@ -172,6 +172,7 @@ the website, in dark theme
 .section__title-center {
   font-size: var(--h2-font-size);
   margin-bottom: var(--mb-2);
+  font-weight: 700;
   line-height: 140%;
   text-transform: uppercase;
 }

@@ -9,7 +9,10 @@ function CLB_DA({ initial }: any) {
                 target: ".clbdas__card"
             },
             animation: {
-                duration: 300
+                duration: 300,
+                nudge: true,
+                reverseOut: true,
+                effects: "fade scale(0.01)"
             }
         })
         // Clean up the MixItUp instance when the component unmounts
@@ -78,8 +81,6 @@ function CLB_DA({ initial }: any) {
             </button>
             <div className='clbdas__slider'>
                 <span className="clbdas__item active-clbdas" data-filter="all">Tất cả</span>
-                <span className="clbdas__item" data-filter=".clb">Câu lạc bộ</span>
-                <span className="clbdas__item" data-filter=".da">Dự án</span>
                 <span className="clbdas__item" data-filter=".vh">Văn hóa</span>
                 <span className="clbdas__item" data-filter=".knnt">Kỹ năng - nghệ thuật</span>
                 <span className="clbdas__item" data-filter=".httt">Học thuật - thông tin</span>

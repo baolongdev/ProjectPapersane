@@ -16,6 +16,7 @@
   padding: 1rem;
   border-radius: 1rem;
   transition: 0.3s;
+  box-shadow: 5px 5px 5px hsla(var(--hue), 4%, 15%, 0.2);
 }
 .activities__card:hover {
   transform: translateY(-0.5rem);
@@ -25,10 +26,10 @@
   color: #fff;
 }
 .activities__card-frame {
-  overflow-y: scroll;
   border-radius: 1rem;
   margin-bottom: 0.75rem;
-  max-height: 250px;
+  /* overflow-y: scroll;
+  max-height: 250px; */
 }
 .activities__card-frame::-webkit-scrollbar {
   width: 0;

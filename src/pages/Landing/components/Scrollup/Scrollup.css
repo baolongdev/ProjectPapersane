@@ -2,6 +2,7 @@
 .scrollup {
   position: fixed;
   background-color: var(--first-color);
+  box-shadow: 0 4px 4px hsla(var(--hue), 4%, 15%, 0.3);
   right: 1rem;
   bottom: -30%;
   display: inline-flex;

@@ -13,7 +13,7 @@ function CLB_DA({ initial }: any) {
                 nudge: true,
                 reverseOut: true,
                 effects: "fade scale(0.01)"
-            }
+            },
         })
         // Clean up the MixItUp instance when the component unmounts
         return () => {
@@ -50,7 +50,6 @@ function CLB_DA({ initial }: any) {
         setScroll((prevScroll) => {
             const slider = document.querySelector('.clbdas__slider') as HTMLElement,
                 sliderWidth = slider.offsetWidth;
-            console.log(prevScroll);
 
             if (prevScroll + 100 > sliderWidth) {
                 return sliderWidth + 200;
@@ -95,8 +94,8 @@ function CLB_DA({ initial }: any) {
         </div>
         <div className="clbdas__container container grid">
             {
-                initial.clb_da.map((data: any) => (
-                    <a href={data.link} target='_blank' className={`clbdas__card mix ${data.tag}`}>
+                initial.clb_da.map((data: any, index: any) => (
+                    <a key={index} href={`clbinfo/` + (data.link).replace("https://www.facebook.com/", "")} target='' className={`clbdas__card mix ${data.tag}`}>
                         <img src={data.img} alt="" className="clbdas__img" />
                     </a>
                 ))

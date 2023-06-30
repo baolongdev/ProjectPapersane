@@ -12,6 +12,7 @@ declare module 'mixitup' {
       reverseOut?: boolean;
       effects?: string;
     };
+    queueLimit?: number;
     // Add more options as needed
   }
 
@@ -19,6 +20,7 @@ declare module 'mixitup' {
     // Define the methods and properties here
     // For example:
     destroy: () => void;
+    remove: () => void;
     mix: () => void;
   }
 

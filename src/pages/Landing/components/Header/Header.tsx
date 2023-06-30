@@ -73,8 +73,8 @@ function Header({ initial }: any) {
                 <ul className="nav__list">
                     {
                         initial.titleTab.map((tabName: any, index: any) => (
-                            <li className="nav__item">
-                                <a href={`${tabName.link}`} key={index} className={`nav__link ${index == 0 ? "active-link" : ""} ${tabName.class}`}>{tabName.title}</a>
+                            <li className="nav__item" key={index}>
+                                <a href={`${tabName.link}`} className={`nav__link ${index == 0 ? "active-link" : ""} ${tabName.class}`}>{tabName.title}</a>
                             </li>
                         ))
                     }

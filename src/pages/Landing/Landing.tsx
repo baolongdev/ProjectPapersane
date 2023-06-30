@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Fragment } from 'react';
-import { Header, Home, About, Activities, Products, CLB_DA, Contact, Footer, Scrollup } from "./components"
+import { Header, Home, About, Activities, Brainstorm, CLB_DA, Contact, Footer, Scrollup } from "./components"
 import InitialVariable from "../../store/InitialVariable";
 function Landing() {
     const initialVar = InitialVariable();
@@ -82,6 +82,7 @@ function Landing() {
         <Header initial={initialVar} />
         <main className="main">
             <Home initial={initialVar} />
+            <Brainstorm initial={initialVar} />
             <About initial={initialVar} />
             <Activities initial={initialVar} />
             {/* <Products initial={initialVar} /> */}

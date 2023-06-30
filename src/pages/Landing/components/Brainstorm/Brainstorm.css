@@ -1,0 +1,11 @@
+.brainstorm__container {
+  display: flex;
+}
+.brainstorm__img {
+  border: 0;
+  height: 100%;
+  width: 100%;
+}
+.brainstorm {
+  padding-top: calc(var(--header-height) + 1rem) !important;
+}

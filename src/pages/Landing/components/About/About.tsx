@@ -54,8 +54,8 @@ function About({ initial }: any) {
                     <br />
                     Văn phòng Đoàn là Nhà trong Nhà
                 </p>
-                <a href="#activities" className="button button--flex">
-                    Các hoạt động <i className="ri-arrow-right-down-line button__icon"></i>
+                <a href="/doantruong" className="button button--flex">
+                    Tìm hiểu thêm <i className="ri-arrow-right-down-line button__icon"></i>
                 </a>
             </div>
         </div>

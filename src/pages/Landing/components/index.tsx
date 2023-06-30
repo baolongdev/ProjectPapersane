@@ -1,5 +1,6 @@
 export { default as Header } from './Header/Header'
 export { default as Home } from './Home/Home'
+export { default as Brainstorm } from './Brainstorm/Brainstorm'
 export { default as About } from './About/About'
 export { default as Activities } from './Activities/Activities'
 export { default as Products } from './Products/Products'

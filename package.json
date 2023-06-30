@@ -13,8 +13,10 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.6",
+    "animejs": "^3.2.1",
     "axios": "^1.4.0",
     "cheerio": "^1.0.0-rc.12",
+    "gsap": "^3.12.2",
     "puppeteer": "^20.7.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -24,6 +26,7 @@
     "swiper": "^9.4.1"
   },
   "devDependencies": {
+    "@types/animejs": "^3.1.7",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/scrollreveal": "^0.0.8",

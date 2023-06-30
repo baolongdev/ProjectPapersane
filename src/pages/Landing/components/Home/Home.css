@@ -18,6 +18,8 @@
   font-size: var(--big-font-size);
   line-height: 140%;
   margin-bottom: var(--mb-1);
+  text-transform: uppercase;
+  font-weight: 800;
 }
 
 .home__description {
@@ -78,6 +80,7 @@
   column-gap: 0.5rem;
   font-size: var(--normal-font-size);
   font-weight: 500;
+  width: 80%;
 }
 
 .home__details-icon {

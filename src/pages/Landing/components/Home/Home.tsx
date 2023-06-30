@@ -9,26 +9,13 @@ function Home({ initial }: any) {
                 <h1 className="home__title">
                     Trường THPT chuyên <br /> Trần Đại Nghĩa
                 </h1>
-                <p className="home__description">
+                {/* <p className="home__description">
                     Lửa Trần Chuyên truyền đi là không bao giờ tắt
-                </p>
+                </p> */}
 
                 <div className="home__details">
                     <p className="home__details-description">
-                        <i className="ri-checkbox-fill home__details-icon"></i>
-                        Học để biết.
-                    </p>
-                    <p className="home__details-description">
-                        <i className="ri-checkbox-fill home__details-icon"></i>
-                        Học để làm.
-                    </p>
-                    <p className="home__details-description">
-                        <i className="ri-checkbox-fill home__details-icon"></i>
-                        Học để tự khẳng định mình.
-                    </p>
-                    <p className="home__details-description">
-                        <i className="ri-checkbox-fill home__details-icon"></i>
-                        Học để cùng chung sống.
+                        Học để biết - Học để làm - Học để tự khẳng định mình - Học để cùng chung sống
                     </p>
                 </div>
                 <a href="#about" className="button button--flex">

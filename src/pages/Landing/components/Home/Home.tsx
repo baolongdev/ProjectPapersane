@@ -1,10 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Home.css'
+import Swiper from 'swiper';
+import { EffectFade, Autoplay, Thumbs } from "swiper";
+
 function Home({ initial }: any) {
+    const numberOfPhotos = 10
+    useEffect(() => {
+        const galleryTop = new Swiper('.home__slider', {
+            effect: 'fade',
+            slidesPerView: 1,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            modules: [EffectFade, Autoplay],
+        });
+
+        return () => {
+            galleryTop.destroy();
+        };
+    }, []);
     return <section className='home' id='home'>
         <div className="home__container container grid">
-            <img src="/home1.png" alt="" className="home__img" />
-
+            <div className="swiper-container home__slider">
+                <div className="swiper-wrapper home__slider-swiper">
+                    {
+                        [...Array(numberOfPhotos)].map((_, i) => (
+                            <div key={i + 1} className="swiper-slide">
+                                <img src={`/home/${i + 1}.png`} alt="" className="home__slider-img home__slider-mask" />
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
             <div className="home__data">
                 <h1 className="home__title">
                     Trường THPT chuyên <br /> Trần Đại Nghĩa

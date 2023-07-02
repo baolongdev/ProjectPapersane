@@ -58,17 +58,17 @@ const InitialVariable = () => {
     ]
     const ativities = [
         {
-            img: "/activities1.jpg",
+            img: "/activities/1.jpg",
             title: "Lễ hội âm nhạc",
             subtitle: "",
             link: "lhan"
         }, {
-            img: "/activities2.jpg",
+            img: "/activities/2.jpg",
             title: "Lễ tri ân và trưởng thành",
             subtitle: "",
             link: "lta&th"
         }, {
-            img: "/hpd.png",
+            img: "/activities/3.jpg",
             title: "HOA PHƯỢNG ĐỎ",
             subtitle: "Chiến dịch Tình nguyện hè",
             link: "hpd"

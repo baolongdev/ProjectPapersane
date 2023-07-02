@@ -3,24 +3,24 @@ import './About.css'
 import './Control.css'
 
 import Swiper from 'swiper';
-import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/thumbs";
 import { EffectFade, Autoplay, Thumbs } from "swiper";
+
 function About({ initial }: any) {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const numberOfPhotos = 3
+
     useEffect(() => {
         const galleryThumbs = new Swiper('.gallery-thumbs', {
             spaceBetween: 0,
             slidesPerView: 3, // Update the number of slides per view here
         });
         const galleryTop = new Swiper('.gallery-top', {
-            // effect: 'fade',
+            effect: 'fade',
             loop: true,
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
+            // autoplay: {
+            //     delay: 2500,
+            //     disableOnInteraction: false,
+            // },
             modules: [EffectFade, Autoplay, Thumbs],
             thumbs: {
                 swiper: galleryThumbs,
@@ -37,9 +37,11 @@ function About({ initial }: any) {
     return <section className="about section container" id="about">
         <div className="swiper-container gallery-top">
             <div className="swiper-wrapper my-swiper">
-                <img src="/BCH1.jpg" alt="" className="about__bg swiper-slide" />
-                <img src="/BCH2.jpg" alt="" className="about__bg swiper-slide" />
-                <img src="/BCH3.jpg" alt="" className="about__bg swiper-slide" />
+                {
+                    [...Array(numberOfPhotos)].map((_, i) => (
+                        <img key={i} src={`/bch/${i + 1}.jpg`} alt="" className="about__bg swiper-slide" />
+                    ))
+                }
             </div>
         </div>
 
@@ -62,9 +64,11 @@ function About({ initial }: any) {
         {/* <!--=============== CONTROLS ===============--> */}
         <div className="controls gallery-thumbs">
             <div className="controls__container swiper-wrapper">
-                <img src="/BCH1.jpg" alt="" className="controls__img swiper-slide" />
-                <img src="/BCH2.jpg" alt="" className="controls__img swiper-slide" />
-                <img src="/BCH3.jpg" alt="" className="controls__img swiper-slide" />
+                {
+                    [...Array(numberOfPhotos)].map((_, i) => (
+                        <img key={i} src={`/bch/${i + 1}.jpg`} alt="" className="controls__img swiper-slide" />
+                    ))
+                }
             </div>
         </div>
     </section>

@@ -4,8 +4,7 @@ import { useParams } from 'react-router-dom';
 import DataClb from '../../store/DataClb';
 import convertDocxToText from './convertDocxToText'
 import ExtractorColor from './ExtractorColor'
-import { Expo, gsap, random } from 'gsap';
-import { map } from 'cheerio/lib/api/traversing';
+import { Expo, gsap } from 'gsap';
 
 
 function Clbinfo({ match }: any) {
@@ -50,6 +49,7 @@ function Clbinfo({ match }: any) {
         const isMobile = window.innerWidth < 767;
         const t1 = gsap.timeline({ defaults: { duration: 2.5, ease: "expo.out" } })
         t1.to(LogoRefs.current, {
+            delay: 0.5,
             scale: 0,
             clipPath: "polygon(0% 100%, 100% 100%, 100: 0%, 0% 0%)",
             opacity: 0,
@@ -216,23 +216,26 @@ function Clbinfo({ match }: any) {
                 </div>
             </div>
             <div className='clbinfo__groupImage' ref={groupImageRef}>
-                {
-                    [...Array(7)].map((_, i) => (
-                        <img
-                            onError={() => {
-                                imageRefs.current[i]?.remove()
-                            }}
-                            onDoubleClick={() => {
-                                imageRefs.current[i]?.classList.toggle("imageShow");
-                            }}
-                            key={i}
-                            src={`/clbinfo/${dataClb?.id}/image/${i + 1}.jpg`}
-                            className={`clbinfo__groupImage-image image${i}`}
-                            ref={(el) => (imageRefs.current[i] = el)}
-                            alt=""
-                        />
-                    ))
-                }
+                <div className="clbinfo__blur">
+
+                    {
+                        [...Array(7)].map((_, i) => (
+                            <img
+                                onError={() => {
+                                    imageRefs.current[i]?.remove()
+                                }}
+                                onDoubleClick={() => {
+                                    imageRefs.current[i]?.classList.toggle("imageShow");
+                                }}
+                                key={i}
+                                src={`/clbinfo/${dataClb?.id}/image/${i + 1}.jpg`}
+                                className={`clbinfo__groupImage-image image${i}`}
+                                ref={(el) => (imageRefs.current[i] = el)}
+                                alt=""
+                            />
+                        ))
+                    }
+                </div>
             </div>
             <img src={`/clbinfo/${dataClb?.id}/banner.png`} className='clbinfo__logo-overlay' ref={LogoRefs} alt="" />
 

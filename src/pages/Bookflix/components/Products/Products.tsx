@@ -2,8 +2,6 @@ import React from 'react'
 import './Products.css'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Rating } from '@mui/material';
-// Import Swiper styles
-import "swiper/css";
 
 
 function Products() {

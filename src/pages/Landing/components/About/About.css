@@ -50,6 +50,10 @@
   color: var(--title-color);
 }
 
+.about .about__bg:not(.swiper-slide-active) {
+  opacity: 0 !important;
+}
+
 /*=============== BREAKPOINTS ===============*/
 @media screen and (min-width: 767px) {
   /* .about__container {

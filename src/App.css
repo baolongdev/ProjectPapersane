@@ -196,6 +196,7 @@ the website, in dark theme
 }
 /*=============== BUTTONS ===============*/
 .button {
+  cursor: pointer;
   display: inline-block;
   background-color: var(--first-color);
   color: #fff;

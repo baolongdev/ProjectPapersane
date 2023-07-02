@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import mixitup from 'mixitup';
+import { DataClb } from '../../../../store';
 
 import './CLB_DA.css'
 function CLB_DA({ initial }: any) {
@@ -65,7 +66,7 @@ function CLB_DA({ initial }: any) {
             slider.scrollLeft = scroll;
         }
     }, [scroll]);
-
+    const { clbinfo } = DataClb();
     return <section className="clbdas section" id="clbda">
         <h2 className="section__title-center clbdas__title container">
             CÂU LẠC BỘ - DỰ ÁN
@@ -94,9 +95,9 @@ function CLB_DA({ initial }: any) {
         </div>
         <div className="clbdas__container container grid">
             {
-                initial.clb_da.map((data: any, index: any) => (
-                    <a key={index} href={`clbinfo/` + (data.link).replace("https://www.facebook.com/", "")} target='' className={`clbdas__card mix ${data.tag}`}>
-                        <img src={data.img} alt="" className="clbdas__img" />
+                clbinfo.map((data: any, index: any) => (
+                    <a key={index} href={`clbinfo/` + data.id.replace(/\./g, "-")} target='_blank' className={`clbdas__card mix ${data.tag}`}>
+                        <img src={`/clbinfo/${data.id}/banner.png`} alt="" className="clbdas__img" />
                     </a>
                 ))
             }

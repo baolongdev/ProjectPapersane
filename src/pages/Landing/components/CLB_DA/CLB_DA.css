@@ -12,6 +12,7 @@
   padding: 1rem;
   gap: 1.25rem;
   justify-items: center;
+  align-items: center;
 }
 .clbdas__filters {
   margin: 2rem 1rem 2.25rem;
@@ -79,6 +80,9 @@
 .clbdas__img {
   border-radius: 1rem;
   box-shadow: 5px 5px 5px hsla(var(--hue), 4%, 15%, 0.2);
+  object-fit: cover;
+  object-position: center;
+  background-color: #fff;
 }
 .clbdas__card:hover {
   transform: translateY(-1rem);

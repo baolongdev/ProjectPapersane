@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Letrianvatruongthanh.css';
 import anime from 'animejs';
-import { TweenMax, Expo } from 'gsap';
+import { gsap, Expo } from 'gsap';
 
 
 function Letrianvatruongthanh() {
@@ -27,22 +27,21 @@ function Letrianvatruongthanh() {
                 duration: 1400,
                 delay: (el, i) => 6500 + 30 * i
             })
-
-            TweenMax.staggerFrom(".ltath__data > .ltath__img",
-                2,
-                {
-                    y: "110%",
-                    ease: Expo.easeInOut,
-                    delay: 1,
-                    stagger: 0.4,
+            const t1 = gsap.timeline({ defaults: { duration: 2.5, ease: "expo.out" } })
+            t1.from(".ltath__data > .ltath__img", {
+                y: "110%",
+                clipPath: "polygon(0% 100%, 100% 100%, 100: 0%, 0% 0%)",
+                ease: "power4.inOut",
+                stagger: {
+                    amount: 1.5,
                 }
-            )
-            TweenMax.to(".ltath__container", 2, {
-                scale: "2",
-                y: "90%",
-                ease: Expo.easeInOut,
-                delay: 5.5
-            })
+            }, "=.1")
+                .to(".ltath__container", {
+                    scale: "2",
+                    y: "90%",
+                    ease: Expo.easeInOut,
+                    delay: 5.5
+                })
         }
 
     }, [])

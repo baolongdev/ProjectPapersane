@@ -17,10 +17,10 @@ function About({ initial }: any) {
         const galleryTop = new Swiper('.gallery-top', {
             effect: 'fade',
             loop: true,
-            // autoplay: {
-            //     delay: 2500,
-            //     disableOnInteraction: false,
-            // },
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
             modules: [EffectFade, Autoplay, Thumbs],
             thumbs: {
                 swiper: galleryThumbs,

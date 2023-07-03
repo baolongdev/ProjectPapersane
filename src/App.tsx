@@ -5,8 +5,34 @@ import { publicRoutes } from './routes'
 import Landing from './pages/Landing/Landing';
 import Libary from './pages/Bookflix/Bookflix';
 import "./App.css";
+import { gsap } from 'gsap';
 function App() {
+  // useEffect(() => {
+  //   var t1 = gsap.timeline();
 
+  //   const Load = async () => {
+  //     t1.to('ul.barba__transition li', {
+  //       duration: 0.5,
+  //       scaleY: 0,
+  //       transformOrigin: "bottom left",
+  //       stagger: 0.2
+  //     });
+  //     // await t1.finished();
+  //   };
+  //   const handlePageLoad = () => {
+  //     // Call Load when entering a new page
+  //     Load();
+  //   };
+
+  //   // Add event listeners for page transitions
+  //   window.addEventListener("load", handlePageLoad);
+
+  //   return () => {
+  //     // Clean up event listeners
+  //     window.removeEventListener("load", handlePageLoad);
+  //     t1.revert();
+  //   };
+  // }, []);
   return (
     <Router>
       <div className='App'>

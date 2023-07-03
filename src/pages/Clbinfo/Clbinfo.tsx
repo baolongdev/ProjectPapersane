@@ -31,66 +31,48 @@ function Clbinfo({ match }: any) {
                 console.error('Error:', error);
             });
     }, []);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const { R, G, B } = await ExtractorColor(`/clbinfo/${dataClb?.id}/Logo.png`);
-                (document.querySelector(".section__title-center") as HTMLElement).style.color = `rgb(${R}, ${G}, ${B})`;
-            } catch (error) {
-                console.error('Error extracting color:', error);
-            }
-        };
-        return () => {
-            fetchData();
-        }
-    }, []);
 
     useLayoutEffect(() => {
         const isMobile = window.innerWidth < 767;
         const t1 = gsap.timeline({ defaults: { duration: 2.5, ease: "expo.out" } })
         t1.to(LogoRefs.current, {
-            delay: 0.5,
             scale: 0,
-            clipPath: "polygon(0% 100%, 100% 100%, 100: 0%, 0% 0%)",
             opacity: 0,
             ease: "power3.inOut",
             duration: 2,
         }, "=.1")
             .from(imageRefs.current, {
                 y: "110%",
-                clipPath: "polygon(0% 100%, 100% 100%, 100: 0%, 0% 0%)",
+
                 opacity: .8,
                 ease: "power3.inOut",
                 duration: 2,
                 stagger: {
                     amount: 3,
-                }
+                },
             }, "=.1")
 
             .to(imageRefs.current, {
-                left: isMobile ? "0%" : "random([-40%,-36%,35%,39%])",
-                top: isMobile ? "0%" : "random([-20%,-0%,20%,30%])",
-                rotate: isMobile ? 0 : "random(-20, 20)",
-                scale: isMobile ? 1 : "random(0.2, 0.25)",
-                cursor: isMobile ? "auto" : "move",
-            })
-            .to(groupImageRef.current, {
-                scale: isMobile ? 2 : 1,
-                opacity: isMobile ? 0 : 1,
-                display: isMobile ? "none" : "block",
+                left: "random([-40%,-36%,35%,39%])",
+                top: "random([-20%,-0%,20%,30%])",
+                rotate: "random(-20, 20)",
+                scale: "random(0.2, 0.25)",
+                cursor: "move",
             })
             .from(backgroundRef.current, {
                 opacity: 0,
                 ease: Expo.easeInOut,
                 transformOrigin: 'center',
-                // delay: 1
-            }, "=-.5")
+            }, "=-2.8")
             .to(btnReturnRef.current, {
                 opacity: 1,
                 ease: "power4.inOut",
-                clipPath: "polygon(0% 100%, 100% 100%, 100: 0%, 0% 0%)",
+
                 zIndex: 10,
-            }, "=-.5")
+            }, "=-2")
+            .to(imageRefs.current, {
+                pointerEvents: "auto"
+            })
         return () => {
             t1.revert();
         }
@@ -175,27 +157,47 @@ function Clbinfo({ match }: any) {
             if (backgroundRef.current && groupImageRef.current) {
                 const backgroundHeight = backgroundRef.current.clientHeight;
                 const windowHeight = window.innerHeight;
+                let heightToSet;
+                if (backgroundHeight > windowHeight) {
+                    heightToSet = backgroundHeight;
+                } else {
+                    heightToSet = windowHeight;
+                }
 
-                // So sánh chiều dài của backgroundRef với chiều dài của trang web
-                const heightToSet = Math.max(backgroundHeight, windowHeight);
+                console.log(backgroundHeight, windowHeight);
 
-                groupImageRef.current.style.height = `${heightToSet}px`;
+                groupImageRef.current.style.height = heightToSet + "px";
+                backgroundRef.current.style.height = heightToSet + "px";
             }
         };
 
         updateGroupImageHeight();
 
-        const resizeObserver = new ResizeObserver(updateGroupImageHeight);
-        if (backgroundRef.current) {
-            resizeObserver.observe(backgroundRef.current);
-        }
+        const handleResize = () => {
+            updateGroupImageHeight();
+        };
+
+        window.addEventListener('resize', handleResize);
 
         return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [docxText]);
+
+    useEffect(() => {
+        const changeBg = () => {
             if (backgroundRef.current) {
-                resizeObserver.unobserve(backgroundRef.current);
+                backgroundRef.current.style.backgroundColor = dataClb?.BgColor || "#FFF";
             }
         };
-    }, [backgroundRef]);
+
+        return () => {
+
+            changeBg(); // Gọi hàm changeBg khi component bị xóa
+        };
+    }, []);
+
+    const specialBg = ["theplasbitcampaign", "tomun2021", "clbnhiepanhtdn", "vanhoavntdnschool"]
 
 
     return (
@@ -207,15 +209,15 @@ function Clbinfo({ match }: any) {
                 ref={btnReturnRef}
             />
             <div className="clbinfo__bg" ref={backgroundRef}>
-                <h2 className="section__title-center clbinfo__title">
+                <h2 className={`section__title-center clbinfo__title ${dataClb?.TextColor} clbinfo__bg-limitedWidth`}>
                     {dataClb?.name}
                 </h2>
-                <img src={`/clbinfo/${dataClb?.id}/banner.png`} className='clbinfo__logo' alt="" />
-                <div className="clbinfo__container grid">
-                    <p className='clbinfo__description' ref={RefDescription}>{docxText}</p>
+                <img src={`/clbinfo/${dataClb?.id}/Logo.png`} className='clbinfo__logo clbinfo__bg-limitedWidth' alt="" />
+                <div className="clbinfo__container clbinfo__bg-limitedWidth">
+                    <p className={`clbinfo__description ${dataClb?.TextColor}`} ref={RefDescription}>{docxText}</p>
                 </div>
             </div>
-            <div className='clbinfo__groupImage' ref={groupImageRef}>
+            <div className='clbinfo__groupImage ' ref={groupImageRef}>
                 <div className="clbinfo__blur">
 
                     {
@@ -237,7 +239,7 @@ function Clbinfo({ match }: any) {
                     }
                 </div>
             </div>
-            <img src={`/clbinfo/${dataClb?.id}/banner.png`} className='clbinfo__logo-overlay' ref={LogoRefs} alt="" />
+            <img src={`/clbinfo/${dataClb?.id}/Logo${specialBg.includes(dataClb?.id as string) ? 1 : ""}.png`} className='clbinfo__logo-overlay' ref={LogoRefs} alt="" />
 
         </section>
     );

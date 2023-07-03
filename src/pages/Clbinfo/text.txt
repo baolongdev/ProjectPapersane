@@ -1,0 +1,44 @@
+
+vanhoavntdnschool: colorwhite
+deutschtdn: 
+amica.tdn: 
+clbvanhoanhatbantdn: 
+clbhanquoctdn: 
+clbvanhoatrunghoatrandainghia: colorwhite
+clbluaxanhtdn: 
+clbnhiepanhtdn: colorwhite
+clbvannghetdn: 
+tdnartclub: colorwhite
+clbhandmadetdn: 
+thecinex.ctdn: 
+tomun2021: colorwhite
+kncongchungtdn: colorwhite
+TDNChessClub: colorwhite
+papersanetdn: 
+clbtienganhtdn: colorwhite
+clbvatlitdn: colorwhite
+clb.hoahoc.tdn: 
+tdntinhoc: colorwhite
+truyenthonghocduongtdn: 
+clbbaochitruyenthongtdn: colorwhite
+ecotdn: 
+themersyact: 
+theplasbitcampaign: colorwhite
+CareerVentureTDN: colorwhite
+ngotlab: colorwhite
+profile.php?id=100087346698039: colorwhite
+the.irisproject.tdn: 
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const { R, G, B } = await ExtractorColor(`/clbinfo/${dataClb?.id}/Logo.png`);
+    //             (document.querySelector(".section__title-center") as HTMLElement).style.color = `rgb(${R}, ${G}, ${B})`;
+    //         } catch (error) {
+    //             console.error('Error extracting color:', error);
+    //         }
+    //     };
+    //     return () => {
+    //         fetchData();
+    //     }
+    // }, []);

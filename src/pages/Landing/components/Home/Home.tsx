@@ -11,7 +11,7 @@ function Home({ initial }: any) {
             slidesPerView: 1,
             loop: true,
             autoplay: {
-                delay: 5000,
+                delay: 3500,
                 disableOnInteraction: false,
             },
             modules: [EffectFade, Autoplay],

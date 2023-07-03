@@ -1,0 +1,16 @@
+ul.barba__transition {
+  display: flex;
+  position: absolute;
+  z-index: 1001;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  pointer-events: none;
+}
+ul.barba__transition li {
+  transform: scaleY(0);
+  background: white;
+  width: 20%;
+}

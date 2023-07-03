@@ -4,89 +4,100 @@ const DataClb = () => {
         {
             id: "vanhoavntdnschool",
             tag: "vh clb",
-            name: "CLB Văn hóa Việt Nam",
+            name: "CÂU LẠC BỘ Văn hóa Việt Nam",
             link: "https://www.facebook.com/vanhoavntdnschool",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#6A53A3",
             logo: "logo.png"
         },
         {
             id: "deutschtdn",
             tag: "vh clb",
-            name: "CLB Văn hóa Đức",
+            name: "CÂU LẠC BỘ Văn hóa Đức",
             link: "https://www.facebook.com/deutschtdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#FCF6AE",
             logo: "logo.png"
         },
         {
             id: "amica.tdn",
             tag: "vh clb",
-            name: "CLB Văn hóa Hoa Kỳ",
+            name: "CÂU LẠC BỘ Văn hóa Hoa Kỳ",
             link: "https://www.facebook.com/amica.tdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#FFFFFF",
             logo: "logo.png"
         },
         {
             id: "clbvanhoanhatbantdn",
             tag: "vh clb",
-            name: "CLB Văn hóa Nhật Bản",
+            name: "CÂU LẠC BỘ Văn hóa Nhật Bản",
             link: "https://www.facebook.com/clbvanhoanhatbantdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#F0D4E6",
             logo: "logo.png"
         },
         {
             id: "clbhanquoctdn",
             tag: "vh clb",
-            name: "CLB Hàn Quốc",
+            name: "CÂU LẠC BỘ Hàn Quốc",
             link: "https://www.facebook.com/clbhanquoctdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#B8E4F4",
             logo: "logo.png"
         },
         {
             id: "clbvanhoatrunghoatrandainghia",
             tag: "vh clb",
-            name: "CLB Văn hóa Trung Hoa",
+            name: "CÂU LẠC BỘ Văn hóa Trung Hoa",
             link: "https://www.facebook.com/clbvanhoatrunghoatrandainghia",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#AA1F24",
             logo: "logo.png"
         },
         {
             id: "clbluaxanhtdn",
             tag: "knnt clb",
-            name: "CLB Kỹ năng Lửa Xanh",
+            name: "CÂU LẠC BỘ Kỹ năng Lửa Xanh",
             link: "https://www.facebook.com/clbluaxanhtdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#CBDFF0",
             logo: "logo.png"
         },
         {
             id: "clbnhiepanhtdn",
             tag: "knnt clb",
-            name: "CLB Nhiếp ảnh - Specture",
+            name: "CÂU LẠC BỘ Nhiếp ảnh - Specture",
             link: "https://www.facebook.com/clbnhiepanhtdn",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#131620",
             logo: "logo.png"
         },
         {
             id: "clbvannghetdn",
             tag: "knnt clb",
-            name: "CLB Văn Nghệ",
+            name: "CÂU LẠC BỘ Văn Nghệ",
             link: "https://www.facebook.com/clbvannghetdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#EADFD6",
             logo: "logo.png"
         },
         {
             id: "tdnartclub",
             tag: "knnt clb",
-            name: "CLB Mỹ Thuật",
+            name: "CÂU LẠC BỘ Mỹ Thuật",
             link: "https://www.facebook.com/tdnartclub",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#A286B5",
             logo: "logo.png"
         },
         {
             id: "clbhandmadetdn",
             tag: "knnt clb",
-            name: "CLB Handmade",
+            name: "CÂU LẠC BỘ Handmade",
             link: "https://www.facebook.com/clbhandmadetdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#ABDFEA",
             logo: "logo.png"
         },
         {
@@ -94,7 +105,8 @@ const DataClb = () => {
             tag: "knnt da",
             name: "Dự án Điện ảnh The CINEX",
             link: "https://www.facebook.com/thecinex.ctdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#FFFFFF",
             logo: "logo.png"
         },
         {
@@ -102,87 +114,98 @@ const DataClb = () => {
             tag: "knnt da",
             name: "Mô hình Liên Hợp Quốc TOMUN",
             link: "https://www.facebook.com/tomun2021",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#153B28",
             logo: "logo.png"
         },
         {
             id: "kncongchungtdn",
             tag: "knnt clb",
-            name: "CLB Kỹ năng công chúng",
+            name: "CÂU LẠC BỘ Kỹ năng công chúng",
             link: "https://www.facebook.com/kncongchungtdn",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#EC5D2A",
             logo: "logo.png"
         },
         {
             id: "TDNChessClub",
             tag: "knnt clb",
-            name: "CLB Cờ Vua",
+            name: "CÂU LẠC BỘ Cờ Vua",
             link: "https://www.facebook.com/TDNChessClub",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#ED7A7A",
             logo: "logo.png"
         },
         {
             id: "papersanetdn",
             tag: "httt clb",
-            name: "CLB Sách - Papersane",
+            name: "CÂU LẠC BỘ Sách - Papersane",
             link: "https://www.facebook.com/papersanetdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#D1E8E4",
             logo: "logo.png"
         },
         {
             id: "clbtienganhtdn",
             tag: "httt clb",
-            name: "Câu lạc bộ Tiếng Anh - EC",
+            name: "CÂU LẠC BỘ Tiếng Anh - EC",
             link: "https://www.facebook.com/clbtienganhtdn",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#F2A9A5",
             logo: "logo.png"
         },
         {
             id: "clbvatlitdn",
             tag: "httt clb",
-            name: "Câu lạc bộ Vật lí+",
+            name: "CÂU LẠC BỘ Vật lí+",
             link: "https://www.facebook.com/clbvatlitdn",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#0A162E",
             logo: "logo.png"
         },
         {
             id: "clb.hoahoc.tdn",
             tag: "httt clb",
-            name: "Câu lạc bộ Hoá học",
+            name: "CÂU LẠC BỘ Hoá học",
             link: "https://www.facebook.com/clb.hoahoc.tdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#FFFFFF",
             logo: "logo.png"
         },
         {
             id: "tdntinhoc",
             tag: "httt clb",
-            name: "Câu lạc bộ Tin học",
+            name: "CÂU LẠC BỘ Tin học",
             link: "https://www.facebook.com/tdntinhoc",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#161617",
             logo: "logo.png"
         },
         {
             id: "truyenthonghocduongtdn",
             tag: "httt clb",
-            name: "CLB Truyền thông học đường",
+            name: "CÂU LẠC BỘ Truyền thông học đường",
             link: "https://www.facebook.com/truyenthonghocduongtdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#FFEED9",
             logo: "logo.png"
         },
         {
             id: "clbbaochitruyenthongtdn",
             tag: "httt clb",
-            name: "CLB Báo chí - Truyền thông",
+            name: "CÂU LẠC BỘ Báo chí - Truyền thông",
             link: "https://www.facebook.com/clbbaochitruyenthongtdn",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#8B1A24",
             logo: "logo.png"
         },
         {
             id: "ecotdn",
             tag: "khxhda clb",
-            name: "CLB Môi trường - ECO",
+            name: "CÂU LẠC BỘ Môi trường - ECO",
             link: "https://www.facebook.com/ecotdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#E1E992",
             logo: "logo.png"
         },
         {
@@ -190,7 +213,8 @@ const DataClb = () => {
             tag: "khxhda da",
             name: "Dự án Tâm lý - The Mersy Act",
             link: "https://www.facebook.com/themersyact",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#FDCA48",
             logo: "logo.png"
         },
         {
@@ -198,7 +222,8 @@ const DataClb = () => {
             tag: "khxhda da",
             name: "Dự án The Plasbit Campaign",
             link: "https://www.facebook.com/theplasbitcampaign",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#8FB079",
             logo: "logo.png"
         },
         {
@@ -206,7 +231,8 @@ const DataClb = () => {
             tag: "khxhda da",
             name: "Dự án Career Venture",
             link: "https://www.facebook.com/CareerVentureTDN",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#244086",
             logo: "logo.png"
         },
         {
@@ -214,7 +240,8 @@ const DataClb = () => {
             tag: "khxhda da",
             name: "Dự án Ngọt LAB",
             link: "https://www.facebook.com/ngotlab",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#9F90C2",
             logo: "logo.png"
         },
         {
@@ -222,15 +249,17 @@ const DataClb = () => {
             tag: "khxhda clb",
             name: "Dự án Thể thao học đường - Sportify",
             link: "https://www.facebook.com/profile.php?id=100087346698039",
-            BgColor: "",
+            TextColor: "colorwhite",
+            BgColor: "#151035",
             logo: "logo.png"
         },
         {
             id: "the.irisproject.tdn",
             tag: "khxhda da",
-            name: "Dự án IRIS",
+            name: "THE IRIS PROJECT",
             link: "https://www.facebook.com/the.irisproject.tdn",
-            BgColor: "",
+            TextColor: " ",
+            BgColor: "#FBDEEB",
             logo: "logo.png"
         },
     ]

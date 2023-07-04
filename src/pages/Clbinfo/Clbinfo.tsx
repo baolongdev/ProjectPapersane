@@ -190,14 +190,10 @@ function Clbinfo({ match }: any) {
                 backgroundRef.current.style.backgroundColor = dataClb?.BgColor || "#FFF";
             }
         };
-
-        return () => {
-
-            changeBg(); // Gọi hàm changeBg khi component bị xóa
-        };
+        changeBg();
     }, []);
 
-    const specialBg = ["theplasbitcampaign", "tomun2021", "clbnhiepanhtdn", "vanhoavntdnschool"]
+    const specialBg = ["theplasbitcampaign", "tomun2021", "clbnhiepanhtdn", "vanhoavntdnschool", "clbbaochitruyenthongtdn"]
 
 
     return (

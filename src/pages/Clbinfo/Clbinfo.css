@@ -46,6 +46,7 @@
 }
 .clbinfo__description {
   font-size: var(--normal-font-size);
+  line-height: 140%;
   font-style: italic;
   text-align: justify;
 }

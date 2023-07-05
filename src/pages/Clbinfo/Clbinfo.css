@@ -9,6 +9,7 @@
 }
 .clbinfo__bg {
   width: 100%;
+  height: 100%;
   padding: var(--mb-1-5);
   display: flex;
   flex-direction: column;
@@ -56,8 +57,8 @@
 }
 .clbinfo__groupImage {
   position: absolute;
-  height: 100vh;
-  width: 99vw;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 .clbinfo__groupImage-image {
@@ -84,6 +85,10 @@
 }
 .clbinfo__blur:hover .clbinfo__groupImage-image:hover {
   z-index: 100 !important;
+}
+
+.clbinfo__fullview {
+  height: 100vh;
 }
 @media screen and (min-width: 992px) {
   .clbinfo__bg {

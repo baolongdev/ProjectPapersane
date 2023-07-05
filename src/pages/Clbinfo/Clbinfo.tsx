@@ -154,21 +154,23 @@ function Clbinfo({ match }: any) {
 
     useEffect(() => {
         const updateGroupImageHeight = () => {
-            if (backgroundRef.current && groupImageRef.current) {
-                const backgroundHeight = backgroundRef.current.clientHeight;
-                const windowHeight = window.innerHeight;
-                let heightToSet;
-                if (backgroundHeight > windowHeight) {
-                    heightToSet = backgroundHeight;
-                } else {
-                    heightToSet = windowHeight;
-                }
+            // if (backgroundRef.current && groupImageRef.current) {
+            //     }
+            const backgroundHeight = (backgroundRef.current as HTMLElement).offsetHeight;
+            const windowHeight = window.innerHeight;
+            console.log(backgroundHeight, windowHeight);
 
-                console.log(backgroundHeight, windowHeight);
-
-                groupImageRef.current.style.height = heightToSet + "px";
-                backgroundRef.current.style.height = heightToSet + "px";
+            if (backgroundHeight <= windowHeight) {
+                console.log("add");
+                (groupImageRef.current as HTMLElement).classList.add("clbinfo__fullview");
+                (backgroundRef.current as HTMLElement).classList.add("clbinfo__fullview");
+            } else {
+                console.log("remove");
+                (groupImageRef.current as HTMLElement).classList.remove("clbinfo__fullview");
+                (backgroundRef.current as HTMLElement).classList.remove("clbinfo__fullview");
             }
+
+
         };
 
         updateGroupImageHeight();

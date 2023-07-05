@@ -172,15 +172,15 @@ const DataClb = () => {
             BgColor: "#FFFFFF",
             logo: "logo.png"
         },
-        {
-            id: "tdntinhoc",
-            tag: "httt clb",
-            name: "CÂU LẠC BỘ Tin học",
-            link: "https://www.facebook.com/tdntinhoc",
-            TextColor: "colorwhite",
-            BgColor: "#161617",
-            logo: "logo.png"
-        },
+        // {
+        //     id: "tdntinhoc",
+        //     tag: "httt clb",
+        //     name: "CÂU LẠC BỘ Tin học",
+        //     link: "https://www.facebook.com/tdntinhoc",
+        //     TextColor: "colorwhite",
+        //     BgColor: "#161617",
+        //     logo: "logo.png"
+        // },
         {
             id: "truyenthonghocduongtdn",
             tag: "httt clb",

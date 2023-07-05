@@ -36,7 +36,7 @@ function Home({ initial }: any) {
             </div>
             <div className="home__data">
                 <h1 className="home__title">
-                    Trường THPT chuyên <br /> Trần Đại Nghĩa
+                    Đoàn Trường THPT chuyên <br /> Trần Đại Nghĩa
                 </h1>
                 <p className="home__description">
                     Lửa Trần Chuyên truyền đi là không bao giờ tắt
@@ -47,10 +47,10 @@ function Home({ initial }: any) {
                         Học để biết - Học để làm - Học để tự khẳng định mình - Học để cùng chung sống
                     </p>
                 </div> */}
-                <a href="#brainstorm" className="button button--flex">
+                {/* <a href="#brainstorm" className="button button--flex">
                     Scroll Down
-                    {/* <i className="ri-arrow-down-line button__icon"></i> */}
-                </a>
+                    <i className="ri-arrow-down-line button__icon"></i>
+                </a> */}
             </div>
 
             <div className="home__social">

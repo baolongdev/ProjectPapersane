@@ -128,3 +128,14 @@
     margin-bottom: var(--mb-0-5);
   }
 }
+@media screen and (min-width: 570px) {
+  .activities__card {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  /* .activities__card-frame {
+    height: 100%;
+  } */
+}

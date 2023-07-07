@@ -2,7 +2,8 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import "./Clbinfo.css";
 import { useParams } from 'react-router-dom';
 import DataClb from '../../store/DataClb';
-import convertDocxToText from './convertDocxToText'
+import { Notfound } from "../../pages"
+import convertDocxToText from '../../store/convertDocxToText'
 import ExtractorColor from './ExtractorColor'
 import { Expo, gsap } from 'gsap';
 
@@ -12,6 +13,12 @@ function Clbinfo({ match }: any) {
     const { id } = useParams();
     const formattedId = id?.replace(/-/g, "."); // Use empty string as default value if 'id' is undefined
     const dataClb = clbinfo.find(item => item.id === formattedId);
+    if (dataClb === undefined) {
+        return (
+            <Notfound />
+        )
+    }
+
     const RefDescription = useRef<HTMLParagraphElement>(null);
 
     const [docxText, setDocxText] = useState<string>('');

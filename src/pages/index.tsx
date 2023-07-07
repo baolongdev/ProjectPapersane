@@ -1,7 +1,8 @@
-export { default as Hoaphuongdo } from './Hoaphuongdo/Hoaphuongdo'
+export { default as Activityhot } from './Activityhot/Activityhot'
+// Hoaphuongdo
+// Lehoiamnhac
+// Letrianvatruongthanh
 export { default as Landing } from './Landing/Landing'
-export { default as Lehoiamnhac } from './Lehoiamnhac/Lehoiamnhac'
-export { default as Letrianvatruongthanh } from './Letrianvatruongthanh/Letrianvatruongthanh'
 export { default as Notfound } from './Notfound/Notfound'
 export { default as BookflixLanding } from './BookflixLanding/BookflixLanding'
 export { default as GocNhinMoi } from './GocNhinMoi/GocNhinMoi'

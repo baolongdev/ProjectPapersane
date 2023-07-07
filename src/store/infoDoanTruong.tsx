@@ -3,22 +3,17 @@ const infoDoanTruong = [
     {
         id: "doantruong",
         title: "Đoàn trường",
-        aboutTitle: "Về Đoàn trường",
+        aboutTitle: "Giới thiệu",
     },
     {
         id: "coPhuc",
         title: "Cô Phúc",
-        aboutTitle: "Về Cô Phúc",
+        aboutTitle: "Cô,\n Châu Hồng Phúc",
     },
     {
         id: "thayPhuong",
         title: "Thầy Phương",
-        aboutTitle: "Về Thầy Phương",
-    },
-    {
-        id: "bch2223",
-        title: "bch2223",
-        aboutTitle: "về BCH 2223",
+        aboutTitle: "Thầy,\n Đặng Đông Phương",
     },
 ]
 

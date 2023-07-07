@@ -52,16 +52,18 @@ function activities({ initial }: any) {
             <div className="activities__container grid">
                 {
 
-                    initial.ativities.map((e: any, index: any) => (
+                    initial.activities.map((e: any, index: any) => (
                         <div key={index} className="activities__card">
                             <div className='activities__card-frame'>
                                 <img className='activities__card-img' src={e.img} alt="" />
                             </div>
-                            <h2 className="activities__card-title">{e.title}</h2>
-                            <h3 className="activities__card-subtitle">{e.subtitle}</h3>
-                            <a href={e.link} className="activities__card-button">
-                                Tìm hiểu thêm <i className="ri-arrow-right-line activities__icon"></i>
-                            </a>
+                            <div className='activities__card-data'>
+                                <h2 className="activities__card-title">{e.title}</h2>
+                                <h3 className="activities__card-subtitle">{e.subtitle}</h3>
+                                <a href={e.link} className="activities__card-button">
+                                    Tìm hiểu thêm <i className="ri-arrow-right-line activities__icon"></i>
+                                </a>
+                            </div>
                         </div>
                     ))
                 }

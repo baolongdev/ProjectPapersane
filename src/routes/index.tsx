@@ -1,14 +1,12 @@
 import {
-    Hoaphuongdo,
     Landing,
-    Lehoiamnhac,
-    Letrianvatruongthanh,
     Notfound,
     Bookflix,
     Blog,
     LoginRegister,
     Clbinfo,
-    Doantruong
+    Doantruong,
+    Activityhot
 } from "../pages"
 
 
@@ -16,11 +14,9 @@ const publicRoutes = [
     { path: "/", compnent: Landing },
     { path: "/doantruong", compnent: Doantruong },
     { path: "/clbinfo/:id", compnent: Clbinfo },
+    { path: "/hots/:id", compnent: Activityhot },
     { path: "/bookflix/books", compnent: Bookflix },
     { path: "/bookflix/blog", compnent: Blog },
-    { path: "/hpd", compnent: Hoaphuongdo },
-    { path: "/lhan", compnent: Lehoiamnhac },
-    { path: "/lta&th", compnent: Letrianvatruongthanh },
     { path: "/login&register", compnent: LoginRegister },
     { path: "*", compnent: Notfound }
 ]

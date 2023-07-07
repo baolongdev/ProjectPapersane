@@ -1,6 +1,7 @@
-import React, { useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import './Doantruong.css';
 import { infoDoanTruong } from '../../store'
+import convertDocxToText from '../../store/convertDocxToText'
 
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger'; // Import ScrollTrigger separately
@@ -15,7 +16,25 @@ function Doantruong() {
     const LogoBgRefs = useRef(null);
     const info = infoDoanTruong
     const componentsRef = useRef<(HTMLDivElement | null)[]>([]);
-
+    const ColorPalet = [
+        {
+            // doantruong
+            bgColor: "#e2dacf",
+            Color: "#00adad",
+        },
+        {
+            // Co
+            bgColor: "#4F97A3",
+            Color: "#c7f0f3",
+            // Color: "#efefef",
+        },
+        {
+            // Thay
+            bgColor: "#4F77AA",
+            Color: "#D2E1E6",
+            // Color: "#00c110",
+        },
+    ]
 
     useLayoutEffect(() => {
         const t1 = gsap.timeline({ defaults: { duration: 2.5, ease: "expo.out" } })
@@ -68,6 +87,8 @@ function Doantruong() {
                             child.classList.remove("is-active");
                             if (index === activeIndex) {
                                 child.classList.add("is-active");
+                                document.documentElement.style.setProperty("--dtbackgroundcolor", ColorPalet[index].bgColor)
+                                document.documentElement.style.setProperty("--dtcolor", ColorPalet[index].Color)
                             }
                         });
                     });
@@ -184,8 +205,6 @@ function Doantruong() {
         });
     }, []);
 
-
-
     return (
         <section className="doantruong" id='doantruong'>
             <div className="doantruong__return-box"
@@ -214,7 +233,7 @@ function Doantruong() {
                                 {info.map((data: any, index: number,) => (
                                     <div key={index} className={`doantruong__tab-item`}>
                                         {/* <p className="doantruong__tab-text">{data.title}</p> */}
-                                        <p className="doantruong__tab-text">plan</p>
+                                        {/* <p className="doantruong__tab-text">{data.title}</p> */}
                                         <div className="doantruong__tab-line"
                                             tr-item-animation="progress-horizontal"
                                         />
@@ -226,20 +245,48 @@ function Doantruong() {
                             <div className="doantruong__about-list"
                                 tr-scroll-toggle="list">
                                 {/* List */}
-                                {info.map((data: any, index: number,) => (
-                                    <div key={index} className={`doantruong__about-item`}>
-                                        {/* <img src="doantruong__about__mobile-icon" alt="" /> */}
-                                        <div className="doantruong__about__heading-wrap">
-                                            <div className='doantruong__about-title'>{data.aboutTitle}</div>
+                                {info.map((data: any, index: number) => {
+                                    const [docxText, setDocxText] = useState('');
+
+                                    useEffect(() => {
+                                        convertDocxToText(`/bch/${data.id}/gioiThieu.docx`)
+                                            .then((text) => {
+                                                setDocxText(text);
+                                            })
+                                            .catch((error) => {
+                                                console.error('Error:', error);
+                                            });
+                                    }, [data.id]);
+
+                                    return (
+                                        <div key={index} className={`doantruong__about-item`}>
+                                            <img src="doantruong__about__mobile-icon" alt="" />
+                                            <div className="doantruong__about__heading-wrap">
+                                                <div className='doantruong__about-title'>
+                                                    {data.aboutTitle.split('\n').map((part: any, index: number) => (
+                                                        <React.Fragment key={index}>
+                                                            {part.trim()}
+                                                            {index !== data.aboutTitle.split('\n').length - 1 && <br />}
+                                                        </React.Fragment>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <p className="doantruong__about-content">
+                                                {docxText.includes("\\n") ? docxText.split('\\n').map((line, index) => (
+                                                    <React.Fragment key={index}>
+                                                        {line}
+                                                        <br />
+                                                    </React.Fragment>
+                                                ))
+                                                    : docxText}
+                                            </p>
+                                            <div className="doantruong__about__mobile-img">
+                                                <img className='doantruong__about__mobile-photo' src={`/bch/${data.id}/image.jpg`} alt="" />
+                                            </div>
                                         </div>
-                                        <p className="doantruong__about-content">
-                                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-                                        </p>
-                                        <div className="doantruong__about__mobile-img">
-                                            <img className='doantruong__about__mobile-photo' src={`/bch/${data.id}/image.jpg`} alt="" />
-                                        </div>
-                                    </div>
-                                ))}
+                                    )
+                                })}
+
 
                             </div>
                         </div>

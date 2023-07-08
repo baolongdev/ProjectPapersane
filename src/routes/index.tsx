@@ -6,6 +6,7 @@ import {
     LoginRegister,
     Clbinfo,
     Doantruong,
+    Bch,
     Activityhot
 } from "../pages"
 
@@ -13,6 +14,7 @@ import {
 const publicRoutes = [
     { path: "/", compnent: Landing },
     { path: "/doantruong", compnent: Doantruong },
+    { path: "/doantruong/bch2223", compnent: Bch },
     { path: "/clbinfo/:id", compnent: Clbinfo },
     { path: "/hots/:id", compnent: Activityhot },
     { path: "/bookflix/books", compnent: Bookflix },

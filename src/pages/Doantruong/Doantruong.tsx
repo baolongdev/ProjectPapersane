@@ -258,6 +258,8 @@ function Doantruong() {
                                             });
                                     }, [data.id]);
 
+
+
                                     return (
                                         <div key={index} className={`doantruong__about-item`}>
                                             <img src="doantruong__about__mobile-icon" alt="" />
@@ -280,9 +282,23 @@ function Doantruong() {
                                                 ))
                                                     : docxText}
                                             </p>
+
                                             <div className="doantruong__about__mobile-img">
                                                 <img className='doantruong__about__mobile-photo' src={`/bch/${data.id}/image.jpg`} alt="" />
                                             </div>
+
+                                            {
+                                                data.id == "doantruong" ?
+                                                    (
+                                                        <div
+                                                            onClick={() => {
+                                                                window.location.href = '/doantruong/bch2223'
+                                                            }}
+                                                            className="doantruong__btn">
+                                                            thông tin thêm về đoàn
+                                                        </div>
+                                                    ) : null
+                                            }
                                         </div>
                                     )
                                 })}

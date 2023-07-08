@@ -13,6 +13,22 @@
   transition: 0.2s ease-in-out;
   opacity: 0;
 }
+.doantruong__btn {
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border-style: solid;
+  border-color: var(--dtcolor);
+  border-radius: 1rem;
+  margin-top: 1rem;
+  margin-left: auto;
+  transition: 0.2s ease-in-out;
+  opacity: 1;
+  cursor: pointer;
+}
+.doantruong__btn:hover {
+  background-color: var(--dtcolor);
+  color: var(--dtbackgroundcolor);
+}
 .doantruong__return-box:hover {
   background-color: var(--dtcolor);
 }

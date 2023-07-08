@@ -10,6 +10,10 @@
   --header-height: 3.5rem; /*56px*/
 
   /*========== Colors ==========*/
+  /* ======= Color bookflix ======= */
+  --bookflix-background: rgb(249, 243, 238);
+
+
   /*Color mode HSL(hue, saturation, lightness)*/
   --hue: 219;
   --sat: 51%;
@@ -26,7 +30,7 @@
 
   /*========== Font and typography ==========*/
   /* =============== Font bookflix =============== */
-  --body-font-bookflix: "Montserrat";
+  --body-font-bookflix: "Barlow";
   --normal-font-bookflix: "Libre Caslon Text";
   /*.5rem = 8px | 1rem = 16px ...*/
   --body-font: "Montserrat", sans-serif;

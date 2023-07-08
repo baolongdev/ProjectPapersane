@@ -1,8 +1,10 @@
 import {
     Landing,
     Notfound,
-    Bookflix,
-    Blog,
+    BookflixLanding,
+    BaiVietGocNhinMoi,
+    GocNhinMoi,
+    TimSach,
     LoginRegister,
     Clbinfo,
     Doantruong,
@@ -17,10 +19,12 @@ const publicRoutes = [
     { path: "/doantruong/bch2223", compnent: Bch },
     { path: "/clbinfo/:id", compnent: Clbinfo },
     { path: "/hots/:id", compnent: Activityhot },
-    { path: "/bookflix/books", compnent: Bookflix },
-    { path: "/bookflix/blog", compnent: Blog },
+    { path: "/bookflix", compnent: BookflixLanding },
+    { path: "/bookflix/gocnhinmoi", compnent: GocNhinMoi },
+    { path: "/bookflix/timsach", compnent: TimSach },
     { path: "/login&register", compnent: LoginRegister },
-    { path: "*", compnent: Notfound }
+    { path: "*", compnent: Notfound },
+    { path: "/bookflix/baiviet", compnent: BaiVietGocNhinMoi },
 ]
 
 const privateRoutes = [

@@ -27,21 +27,36 @@ const BookCardResult = ({ bookInfo }: { bookInfo: Book }) => {
     >
       <CardMedia
         component="img"
-        sx={{ width: 150, objectFit: "cover" }}
+        sx={{ width: 150, objectFit: "contain" }}
         image={bookInfo.bookCoverURL}
         alt="Image"
       />
       <CardContent
         sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
       >
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+        <Typography
+          variant="h6"
+          fontSize={{ xs: 15, lg: 20 }}
+          fontWeight="bold"
+        >
           {bookInfo.title}
         </Typography>
-        <Typography variant="subtitle1" color="text.secondary">
+        <Typography
+          variant="subtitle1"
+          color="text.secondary"
+          fontSize={{ xs: 13, lg: 15 }}
+        >
           bởi {bookInfo.author}
         </Typography>
 
-        <Rating defaultValue={bookInfo.rating} precision={0.5} readOnly />
+        <Rating
+          defaultValue={bookInfo.rating}
+          precision={0.5}
+          readOnly
+          sx={{
+            fontSize: { xs: 15, sm: 20 },
+          }}
+        />
 
         <Button
           variant="contained"
@@ -51,6 +66,7 @@ const BookCardResult = ({ bookInfo }: { bookInfo: Book }) => {
             borderRadius: "20px 0 0 20px",
             boxShadow: "none",
             maxWidth: 200,
+            fontSize: { xs: 10, sm: 15 },
             mt: 3,
             "&:hover": {
               backgroundColor: "rgb(224, 143, 120)",

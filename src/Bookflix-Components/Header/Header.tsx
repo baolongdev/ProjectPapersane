@@ -15,7 +15,7 @@ import SearchIcon from "@mui/icons-material/Search"
 
 import DehazeIcon from "@mui/icons-material/Dehaze"
 
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 
 import { useState } from "react"
 import { Link } from "react-router-dom"
@@ -34,7 +34,8 @@ function Header({ activePage }: { activePage: string }) {
             fontWeight: "bold",
             color: "rgb(47, 62, 116)",
             fontFamily: "Barlow",
-            ml: 10,
+            ml: 3,
+            fontSize: { xs: 30, sm: 50 },
           }}
         >
           BOOKFLIX

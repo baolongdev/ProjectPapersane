@@ -22,15 +22,24 @@ const PostPreviewCard = ({ postInfo }: { postInfo: postInfoProp }) => {
     >
       <CardMedia
         component="img"
-        sx={{ width: 150, objectFit: "cover" }}
+        sx={{ width: { xs: 100, sm: 150 }, objectFit: "cover" }}
         image={postInfo.imageURL}
         alt="Image"
       />
-      <CardContent sx={{ flex: 1 }}>
-        <Typography variant="h6" component="div" sx={{ fontStyle: "italic" }}>
+      <CardContent sx={{ flexGrow: 1 }}>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ fontSize: { xs: 15, sm: 17, lg: 20 }, fontStyle: "italic" }}
+        >
           {postInfo.title}
         </Typography>
-        <Typography variant="subtitle1" component="div" color="text.secondary">
+        <Typography
+          variant="subtitle1"
+          component="div"
+          color="text.secondary"
+          sx={{ fontSize: { xs: 12, sm: 15, lg: 17 } }}
+        >
           bởi {postInfo.author}
         </Typography>
         <Typography variant="body2" component="div" sx={{ mb: 2 }}>

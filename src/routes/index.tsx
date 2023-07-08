@@ -22,9 +22,9 @@ const publicRoutes = [
     { path: "/bookflix", compnent: BookflixLanding },
     { path: "/bookflix/gocnhinmoi", compnent: GocNhinMoi },
     { path: "/bookflix/timsach", compnent: TimSach },
+    { path: "/bookflix/ baiviet", compnent: BaiVietGocNhinMoi },
     { path: "/login&register", compnent: LoginRegister },
     { path: "*", compnent: Notfound },
-    { path: "/bookflix/baiviet", compnent: BaiVietGocNhinMoi },
 ]
 
 const privateRoutes = [

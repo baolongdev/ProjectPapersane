@@ -14,7 +14,7 @@ import {
   InputAdornment,
 } from "@mui/material"
 
-import Header from '../../Bookflix-Components/Header/Header'
+import Header from "../../Bookflix-Components/Header/Header"
 
 import { Link } from "react-router-dom"
 
@@ -37,7 +37,8 @@ function BaiVietGocNhinMoi() {
           gap: 7,
           justifyContent: "center",
           flexWrap: "wrap",
-          marginTop: 10,
+          mt: 10,
+          mx: 2,
         }}
       >
         <Box sx={{ flexBasis: "20%", minWidth: 300 }}>
@@ -72,7 +73,7 @@ function BaiVietGocNhinMoi() {
           </Box>
         </Box>
 
-        <Box sx={{ flexBasis: "60%", minWidth: 350 }}>
+        <Box sx={{ flexBasis: { xs: "100%", md: "70%" }, minWidth: 300 }}>
           <Typography
             variant="h3"
             sx={{
@@ -122,7 +123,7 @@ function BaiVietGocNhinMoi() {
             </Typography>
             <img
               src="https://www.hindustantimes.com/ht-img/img/2023/02/20/1600x900/minecraft_1676880562368_1676880570924_1676880570924.jpg"
-              style={{ maxWidth: "70%", minWidth: 300, alignSelf: "center" }}
+              style={{ alignSelf: "center" }}
             />
             <Typography variant="subtitle1">
               Sample textSample textSample textSample textSample textSample
@@ -146,7 +147,6 @@ function BaiVietGocNhinMoi() {
           </Box>
         </Box>
       </Box>
-
     </Box>
   )
 }

@@ -130,9 +130,11 @@ function BookflixLanding() {
               borderRadius: "30px",
               p: 5,
               mt: 5,
+              fontSize: { xs: 30, lg: 35 },
             }}
           >
-            Bookflix là chất kích thích, tick tock tick tock đọc ngay anh em. hehehehe
+            Bookflix là chất kích thích, tick tock tick tock đọc ngay anh em.
+            hehehehe
           </Typography>
         </Grid>
 
@@ -220,6 +222,7 @@ function BookflixLanding() {
           color: "red",
           fontFamily: "Barlow",
           fontWeight: "bold",
+          fontSize: { xs: 30, sm: 35, md: 50 },
         }}
       >
         QUOTE OF THE DAY
@@ -243,7 +246,8 @@ function BookflixLanding() {
             borderRadius: "30px",
             p: 5,
             mb: 5,
-            mx: 5,
+            mx: 2,
+            fontSize: { xs: 20, lg: 25 },
           }}
         >
           "He never went out without a book under his arm, and he often came

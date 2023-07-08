@@ -143,7 +143,7 @@
   opacity: 1;
 }
 .doantruong__about-title {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   margin-top: 0px;
   margin-bottom: 0px;
   font-size: calc(var(--h1-font-size) + 0.5rem);

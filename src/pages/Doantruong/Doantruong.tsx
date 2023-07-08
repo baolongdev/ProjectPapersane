@@ -295,7 +295,7 @@ function Doantruong() {
                                                                 window.location.href = '/doantruong/bch2223'
                                                             }}
                                                             className="doantruong__btn">
-                                                            thông tin thêm về đoàn
+                                                            Thông tin khác
                                                         </div>
                                                     ) : null
                                             }

@@ -40,6 +40,7 @@
 }
 
 .activities__card-title {
+  text-transform: uppercase;
   font-size: var(--h2-font-size);
   line-height: 1.25rem; /* 20px */
   font-weight: 600;
@@ -116,7 +117,7 @@
   }
   .activities__card-title {
     font-size: var(--h2-font-size);
-    line-height: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 20px */
     font-weight: 600;
     margin-bottom: var(--mb-0-5);
   }

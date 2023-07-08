@@ -3,18 +3,19 @@ const infoDoanTruong = [
     {
         id: "doantruong",
         title: "Đoàn trường",
-        aboutTitle: "Giới thiệu",
+        aboutTitle: "GIỚI THIỆU",
     },
     {
         id: "coPhuc",
         title: "Cô Phúc",
-        aboutTitle: "Cô,\n Châu Hồng Phúc",
+        aboutTitle: "Cô\n CHÂU HỒNG PHÚC",
     },
     {
         id: "thayPhuong",
         title: "Thầy Phương",
-        aboutTitle: "Thầy,\n Đặng Đông Phương",
+        aboutTitle: "Thầy\n ĐẶNG ĐÔNG PHƯƠNG",
     },
 ]
+
 
 export default infoDoanTruong;

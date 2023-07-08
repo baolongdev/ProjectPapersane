@@ -29,7 +29,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
 function BaiVietGocNhinMoi() {
   return (
     <Box sx={{ backgroundColor: "rgb(249, 243, 238)" }}>
-      <Header activePage="GocNhinMoi"/>
+      <Header activePage="GocNhinMoi" />
 
       <Box
         sx={{
@@ -146,7 +146,7 @@ function BaiVietGocNhinMoi() {
           </Box>
         </Box>
       </Box>
-      
+
     </Box>
   )
 }

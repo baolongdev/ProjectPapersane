@@ -18,7 +18,7 @@ const InitialVariable = () => {
         "class": ""
     }, {
         "title": "BOOKFLIX",
-        "link": "/bookflix/books",
+        "link": "/bookflix",
         "class": "btn-link"
     }];
     // {

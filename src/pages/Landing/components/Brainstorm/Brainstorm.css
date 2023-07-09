@@ -1,11 +1,73 @@
+.brainstorm {
+  /* height: 100vh; */
+  padding: calc(var(--header-height) + 1rem) 0 !important;
+  background-color: #171657;
+}
+.brainstorm__data {
+  /* padding-bottom: 3.5rem; */
+}
+.brainstorm__title {
+  font-size: var(--h1-font-size);
+  line-height: 140%;
+  margin-bottom: var(--mb-1);
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+}
 .brainstorm__container {
+  height: 100%;
+  align-items: center;
+  justify-items: center;
+}
+
+.brainstorm__moves {
+  color: #fff;
+}
+.brainstorm__game {
+  display: grid;
+  width: 80%;
+  /* height: 25em; */
+  grid-template-columns: repeat(3, 1fr);
+  /* grid-auto-rows: 8em; */
+  padding-bottom: 10rem;
+}
+
+.image-container {
+  border: 1px solid #fff;
   display: flex;
 }
-.brainstorm__img {
-  border: 0;
-  height: 100%;
-  width: 100%;
+.brainstorm__moves {
+  position: relative;
+  margin: 1em;
+  text-align: right;
 }
-.brainstorm {
-  padding-top: calc(var(--header-height) + 1rem) !important;
+.hide {
+  display: none;
+}
+.image-container > .image {
+  padding: 0.2rem;
+}
+#brainstorm__start-button {
+  font-size: 1.2em;
+  padding: 0.8em 2em;
+  border: none;
+  border-radius: 2em;
+  cursor: pointer;
+}
+.brainstorm__slider-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.brainstorm__result {
+}
+
+@media screen and (max-width: 767px) {
+  .brainstorm {
+    height: 100vh;
+  }
+  #brainstorm__start-button {
+    scale: 80%;
+  }
 }

@@ -82,7 +82,7 @@ function Landing() {
         <Header initial={initialVar} />
         <main className="main">
             <Home initial={initialVar} />
-            <Brainstorm initial={initialVar} />
+            <Brainstorm />
             <About initial={initialVar} />
             <Activities initial={initialVar} />
             {/* <Products initial={initialVar} /> */}

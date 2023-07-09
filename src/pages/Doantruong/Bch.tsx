@@ -37,7 +37,7 @@ function bch() {
                                     <img src={`/bch/bch2223/${i + 1}.jpg`} alt="" className="bch__img" />
                                 </div>
                                 <h2 className='bch__card-title'>{bch2223[i].name + "-" + bch2223[i].class}</h2>
-                                <h3 className='bch__card-subtitle'>{bch2223[i].job}</h3>
+                                <h3 className='bch__card-subtitle' style={{ color: bch2223[i].color }}>{bch2223[i].job}</h3>
                             </div>
                         ))
                     }
@@ -50,7 +50,7 @@ function bch() {
                                     <img src={`/bch/bch2223/${i + 3}.jpg`} alt="" className="bch__img" />
                                 </div>
                                 <h2 className='bch__card-title'>{bch2223[i + 2].name + "-" + bch2223[i + 2].class}</h2>
-                                <h3 className='bch__card-subtitle'>{bch2223[i + 2].job}</h3>
+                                <h3 className='bch__card-subtitle' style={{ color: bch2223[i + 2].color }}>{bch2223[i + 2].job}</h3>
                             </div>
                         ))
                     }
@@ -64,7 +64,7 @@ function bch() {
                                     <img src={`/bch/bch2223/${i + 6}.jpg`} alt="" className="bch__img" />
                                 </div>
                                 <h2 className='bch__card-title'>{bch2223[i + 5].name + "-" + bch2223[i + 5].class}</h2>
-                                <h3 className='bch__card-subtitle'>{bch2223[i + 5].job}</h3>
+                                <h3 className='bch__card-subtitle' style={{ color: bch2223[i + 5].color }}>{bch2223[i + 5].job}</h3>
                             </div>
                         ))
                     }

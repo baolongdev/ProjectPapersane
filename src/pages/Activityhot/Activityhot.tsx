@@ -109,10 +109,16 @@ function Activityhot({ match }: any) {
                 delay: 2
             })
             if (textTitle) {
+                const nd = InitialVariable().activities[linkValues.indexOf(id as string)].title
+                let position = nd.replace(/\s/g, "").indexOf('/')
+
                 textTitle.innerHTML = (textTitle.textContent || '').replace(
                     /\S/g,
                     "<span class='activityhot__letter'>$&</span>"
                 );
+                textTitle.children[position].innerHTML = "<br>"
+
+
             }
 
 

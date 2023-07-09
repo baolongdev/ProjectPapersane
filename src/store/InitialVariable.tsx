@@ -58,24 +58,25 @@ const InitialVariable = () => {
     ]
     const activities = [
         {
-            img: "/activities/1.jpg",
-            title: "Lễ hội âm nhạc",
-            subtitle: "",
-            link: "hots/lhan",
-            linkFB: "https://www.facebook.com/759662799498945"
-        }, {
-            img: "/activities/2.jpg",
-            title: "Lễ tri ân và trưởng thành",
-            subtitle: "",
-            link: "hots/lta&th",
-            linkFB: "https://www.facebook.com/576520341290807"
-        }, {
             img: "/activities/3.jpg",
             title: "HOA PHƯỢNG ĐỎ",
             subtitle: "Chiến dịch Tình nguyện hè",
             link: "hots/hpd",
             linkFB: "https://www.facebook.com/759662799498945"
         }
+        , {
+            img: "/activities/1.jpg",
+            title: "Lễ hội âm nhạc",
+            subtitle: "",
+            link: "hots/lhan",
+            linkFB: "https://www.facebook.com/541613061448202"
+        }, {
+            img: "/activities/2.jpg",
+            title: "Lễ tri ân /và trưởng thành",
+            subtitle: "",
+            link: "hots/lta&th",
+            linkFB: "https://www.facebook.com/576520341290807"
+        },
     ]
 
     return {

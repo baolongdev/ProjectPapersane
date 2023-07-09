@@ -131,8 +131,8 @@
 }
 @media screen and (min-width: 570px) {
   .activities__card {
-    height: auto;
-    display: flex;
+    /* height: auto;
+    display: flex; */
     flex-direction: column;
     justify-content: space-between;
   }

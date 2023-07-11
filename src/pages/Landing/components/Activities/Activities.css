@@ -1,6 +1,7 @@
 /*=============== activities ===============*/
 .activities__bg {
-  background-color: var(--first-color);
+  /* background-color: var(--first-color); */
+  background-color: #00216d;
   padding: 3rem 2rem 2rem;
   border-radius: 1rem;
 }

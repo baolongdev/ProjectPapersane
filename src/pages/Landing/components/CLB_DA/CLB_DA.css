@@ -70,7 +70,7 @@
 }
 .clbdas__item:hover {
   background-color: var(--first-color);
-  color: var(--body-color);
+  color: #fff;
 }
 .clbdas__card {
   width: 200px;

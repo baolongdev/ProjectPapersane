@@ -116,7 +116,8 @@ function Activityhot({ match }: any) {
                     /\S/g,
                     "<span class='activityhot__letter'>$&</span>"
                 );
-                textTitle.children[position].innerHTML = "<br>"
+                if (!position)
+                    textTitle.children[position].innerHTML = "<br>"
 
 
             }

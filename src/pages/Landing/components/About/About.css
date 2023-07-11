@@ -5,6 +5,7 @@
   position: relative;
   max-width: none !important;
   margin: 0 !important;
+  background-color: hsl(var(--hue), 8%, 12%);
 }
 .my-swiper {
   height: calc(100vh) !important;
@@ -47,7 +48,7 @@
 
 .about__title,
 .about__description {
-  color: var(--title-color);
+  color: hsl(var(--hue), 4%, 95%);
 }
 
 .about .about__bg:not(.swiper-slide-active) {

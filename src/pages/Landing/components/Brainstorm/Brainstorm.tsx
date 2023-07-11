@@ -3,156 +3,212 @@ import './Brainstorm.css'
 function Brainstorm({ initial }: any) {
 
     useEffect(() => {
-        const IMAGE__COUNT = 6
+        let draggableObjects;
+        let dropPoints;
+        let steps = 0
+        const startBtn = document.getElementById("start") as HTMLElement;
+        const result = document.getElementById("result") as HTMLElement;
+        const controls = document.querySelector(".brainstorm__controls") as HTMLElement
+        const dragContainer = document.querySelector(".brainstorm__draggable-objects") as HTMLElement
+        const dropContainer = document.querySelector(".brainstorm__drop-points") as HTMLElement
+        const data = [
+            "MULTILINGUALISM",
+            "RESEARCH-SKILLS",
+            "COMPABILITY",
+            "HEALTH-AWARENESS",
+            "COMMUNITY-ORIENTATION",
+            "GLOBAL-INTERACTION"
+        ]
 
-        const moves = document.querySelector('.brainstorm__moves') as HTMLElement
-        const container = document.querySelector(".brainstorm__game") as HTMLElement
-        const startButton = document.querySelector("#brainstorm__start-button") as HTMLElement
-        const coverScreen = document.querySelector(".brainstorm__cover-screen") as HTMLElement
-        const result = document.querySelector(".brainstorm__result") as HTMLElement
-        let checkWin = false
-        let currentElement = ""
-        let movesCount = 0,
-            imagesArr = [] as Array<number>
+        let deviceType = "";
+        let initialX = 0,
+            initialY = 0;
+        let currentElement: EventTarget | null = null;
+        let moveElement = false;
+
         const isTouchDevice = () => {
             try {
                 document.createEvent("TouchEvent");
-                return true
+                deviceType = "touch";
+                return true;
             } catch (e) {
-                return false
+                deviceType = "mouse";
+                return false;
             }
         }
-        const randomNumber = () => (Math.floor(Math.random() * (IMAGE__COUNT - 1)) + 1) as number
-        const getCoords = (element: HTMLElement) => {
-            const [row, col] = element.getAttribute("data-positon")?.split("_") as string[]
-            return [parseInt(row), parseInt(col)]
 
+        let count = 0;
+        const randomValueGenerator = () => {
+            return data[Math.floor(Math.random() * data.length)]
         }
-        const checkAdjacent = (row1: number, row2: number, col1: number, col2: number) => {
-            if (row1 == row2) {
-                if (col2 == col1 - 1 || col2 == col1 + 1) {
-                    return true;
-                }
-            } else if (col1 == col2) {
-                if (row2 == row1 - 1 || row2 == row1 + 1) {
-                    return true;
-                }
-            }
-            return false;
+
+        const stopGame = () => {
+            controls.classList.remove("hide");
+            startBtn.classList.remove("hide");
         }
-        const randowImages = () => {
-            while (imagesArr.length < (IMAGE__COUNT - 1)) {
-                let randomVal = randomNumber();
-                if (!imagesArr.includes(randomVal)) {
-                    imagesArr.push(randomVal);
-                }
-            }
-            imagesArr.push(IMAGE__COUNT);
-        }
-        const gridGenerator = () => {
-            let count = 0;
-            for (let i = 0; i < 2; i++) {
-                for (let j = 0; j < 3; j++) {
-                    let div = document.createElement("div");
-                    div.setAttribute("data-positon", `${i}_${j}`);
-                    div.addEventListener("click", selectImage);
-                    div.classList.add("image-container");
-                    div.innerHTML = `<img src="/brainstorm/${imagesArr[count]}.png" class="image ${imagesArr[count] == IMAGE__COUNT ? "target hide" : ""}" data-index="${imagesArr[count]}" position="${imagesArr[count]}"/>`
-                    count++;
-                    container?.appendChild(div);
-                }
+
+        function dragStart(e: Event) {
+            if (isTouchDevice()) {
+                initialX = (e as TouchEvent).touches[0].clientX;
+                initialY = (e as TouchEvent).touches[0].clientY;
+                moveElement = true;
+                currentElement = e.target;
+            } else {
+                (e as any).dataTransfer.setData("text", (e.target as HTMLElement).id);
             }
         }
-        const checkPosition = () => {
-            let positionAttributes = '';
-            (document.querySelectorAll("[position]") as NodeListOf<HTMLElement>).forEach((element: HTMLElement) => {
-                const position = element.getAttribute("position") as string;
-                positionAttributes += position;
-            });
-            return positionAttributes;
-        };
-        const selectImage = (e: Event) => {
+
+        function dragOver(e: Event) {
             e.preventDefault();
-            const currentElement = e.target as HTMLElement;
-            const targetElement = document.querySelector(".target") as HTMLElement;
-            const currentParent = currentElement.parentElement as HTMLElement;
-            let targetParent = targetElement.parentElement as HTMLElement;
-            const [row1, col1] = getCoords(currentParent)
-            const [row2, col2] = getCoords(targetParent)
-            console.log(currentElement.getAttribute("data-index") as string);
+        }
 
-            if (checkAdjacent(row1, row2, col1, col2) && !checkWin) {
-
-                currentElement.remove();
-                targetElement.remove();
-                let currentIndex = parseInt(currentElement.getAttribute("data-index") as string)
-                let targetIndex = parseInt(targetElement.getAttribute("data-index") as string)
-
-                currentElement.setAttribute("data-index", String(targetIndex))
-                targetElement.setAttribute("data-index", String(currentIndex))
-
-                currentParent.appendChild(targetElement)
-                targetParent.appendChild(currentElement)
-
-                let currentArrIndex: number = imagesArr.indexOf(currentIndex);
-                let targetArrIndex: number = imagesArr.indexOf(targetIndex);
-                console.log(imagesArr);
-                [imagesArr[currentArrIndex], imagesArr[targetArrIndex]] = [
-                    imagesArr[targetArrIndex],
-                    imagesArr[currentArrIndex],
-                ];
-                console.log(imagesArr);
-
-
-                if (imagesArr.join("") == "123456" || checkPosition().toString() == "123456") {
-                    console.log("win");
-                    setTimeout(() => {
-                        checkWin = true
-                        moves.innerText = `Total Moves: ${movesCount}`
-                        startButton.innerText = "RestartGame";
-                        (document.querySelector(".image-container>.target") as HTMLElement).classList.remove("hide")
-                    }, 1000)
-                }
-                movesCount += 1;
-                moves.innerText = `Moves: ${movesCount}`
-
+        const touchMove = (e: Event | MouseEvent | TouchEvent) => {
+            if (moveElement) {
+                e.preventDefault();
+                let newX = (e as TouchEvent).touches[0].clientX;
+                let newY = (e as TouchEvent).touches[0].clientY;
+                let currentSelectedElement = document.getElementById((e.target as HTMLElement).id) as HTMLElement;
+                (currentSelectedElement.parentElement as HTMLElement).style.top = (currentSelectedElement.parentElement as HTMLElement).offsetTop - (initialY - newY) + "px";
+                (currentSelectedElement.parentElement as HTMLElement).style.left = (currentSelectedElement.parentElement as HTMLElement).offsetLeft - (initialX - newX) + "px";
+                initialX = newX;
+                initialY = newY;
             }
         }
 
-        startButton?.addEventListener("click", () => {
-            startButton.innerText = "Start Game"
-            container.innerHTML = ""
-            imagesArr = []
-            randowImages()
-            gridGenerator()
-            movesCount = 0
-            checkWin = false
-            moves.innerText = `Moves ${movesCount}`;
+        const drop = (e: Event) => {
+            e.preventDefault();
+            if (isTouchDevice()) {
+                moveElement = false;
+                const currentDrop = document.querySelector(`div[data-id='${(e.target as HTMLElement).id}']`) as HTMLElement
+                const currentDropBound = currentDrop.getBoundingClientRect();
+                if (
+                    initialX >= currentDropBound.left &&
+                    initialX <= currentDropBound.right &&
+                    initialY >= currentDropBound.top &&
+                    initialY <= currentDropBound.bottom
+                ) {
+                    currentDrop.classList.add("dropped");
+                    (currentElement as HTMLElement).classList.add("hide");
+                    currentDrop.innerHTML = ``;
+                    currentDrop.insertAdjacentHTML(
+                        "afterbegin",
+                        `<img src= "/brainstorm/${(currentElement as HTMLElement).id}.png">`
+                    );
+                    count += 1;
+                }
+            } else {
+                const draggedElementData = (e as any).dataTransfer.getData("text");
+                const droppableElementData = (e.target as HTMLElement).getAttribute("data-id");
+                if (draggedElementData === droppableElementData) {
+                    const draggedElement = document.getElementById(draggedElementData) as HTMLElement;
+                    //dropped class
+                    (e.target as HTMLElement).classList.add("dropped");
+                    //hide current img
+                    draggedElement.classList.add("hide");
+                    //draggable set to false
+                    draggedElement.setAttribute("draggable", "false");
+                    (e.target as HTMLElement).innerHTML = ``;
+                    //insert new img
+                    (e.target as HTMLElement).insertAdjacentHTML(
+                        "afterbegin",
+                        `<img src="/brainstorm/${draggedElementData}1.png" test>`
+                    );
+                    count += 1;
+                } else {
+                    steps++
+                    console.log(steps);
+                }
+            }
+            if (count == 6) {
+                result.innerHTML = `You Won! <br/> số lần sai: ${steps}`;
+                startBtn.innerText = "Restart Game"
+                dragContainer.classList.add("hide")
+                stopGame();
+            }
+        }
+
+        const creator = () => {
+            dragContainer.innerHTML = "";
+            dropContainer.innerHTML = "";
+            let randomData: string[] = [];
+            //for string random values in array
+            for (let i = 1; i <= 6; i++) {
+                let randomValue = randomValueGenerator();
+                if (!randomData.includes(randomValue)) {
+                    randomData.push(randomValue);
+                } else {
+                    //If value already exists then decrement i by 1
+                    i -= 1;
+                }
+            }
+            for (let i of randomData) {
+                const flagDiv = document.createElement("div");
+                flagDiv.classList.add("brainstorm__draggable-image");
+                flagDiv.setAttribute("draggable", "true");
+                if (isTouchDevice()) {
+                    flagDiv.style.position = "absolute";
+                }
+                flagDiv.innerHTML = `<img src="/brainstorm/${i}.png" id="${i}">`;
+                dragContainer.appendChild(flagDiv);
+            }
+            //Sort the array randomly before creating country divs
+            randomData = randomData.sort(() => 0.5 - Math.random());
+            for (let i of randomData) {
+                const countryDiv = document.createElement("div");
+                countryDiv.innerHTML = `<div class='brainstorm__card' data-id='${i}'>
+                                        ${i.charAt(0).toUpperCase() + i.slice(1).replace("-", " ")}
+                                        </div>
+                `;
+                dropContainer.appendChild(countryDiv);
+            }
+        };
+        //Start Game
+        startBtn.addEventListener("click", async () => {
+            currentElement = null;
+            controls.classList.add("hide");
+            startBtn.classList.add("hide");
+            dragContainer.classList.remove("hide")
+            //This will wait for creator to create the images and then move forward
+            await creator();
+            count = 0;
+            dropPoints = document.querySelectorAll(".brainstorm__card");
+            draggableObjects = document.querySelectorAll(".brainstorm__draggable-image");
+            //Events
+            draggableObjects.forEach((element) => {
+                element.addEventListener("dragstart", dragStart);
+                //for touch screen
+                element.addEventListener("touchstart", dragStart);
+                element.addEventListener("touchend", drop);
+                element.addEventListener("touchmove", touchMove);
+            });
+            dropPoints.forEach((element) => {
+                element.addEventListener("dragover", dragOver);
+                element.addEventListener("drop", drop);
+            });
         });
 
-        window.onload = () => {
-            // coverScreen.classList.remove("hide")
-            // container.classList.add("hide")
-        }
+
+
+
 
     }, [])
 
     return <section className="brainstorm" id="brainstorm">
         <div className="brainstorm__data">
             <h1 className="brainstorm__title">
-                6 giá trị <br /> học hiệu
+                6 giá trị học hiệu
             </h1>
         </div>
-        <div className="brainstorm__container container grid">
-            <div className="brainstorm__cover-screen">
-                <p className="brainstorm__result"></p>
-                <button id="brainstorm__start-button">Start Game</button>
-            </div>
-            <div className="brainstorm__moves"></div>
-            <div className="brainstorm__slider-game">
-                <div className="brainstorm__game"></div>
-            </div>
+        <div className="brainstorm__controls">
+            <button className="brainstorm__start" id="start"> Start Game </button>
+            <p className="brainstorm__result" id="result"></p>
         </div>
+        <div className="brainstorm__container container">
+            <div className="brainstorm__draggable-objects"></div>
+            <div className="brainstorm__drop-points"></div>
+
+        </div>
+
     </section>
 }
 

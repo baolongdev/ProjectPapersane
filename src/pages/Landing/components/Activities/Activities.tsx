@@ -58,7 +58,7 @@ function activities({ initial }: any) {
                                 <img className='activities__card-img' src={e.img} alt="" />
                             </div>
                             <div className='activities__card-data'>
-                                <h2 className="activities__card-title">{e.title}</h2>
+                                <h2 className="activities__card-title">{e.title.replace("/", "")}</h2>
                                 <h3 className="activities__card-subtitle">{e.subtitle}</h3>
                                 <a href={e.link} className="activities__card-button">
                                     Tìm hiểu thêm <i className="ri-arrow-right-line activities__icon"></i>

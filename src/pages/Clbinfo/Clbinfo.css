@@ -29,6 +29,16 @@
   box-shadow: 5px 5px 5px hsla(var(--hue), 4%, 15%, 0.2);
   background-color: #fff !important;
   color: var(--title-color) !important;
+  opacity: 0;
+}
+.Clbinfo__facebook {
+  position: absolute;
+  right: 0;
+  margin: 2rem;
+  border-radius: 2rem !important;
+  padding: 0.2rem 0.3rem !important;
+  font-size: var(--h2-font-size);
+  opacity: 0;
 }
 .clbinfo__logo {
   max-width: 250px;
@@ -70,9 +80,6 @@
   transform: 0.2;
   pointer-events: none;
 }
-.Clbinfo__return {
-  opacity: 0;
-}
 .imageShow {
   transform: scale(0.9, 0.9) !important;
   position: fixed !important;
@@ -97,9 +104,9 @@
   }
 }
 @media screen and (max-width: 767px) {
-  .clbinfo__groupImage {
+  /* .clbinfo__groupImage {
     display: none !important;
-  }
+  } */
   .clbinfo__bg {
     padding-top: calc(var(--header-height) + 1rem);
     max-width: none;

@@ -26,6 +26,7 @@ function Clbinfo({ match }: any) {
     const groupImageRef = useRef<HTMLDivElement | null>(null);
     const backgroundRef = useRef<HTMLDivElement | null>(null);
     const btnReturnRef = useRef(null);
+    const btnFacebookRef = useRef(null);
     const LogoRefs = useRef<(HTMLImageElement | null)>(null);
 
 
@@ -59,6 +60,10 @@ function Clbinfo({ match }: any) {
                 },
             }, "=.1")
 
+            .to(groupImageRef.current, {
+                opacity: window.innerWidth <= 767 ? 0 : 1,
+                display: window.innerWidth <= 767 ? "none" : "block"
+            })
             .to(imageRefs.current, {
                 left: "random([-40%,-36%,35%,39%])",
                 top: "random([-20%,-0%,20%,30%])",
@@ -71,10 +76,10 @@ function Clbinfo({ match }: any) {
                 ease: Expo.easeInOut,
                 transformOrigin: 'center',
             }, "=-2.8")
-            .to(btnReturnRef.current, {
+            .to([btnReturnRef.current, btnFacebookRef.current], {
                 opacity: 1,
                 ease: "power4.inOut",
-
+                stagger: 0.2,
                 zIndex: 10,
             }, "=-2")
             .to(imageRefs.current, {
@@ -165,8 +170,12 @@ function Clbinfo({ match }: any) {
             //     }
             const backgroundHeight = (backgroundRef.current as HTMLElement).offsetHeight;
             const windowHeight = window.innerHeight;
+            const windowWidth = window.innerWidth;
             console.log(backgroundHeight, windowHeight);
-
+            if (windowWidth < 767)
+                (groupImageRef.current as HTMLElement).classList.add("hide")
+            else
+                (groupImageRef.current as HTMLElement).classList.remove("hide")
             if (backgroundHeight <= windowHeight) {
                 console.log("add");
                 (groupImageRef.current as HTMLElement).classList.add("clbinfo__fullview");
@@ -179,10 +188,9 @@ function Clbinfo({ match }: any) {
 
 
         };
-
-        updateGroupImageHeight();
-
         const handleResize = () => {
+            (groupImageRef.current as HTMLElement).classList.remove("clbinfo__fullview");
+            (backgroundRef.current as HTMLElement).classList.remove("clbinfo__fullview");
             updateGroupImageHeight();
         };
 
@@ -212,6 +220,12 @@ function Clbinfo({ match }: any) {
             }}
                 className="ri-arrow-left-line Clbinfo__return button button--flex"
                 ref={btnReturnRef}
+            />
+            <i onClick={() => {
+                window.open(dataClb.link);
+            }}
+                className="ri-facebook-circle-fill Clbinfo__facebook button button--flex"
+                ref={btnFacebookRef}
             />
             <div className="clbinfo__bg" ref={backgroundRef}>
                 <h2 className={`section__title-center clbinfo__title ${dataClb?.TextColor} clbinfo__bg-limitedWidth`}>

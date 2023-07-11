@@ -66,8 +66,8 @@ function Landing() {
         });
 
         sr.reveal('.home__data');
-        sr.reveal('.home__img', { delay: 500 });
-        sr.reveal('.home__social', { delay: 600 });
+        sr.reveal('.home__img, .brainstorm__start-button', { delay: 500 });
+        sr.reveal('.home__social, .brainstorm__title', { delay: 600 });
         sr.reveal('.about__img, .contact__box', { origin: 'left' });
         sr.reveal('.about__data, .contact__form', { origin: 'right' });
         sr.reveal('.activities__card, .clbdas__card, .product__card, .questions__group, .footer', { interval: 100 });

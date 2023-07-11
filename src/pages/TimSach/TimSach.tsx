@@ -153,8 +153,13 @@ function TimSach() {
   }
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100vw">
-      <Header activePage="TimSach"/>
+    <Box
+      bgcolor="rgb(249, 243, 238)"
+      minHeight="100vh"
+      height="100%"
+      width="100vw"
+    >
+      <Header activePage="TimSach" />
 
       <Box display="flex" justifyContent="space-evenly" mt={10}>
         <Box flexBasis={{ xs: "90%", md: "60%" }}>
@@ -177,7 +182,7 @@ function TimSach() {
                       <TuneIcon />
                     </IconButton>
                   </Hidden>
-                  <IconButton onClick={updateBookSearchedInfo}>
+                  <IconButton onClick={() => updateBookSearchedInfo()}>
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>
@@ -279,6 +284,9 @@ function TimSach() {
 
           <TextField
             placeholder="Viết các thể loại bạn muốn tìm, ngăn cách dấu phẩy. Ví dụ: Lãng mạn, Bí ẩn, Trinh thám"
+            onChange={(e) => {
+              setGenreSearchList(e.target.value.split(","))
+            }}
             multiline
             fullWidth
             rows={10}

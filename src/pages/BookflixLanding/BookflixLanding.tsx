@@ -16,10 +16,14 @@ import "swiper/css/autoplay"
 
 import getBookIdsForSurpriseMeSwiper from "../../store/getBookIdsForSurpriseMeSwiper"
 
+import getSearchableBookIds from "../../store/getSearchableBookIds"
+
 function BookflixLanding() {
+  const allBookIds = getSearchableBookIds()
+
   const bookIdsSurpriseMe = getBookIdsForSurpriseMeSwiper()
 
-  var bookCoversSurpriseMe = bookIdsSurpriseMe.map(
+  const bookCoversSurpriseMe = bookIdsSurpriseMe.map(
     (id) => `/bookflix-searchable-book-info/${id}/cover.png`
   )
 
@@ -114,8 +118,8 @@ function BookflixLanding() {
   ]
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" height="100%" width="100vw">
-      <Header activePage="TrangChu" />
+    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100vw">
+      <Header activePage="TrangChu"/>
 
       <Grid container columns={24} justifyContent="center" spacing={10}>
         <Grid item xs={22} sm={22} md={14} lg={10} alignSelf="center">
@@ -163,6 +167,10 @@ function BookflixLanding() {
 
           <Button
             fullWidth
+            onClick={() => {
+              const randomId = allBookIds[Math.floor(Math.random() * allBookIds.length)];
+              window.open(`/bookflix/bookinfo/${randomId}`, '_blank');
+            }}
             sx={{
               mt: 1,
               bgcolor: "rgb(250, 222, 220)",

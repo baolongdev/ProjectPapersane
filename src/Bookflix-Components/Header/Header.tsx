@@ -148,7 +148,7 @@ function Header({ activePage }: { activePage: string }) {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton component={Link} to="/bookflix/TimSach">
+                  <IconButton component={Link} to={`/bookflix/TimSach/${bookSearchValue}`}>
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>

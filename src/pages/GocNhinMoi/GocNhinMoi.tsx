@@ -1,8 +1,5 @@
 import { Typography, Box, Hidden } from "@mui/material"
 
-// Import Swiper styles
-import "swiper/css"
-
 import PostPreviewCard from "./components/PostPreviewCard/PostPreviewCard"
 
 import Header from "../../Bookflix-Components/Header/Header"
@@ -28,7 +25,7 @@ function GocNhinMoi() {
   ]
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" height="2000px" width="100%">
+    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100%">
       <Header activePage="GocNhinMoi" />
 
       <Typography

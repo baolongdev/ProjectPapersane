@@ -1,8 +1,4 @@
-import {
-  Typography,
-  Button,
-  Box,
-} from "@mui/material"
+import { Typography, Button, Box } from "@mui/material"
 
 import Header from "../../Bookflix-Components/Header/Header"
 
@@ -11,6 +7,7 @@ import ShareIcon from "@mui/icons-material/Share"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
+import { Link } from "react-router-dom"
 
 function BaiVietGocNhinMoi() {
   return (
@@ -29,6 +26,8 @@ function BaiVietGocNhinMoi() {
       >
         <Box sx={{ flexBasis: "20%", minWidth: 300 }}>
           <Button
+            component={Link}
+            to="/bookflix/gocnhinmoi"
             sx={{
               fontFamily: "Barlow, sans-serif",
               color: "rgb(232, 129, 119)",

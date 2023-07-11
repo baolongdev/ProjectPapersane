@@ -1,11 +1,10 @@
 import { Typography, Box, Hidden } from "@mui/material"
 
-// Import Swiper styles
-import "swiper/css"
-
 import PostPreviewCard from "./components/PostPreviewCard/PostPreviewCard"
 
 import Header from "../../Bookflix-Components/Header/Header"
+
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome"
 
 function GocNhinMoi() {
   const examplePosts = [
@@ -26,7 +25,7 @@ function GocNhinMoi() {
   ]
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" height="2000px" width="100%">
+    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100%">
       <Header activePage="GocNhinMoi" />
 
       <Typography
@@ -37,10 +36,13 @@ function GocNhinMoi() {
           color: "rgb(232, 129, 119)",
           fontWeight: "bold",
           marginTop: 5,
-          fontSize: 50,
+          fontSize: { xs: 30, sm: 50 },
         }}
       >
-        GÓC NHÌN MỚI
+        <AutoAwesomeIcon
+          sx={{ color: "yellow", fontSize: { xs: 25, sm: 45 } }}
+        />
+        {" GÓC NHÌN MỚI"}
       </Typography>
 
       <Box display="flex" gap={10} justifyContent="center" mx={2}>
@@ -58,7 +60,7 @@ function GocNhinMoi() {
             display="flex"
           >
             <Box>
-              <img src="..\..\..\public\bookflix-ui-pics\FillerPic_GocNhinMoi.png" />
+              <img src="/bookflix-ui-pics/FillerPic_GocNhinMoi.png" />
             </Box>
           </Box>
         </Hidden>

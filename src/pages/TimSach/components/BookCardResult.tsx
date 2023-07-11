@@ -6,9 +6,10 @@ import {
   Rating,
   Button,
 } from "@mui/material"
-import React from "react"
+import { Link } from "react-router-dom"
 
 interface Book {
+  id: string
   title: string
   author: string
   rating: number
@@ -59,6 +60,8 @@ const BookCardResult = ({ bookInfo }: { bookInfo: Book }) => {
         />
 
         <Button
+          component={Link}
+          to={`/bookflix/bookinfo/${bookInfo.id}`}
           variant="contained"
           color="primary"
           sx={{

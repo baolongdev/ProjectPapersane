@@ -1,30 +1,13 @@
-import React, { Fragment } from "react"
-
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  TextField,
-  Box,
-  Stack,
-  Card,
-  CardMedia,
-  CardContent,
-  InputAdornment,
-} from "@mui/material"
+import { Typography, Button, Box } from "@mui/material"
 
 import Header from "../../Bookflix-Components/Header/Header"
-
-import { Link } from "react-router-dom"
-
-import SearchIcon from "@mui/icons-material/Search"
 
 import ShareIcon from "@mui/icons-material/Share"
 
 import FavoriteIcon from "@mui/icons-material/Favorite"
 
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
+import { Link } from "react-router-dom"
 
 function BaiVietGocNhinMoi() {
   return (
@@ -43,6 +26,8 @@ function BaiVietGocNhinMoi() {
       >
         <Box sx={{ flexBasis: "20%", minWidth: 300 }}>
           <Button
+            component={Link}
+            to="/bookflix/gocnhinmoi"
             sx={{
               fontFamily: "Barlow, sans-serif",
               color: "rgb(232, 129, 119)",

@@ -12,4 +12,4 @@ export { default as LoginRegister } from './LoginRegister/LoginRegister'
 export { default as Clbinfo } from './Clbinfo/Clbinfo'
 export { default as Doantruong } from './Doantruong/Doantruong'
 export { default as Bch } from './Doantruong/Bch'
-
+export { default as BookInfo } from './BookInfo/BookInfo'

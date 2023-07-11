@@ -1,24 +1,10 @@
-import React, { Fragment } from "react"
-
 import {
-  AppBar,
-  Toolbar,
   Typography,
   Button,
-  TextField,
   Box,
-  Stack,
-  Card,
-  CardMedia,
-  CardContent,
-  InputAdornment,
 } from "@mui/material"
 
 import Header from "../../Bookflix-Components/Header/Header"
-
-import { Link } from "react-router-dom"
-
-import SearchIcon from "@mui/icons-material/Search"
 
 import ShareIcon from "@mui/icons-material/Share"
 

@@ -22,6 +22,7 @@ import { Link } from "react-router-dom"
 
 // Unfinished!
 function Header({ activePage }: { activePage: string }) {
+  const [bookSearchValue, setBookSearchValue] = useState("")
   const [isHeaderDrawerOpen, setIsHeaderDrawerOpen] = useState(false)
 
   return (
@@ -61,13 +62,14 @@ function Header({ activePage }: { activePage: string }) {
           <TextField
             label="Gõ tên sách"
             variant="outlined"
+            onChange={(e) => setBookSearchValue(e.target.value)}
             InputLabelProps={{
               sx: { fontFamily: "Barlow" },
             }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton component={Link} to="/bookflix/TimSach">
+                  <IconButton component={Link} to={`/bookflix/TimSach/${bookSearchValue}`}>
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>

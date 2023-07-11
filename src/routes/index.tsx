@@ -9,7 +9,8 @@ import {
     Clbinfo,
     Doantruong,
     Bch,
-    Activityhot
+    Activityhot,
+    BookInfo,
 } from "../pages"
 
 
@@ -21,9 +22,10 @@ const publicRoutes = [
     { path: "/hots/:id", compnent: Activityhot },
     { path: "/bookflix", compnent: BookflixLanding },
     { path: "/bookflix/gocnhinmoi", compnent: GocNhinMoi },
-    { path: "/bookflix/timsach", compnent: TimSach },
+    { path: "/bookflix/timsach/:searchQueryInURL?", compnent: TimSach },
     { path: "/bookflix/baiviet", compnent: BaiVietGocNhinMoi },
     { path: "/login&register", compnent: LoginRegister },
+    { path: "/bookflix/bookinfo/:bookId", compnent: BookInfo },
     { path: "*", compnent: Notfound },
 ]
 

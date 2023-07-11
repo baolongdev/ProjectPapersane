@@ -14,9 +14,15 @@ import { Autoplay } from "swiper"
 import "swiper/css"
 import "swiper/css/autoplay"
 
-import { styled } from "@mui/system"
+import getBookIdsForSurpriseMeSwiper from "../../store/getBookIdsForSurpriseMeSwiper"
 
 function BookflixLanding() {
+  const bookIdsSurpriseMe = getBookIdsForSurpriseMeSwiper()
+
+  var bookCoversSurpriseMe = bookIdsSurpriseMe.map(
+    (id) => `/bookflix-searchable-book-info/${id}/cover.png`
+  )
+
   const booksNewRelease = [
     {
       title: "Book 1",
@@ -107,13 +113,6 @@ function BookflixLanding() {
     // Add more book objects here...
   ]
 
-  const booksCoversSurpriseMe = [
-    "https://cdn.baogiaothong.vn/files/baogiay1/2015/12/08/sach-cua-nguyen-nhat-anh-va-nguyen-ngoc-tu-0838.jpg",
-    "https://images.baoquangnam.vn/Storage/NewsPortal/2022/1/15/122456/TNB-49812-01.jpg",
-    "https://newshop.vn/public/uploads/products/3653/ngay-xua-co-mot-chuyen-tinh.jpg",
-    "https://isach.info/images/story/cover/quan_go_di_len__nguyen_nhat_anh.jpg",
-  ]
-
   return (
     <Box bgcolor="rgb(249, 243, 238)" height="100%" width="100vw">
       <Header activePage="TrangChu" />
@@ -124,13 +123,13 @@ function BookflixLanding() {
             variant="h4"
             align="center"
             sx={{
-              fontFamily: "Libre Caslon Text",
+              fontFamily: "var(--normal-font-bookflix)",
               color: "black",
               bgcolor: "white",
               borderRadius: "30px",
               p: 5,
               mt: 5,
-              fontSize: { xs: 30, lg: 35 },
+              fontSize: { xs: 35, lg: 40 },
             }}
           >
             Bookflix là chất kích thích, tick tock tick tock đọc ngay anh em.
@@ -147,9 +146,17 @@ function BookflixLanding() {
             noSwiping={true}
             noSwipingClass="swiper-slide"
           >
-            {booksCoversSurpriseMe.map((bookCoverURL) => (
+            {bookCoversSurpriseMe.map((bookCoverURL) => (
               <SwiperSlide>
-                <img src={bookCoverURL}></img>
+                <img
+                  src={bookCoverURL}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                  }}
+                ></img>
               </SwiperSlide>
             ))}
           </Swiper>

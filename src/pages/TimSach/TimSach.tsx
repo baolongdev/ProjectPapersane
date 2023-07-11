@@ -1,19 +1,12 @@
-import React, { Fragment, useState } from "react"
-//import "./Bookflix.css"
+import { useState, useEffect } from "react"
+
+import { useParams } from "react-router-dom"
 
 import {
-  AppBar,
-  Toolbar,
   Typography,
-  Button,
   TextField,
   Box,
-  Stack,
-  Card,
-  CardMedia,
-  CardContent,
   InputAdornment,
-  Rating,
   Drawer,
   Hidden,
 } from "@mui/material"
@@ -22,52 +15,157 @@ import Header from "../../Bookflix-Components/Header/Header"
 
 import BookCardResult from "./components/BookCardResult"
 
-import { Link } from "react-router-dom"
-
 import SearchIcon from "@mui/icons-material/Search"
 
 import IconButton from "@mui/material/IconButton"
 
 import TuneIcon from "@mui/icons-material/Tune"
 
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react"
+import getSearchableBookIds from "../../store/getSearchableBookIds"
 
-// Import Swiper styles
-import "swiper/css"
+import readTextFile from "../../store/readTextFile"
 
-import { styled } from "@mui/system"
+interface Book {
+  id: string
+  title: string
+  author: string
+  rating: number
+  bookCoverURL: string
+}
 
 function TimSach() {
+  const { searchQueryInURL } = useParams()
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false)
+  const [bookSearchValue, setBookSearchValue] = useState(
+    searchQueryInURL ? searchQueryInURL : ""
+  )
+  const [genreSearchList, setGenreSearchList] = useState<string[]>([])
+  const [bookSearchedInfo, setBookSearchedInfo] = useState<Book[]>([])
 
-  const exampleBookSearchResult = [
-    {
-      title: "Harry Potter and the Chamber of Secrets (Harry Potter, #69)",
-      author: "J.K. Rowling",
-      rating: 4.5,
-      bookCoverURL:
-        "https://m.media-amazon.com/images/I/81THMAxo+pL._AC_UF1000,1000_QL80_.jpg",
-    },
-    {
-      title: "Ra Bờ Suối Ngắm Hoa Kèn Hồngggg",
-      author: "Nguyễn Nhật Ánh",
-      rating: 5,
-      bookCoverURL:
-        "https://images.baoquangnam.vn/Storage/NewsPortal/2022/1/15/122456/TNB-49812-01.jpg",
-    },
-  ]
+  const bookIdsList = getSearchableBookIds()
+
+  useEffect(() => {
+    async function updateBookSearchedInfo() {
+      function includeAllGenres(genresList: string[]) {
+        for (const genre of genreSearchList) {
+          if (!genresList.includes(genre.toLowerCase())) {
+            return false
+          }
+        }
+        return true
+      }
+
+      var newBookSearchedInfo = []
+      for (const thisId of bookIdsList) {
+        const thisTitle = await readTextFile(
+          `/bookflix-searchable-book-info/${thisId}/title.txt`
+        )
+        const thisGenres = (
+          await readTextFile(
+            `/bookflix-searchable-book-info/${thisId}/genres.txt`
+          )
+        )
+          .split(",")
+          .map((genre) => genre.toLowerCase())
+
+        const thisAuthor = await readTextFile(
+          `/bookflix-searchable-book-info/${thisId}/author.txt`
+        )
+        const thisRating = parseFloat(
+          await readTextFile(
+            `/bookflix-searchable-book-info/${thisId}/rating.txt`
+          )
+        )
+
+        const thisCoverURL = `/bookflix-searchable-book-info/${thisId}/cover.png`
+
+        if (
+          thisTitle.toLowerCase().includes(bookSearchValue.toLowerCase()) &&
+          includeAllGenres(thisGenres)
+        ) {
+          const thisBook: Book = {
+            id: thisId,
+            title: thisTitle,
+            author: thisAuthor,
+            rating: thisRating,
+            bookCoverURL: thisCoverURL,
+          }
+          newBookSearchedInfo.push(thisBook)
+        }
+      }
+
+      setBookSearchedInfo(newBookSearchedInfo)
+    }
+
+    updateBookSearchedInfo()
+  }, [])
+
+  async function updateBookSearchedInfo() {
+    function includeAllGenres(genresList: string[]) {
+      for (const genre of genreSearchList) {
+        if (!genresList.includes(genre.toLowerCase())) {
+          return false
+        }
+      }
+      return true
+    }
+
+    var newBookSearchedInfo = []
+    for (const thisId of bookIdsList) {
+      const thisTitle = await readTextFile(
+        `/bookflix-searchable-book-info/${thisId}/title.txt`
+      )
+      const thisGenres = (
+        await readTextFile(
+          `/bookflix-searchable-book-info/${thisId}/genres.txt`
+        )
+      )
+        .split(",")
+        .map((genre) => genre.toLowerCase())
+
+      const thisAuthor = await readTextFile(
+        `/bookflix-searchable-book-info/${thisId}/author.txt`
+      )
+      const thisRating = parseFloat(
+        await readTextFile(
+          `/bookflix-searchable-book-info/${thisId}/rating.txt`
+        )
+      )
+
+      const thisCoverURL = `/bookflix-searchable-book-info/${thisId}/cover.png`
+
+      if (
+        thisTitle.toLowerCase().includes(bookSearchValue.toLowerCase()) &&
+        includeAllGenres(thisGenres)
+      ) {
+        const thisBook: Book = {
+          id: thisId,
+          title: thisTitle,
+          author: thisAuthor,
+          rating: thisRating,
+          bookCoverURL: thisCoverURL,
+        }
+        newBookSearchedInfo.push(thisBook)
+      }
+    }
+
+    setBookSearchedInfo(newBookSearchedInfo)
+  }
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" height="100vh" width="100vw">
-      <Header activePage="TimSach" />
+    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100vw">
+      <Header activePage="TimSach"/>
 
       <Box display="flex" justifyContent="space-evenly" mt={10}>
         <Box flexBasis={{ xs: "90%", md: "60%" }}>
           <TextField
             fullWidth
+            value={bookSearchValue}
             label="Gõ tên sách"
             variant="outlined"
+            onChange={(e) => {
+              setBookSearchValue(e.target.value)
+            }}
             InputLabelProps={{
               sx: { fontFamily: "Barlow, sans-serif" },
             }}
@@ -79,7 +177,7 @@ function TimSach() {
                       <TuneIcon />
                     </IconButton>
                   </Hidden>
-                  <IconButton>
+                  <IconButton onClick={updateBookSearchedInfo}>
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>
@@ -108,9 +206,13 @@ function TimSach() {
             }}
           />
 
-          {exampleBookSearchResult.map((bookResult) => (
+          {bookSearchedInfo.map((bookResult) => (
             <BookCardResult bookInfo={bookResult} />
           ))}
+
+          {/* {exampleBookSearchResult.map((bookResult) => (
+            <BookCardResult bookInfo={bookResult} />
+          ))} */}
         </Box>
 
         <Box flexBasis="20%" display={{ xs: "none", md: "block" }}>
@@ -129,6 +231,9 @@ function TimSach() {
 
           <TextField
             placeholder="Viết các thể loại bạn muốn tìm, ngăn cách dấu phẩy. Ví dụ: Lãng mạn, Bí ẩn, Trinh thám"
+            onChange={(e) => {
+              setGenreSearchList(e.target.value.split(","))
+            }}
             multiline
             fullWidth
             rows={30}

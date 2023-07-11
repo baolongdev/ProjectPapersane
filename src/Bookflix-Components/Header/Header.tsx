@@ -141,6 +141,7 @@ function Header({ activePage }: { activePage: string }) {
 
           <TextField
             label="Gõ tên sách"
+            onChange={(e) => setBookSearchValue(e.target.value)}
             variant="outlined"
             InputLabelProps={{
               sx: { fontFamily: "Barlow" },

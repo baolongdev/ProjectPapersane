@@ -193,10 +193,10 @@ function Clbinfo({ match }: any) {
             (backgroundRef.current as HTMLElement).classList.remove("clbinfo__fullview");
             updateGroupImageHeight();
         };
-
         window.addEventListener('resize', handleResize);
 
         return () => {
+            handleResize()
             window.removeEventListener('resize', handleResize);
         };
     }, [docxText]);

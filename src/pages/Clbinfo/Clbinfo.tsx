@@ -170,12 +170,7 @@ function Clbinfo({ match }: any) {
             //     }
             const backgroundHeight = (backgroundRef.current as HTMLElement).offsetHeight;
             const windowHeight = window.innerHeight;
-            const windowWidth = window.innerWidth;
-            console.log(backgroundHeight, windowHeight);
-            if (windowWidth < 767)
-                (groupImageRef.current as HTMLElement).classList.add("hide")
-            else
-                (groupImageRef.current as HTMLElement).classList.remove("hide")
+
             if (backgroundHeight <= windowHeight) {
                 console.log("add");
                 (groupImageRef.current as HTMLElement).classList.add("clbinfo__fullview");
@@ -216,7 +211,11 @@ function Clbinfo({ match }: any) {
     return (
         <section className="clbinfo section" id='clbinfo'>
             <i onClick={() => {
-                window.close();
+                if (window.innerWidth > 767) {
+                    window.close();
+                } else {
+                    window.history.back();
+                }
             }}
                 className="ri-arrow-left-line Clbinfo__return button button--flex"
                 ref={btnReturnRef}

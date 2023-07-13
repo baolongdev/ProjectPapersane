@@ -44,6 +44,7 @@ function TimSach() {
 
   const bookIdsList = getSearchableBookIds()
 
+  // this is long bcuz I had to copy the whole updateBookSearchedInfo() definition in useEffect :(, at least it works
   useEffect(() => {
     async function updateBookSearchedInfo() {
       function includeAllGenres(genresList: string[]) {
@@ -157,7 +158,8 @@ function TimSach() {
       bgcolor="rgb(249, 243, 238)"
       minHeight="100vh"
       height="100%"
-      width="100vw"
+      minWidth="100vw"
+      width="100%"
     >
       <Header activePage="TimSach" />
 
@@ -214,10 +216,6 @@ function TimSach() {
           {bookSearchedInfo.map((bookResult) => (
             <BookCardResult bookInfo={bookResult} />
           ))}
-
-          {/* {exampleBookSearchResult.map((bookResult) => (
-            <BookCardResult bookInfo={bookResult} />
-          ))} */}
         </Box>
 
         <Box flexBasis="20%" display={{ xs: "none", md: "block" }}>

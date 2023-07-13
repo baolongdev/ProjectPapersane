@@ -21,9 +21,9 @@ const BookInfo = () => {
 
   const [bookTitle, setBookTitle] = useState("")
   const [bookAuthor, setBookAuthor] = useState("")
-  const [bookReview, setBookReview] = useState("")
   const [bookReviewParagraphs, setBookReviewParagraphs] = useState<string[]>([])
   const [bookGenres, setBookGenres] = useState<string[]>([])
+  const [bookRating, setBookRating] = useState(0.0)
 
   useEffect(() => {
     readTextFile(`/bookflix-searchable-book-info/${bookId}/title.txt`).then(
@@ -31,7 +31,6 @@ const BookInfo = () => {
     )
     readTextFile(`/bookflix-searchable-book-info/${bookId}/review.txt`).then(
       (data) => {
-        setBookReview(data)
         // Split with all kinds of "newline" character (according to ChatGPT, there are many, like \r \n idk)
         setBookReviewParagraphs(data.split(/\r\n|\r|\n/g))
       }
@@ -49,6 +48,9 @@ const BookInfo = () => {
     )
     readTextFile(`/bookflix-searchable-book-info/${bookId}/author.txt`).then(
       (data) => setBookAuthor(data)
+    )
+    readTextFile(`/bookflix-searchable-book-info/${bookId}/rating.txt`).then(
+      (data) => setBookRating(data ? parseFloat(data) : 0.0)
     )
   }, [])
 
@@ -186,8 +188,8 @@ const BookInfo = () => {
                   Đánh giá:{" "}
                 </Typography>
                 <Rating
-                  defaultValue={4}
-                  precision={0.5}
+                  value={bookRating}
+                  precision={0.25}
                   readOnly
                   sx={{ fontSize: { md: 30, lg: 40 } }}
                 />

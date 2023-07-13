@@ -17,6 +17,8 @@ import "swiper/css/autoplay"
 import getBookIdsForSurpriseMeSwiper from "../../store/getBookIdsForSurpriseMeSwiper"
 
 import getSearchableBookIds from "../../store/getSearchableBookIds"
+import { useEffect, useState } from "react"
+import readTextFile from "../../store/readTextFile"
 
 function BookflixLanding() {
   const allBookIds = getSearchableBookIds()
@@ -26,6 +28,19 @@ function BookflixLanding() {
   const bookCoversSurpriseMe = bookIdsSurpriseMe.map(
     (id) => `/bookflix-searchable-book-info/${id}/cover.png`
   )
+
+  const [quoteTxtLines, setQuoteTxtLines] = useState<string[]>([])
+
+  useEffect(() => {
+    readTextFile(`/bookflix-others/quotes.txt`).then((data) => {
+      // once again, the strange parameters for split() is what ChatGPT said is needed for splitting based on new lines
+      setQuoteTxtLines(data.split(/\r\n|\r|\n/g))
+    })
+  }, [])
+
+  const date0 = new Date("2023-07-13")
+  const daysSinceDate0 = new Date().getDate() - date0.getDate()
+  const quoteIndex = daysSinceDate0 % 100
 
   const booksNewRelease = [
     {
@@ -118,8 +133,14 @@ function BookflixLanding() {
   ]
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100vw">
-      <Header activePage="TrangChu"/>
+    <Box
+      bgcolor="rgb(249, 243, 238)"
+      minHeight="100vh"
+      height="100%"
+      minWidth="100vw"
+      width="100%"
+    >
+      <Header activePage="TrangChu" />
 
       <Grid container columns={24} justifyContent="center" spacing={10}>
         <Grid item xs={22} sm={22} md={14} lg={10} alignSelf="center">
@@ -136,8 +157,7 @@ function BookflixLanding() {
               fontSize: { xs: 35, lg: 40 },
             }}
           >
-            Bookflix là chất kích thích, tick tock tick tock đọc ngay anh em.
-            hehehehe
+            Yêu sách từ đầu sao thật khó<br></br>Đừng từ bỏ, có Bookflix lo!
           </Typography>
         </Grid>
 
@@ -168,8 +188,9 @@ function BookflixLanding() {
           <Button
             fullWidth
             onClick={() => {
-              const randomId = allBookIds[Math.floor(Math.random() * allBookIds.length)];
-              window.open(`/bookflix/bookinfo/${randomId}`, '_blank');
+              const randomId =
+                allBookIds[Math.floor(Math.random() * allBookIds.length)]
+              window.open(`/bookflix/bookinfo/${randomId}`, "_blank")
             }}
             sx={{
               mt: 1,
@@ -265,10 +286,9 @@ function BookflixLanding() {
             fontSize: { xs: 20, lg: 25 },
           }}
         >
-          "He never went out without a book under his arm, and he often came
-          back with two."
+          {quoteTxtLines[quoteIndex * 2]}
           <br />
-          -Victor Hugo, Les Miserablés-
+          {`- ${quoteTxtLines[quoteIndex * 2 + 1]}`}
         </Typography>
       </Box>
     </Box>

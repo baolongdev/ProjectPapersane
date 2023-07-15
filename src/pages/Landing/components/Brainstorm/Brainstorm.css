@@ -18,6 +18,13 @@
   color: #fff;
   text-align: center;
 }
+.brainstorm__bq {
+  margin-top: var(--mb-2);
+  font-size: var(--h2-font-size);
+  line-height: 140%;
+  font-weight: 400;
+  color: #fff;
+}
 .brainstorm__container {
   display: flex;
   height: 100%;
@@ -25,7 +32,7 @@
   align-items: center;
   justify-items: center;
   background-color: #fff;
-  width: 90%;
+  /* width: 90%; */
   /* max-width: auto !important; */
   padding: 3em 0.5em;
   border-radius: 0.8em;
@@ -40,18 +47,18 @@
   justify-items: center;
 }
 .brainstorm__draggable-image {
-  width: 8em;
+  width: 12em;
   cursor: move;
 }
 .brainstorm__draggable-image img,
 .brainstorm__card.dropped img {
-  width: 8em;
+  width: 12em;
   border-radius: 0.5em;
   filter: drop-shadow(0 0.3em 0.9em rgba(0, 0, 0, 0.25));
 }
 .brainstorm__card {
-  width: 10em;
-  height: 10em;
+  width: 14em;
+  height: 14em;
   text-align: center;
   padding: 1rem;
   display: flex;
@@ -86,7 +93,7 @@
 }
 .brainstorm__controls p {
   color: #ffffff;
-  font-size: 2em;
+  font-size: var(--h3-font-size);
   margin-bottom: 1em;
   text-align: center;
 }
@@ -97,18 +104,18 @@
 @media screen and (max-width: 1200px) {
   .brainstorm__draggable-image img,
   .brainstorm__card.dropped img {
-    width: 6em;
+    width: 8em;
   }
   .brainstorm__card {
-    width: 8em;
-    height: 8em;
+    width: 12em;
+    height: 12em;
   }
   .brainstorm__draggable-image {
     width: auto;
   }
   .brainstorm__container {
     display: block !important;
-    max-width: 37.5em !important;
+    /* max-width: 37.5em !important; */
   }
 }
 @media screen and (max-width: 450px) {
@@ -117,7 +124,7 @@
   }
   .brainstorm__draggable-image img,
   .brainstorm__card.dropped img {
-    width: 4em;
+    width: 6em;
   }
   .brainstorm__card {
     font-size: 0.8rem;

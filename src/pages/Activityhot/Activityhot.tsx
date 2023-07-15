@@ -116,10 +116,9 @@ function Activityhot({ match }: any) {
                     /\S/g,
                     "<span class='activityhot__letter'>$&</span>"
                 );
-                if (!position)
+                if (position > 0) {
                     textTitle.children[position].innerHTML = "<br>"
-
-
+                }
             }
 
 
@@ -130,11 +129,12 @@ function Activityhot({ match }: any) {
                     duration: 0.8,
                     stagger: 0.05,
                     delay: 4
-                }).fromTo(document.querySelector(".activityhot__description"), {
+                }).fromTo([document.querySelector(".activityhot__description"), document.querySelector(".activityhot__bq")], {
                     opacity: 0,
                 }, {
                     opacity: 1,
                     duration: 0.8,
+                    stagger: 0.5,
                 }).fromTo(document.querySelector(".activityhot__link"), {
                     opacity: 0,
                 }, {
@@ -254,7 +254,18 @@ function Activityhot({ match }: any) {
                     <p className="activityhot__description">
                         {docxText}
                     </p>
-                    <a href={InitialVariable().activities[linkValues.indexOf(id as string)].linkFB} target='_blank' className="activityhot__link">Thông tin khác</a>
+                    <p className="activityhot__bq">
+                        Website có sử dụng một số hình ảnh từ Câu lạc bộ Nhiếp ảnh - Specture và Câu lạc bộ Báo chí - Truyền thông
+                    </p>
+
+                    {
+                        InitialVariable().activities[linkValues.indexOf(id as string)].linkFB && (
+                            <a href={InitialVariable().activities[linkValues.indexOf(id as string)].linkFB} target='_blank' className="activityhot__link">
+                                Thông tin khác
+                            </a>
+                        )
+                    }
+
                 </div>
                 <div className="activityhot__btnNext swiper-button-next">
                     <div className='activityhot__line'></div>

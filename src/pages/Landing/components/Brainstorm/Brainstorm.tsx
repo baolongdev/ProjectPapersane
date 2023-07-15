@@ -189,8 +189,6 @@ function Brainstorm({ initial }: any) {
 
 
 
-
-
     }, [])
 
     return <section className="brainstorm" id="brainstorm">
@@ -209,6 +207,9 @@ function Brainstorm({ initial }: any) {
 
         </div>
 
+        <p className="brainstorm__bq">
+            Website có sử dụng một số hình ảnh từ Câu lạc bộ Truyền thông học đường
+        </p>
     </section>
 }
 

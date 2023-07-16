@@ -211,11 +211,7 @@ function Clbinfo({ match }: any) {
     return (
         <section className="clbinfo section" id='clbinfo'>
             <i onClick={() => {
-                if (window.innerWidth > 767) {
-                    window.close();
-                } else {
-                    window.history.back();
-                }
+                window.history.back();
             }}
                 className="ri-arrow-left-line Clbinfo__return button button--flex"
                 ref={btnReturnRef}

@@ -96,7 +96,7 @@ function CLB_DA({ initial }: any) {
         <div className="clbdas__container container grid">
             {
                 clbinfo.map((data: any, index: any) => (
-                    <a key={index} href={`clbinfo/` + data.id.replace(/\./g, "-")} target='_blank' className={`clbdas__card mix ${data.tag}`}>
+                    <a key={index} href={`clbinfo/` + data.id.replace(/\./g, "-")} className={`clbdas__card mix ${data.tag}`}>
                         <img src={`/clbinfo/${data.id}/banner.png`} alt="" className="clbdas__img" />
                     </a>
                 ))

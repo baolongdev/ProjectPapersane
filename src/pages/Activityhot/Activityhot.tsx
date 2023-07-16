@@ -32,10 +32,10 @@ function Activityhot({ match }: any) {
                 console.error('Error:', error);
             });
     }, []);
-    useEffect(() => {
-        if (id == "lhan")
-            document.documentElement.style.setProperty("--imgheight", "200%")
-    }, []);
+    // useEffect(() => {
+    //     if (id == "lhan")
+    //         document.documentElement.style.setProperty("--imgheight", "200%")
+    // }, []);
 
     useLayoutEffect(() => {
         const components = componentsRef.current
@@ -255,16 +255,16 @@ function Activityhot({ match }: any) {
                         {docxText}
                     </p>
                     <p className="activityhot__bq">
-                        Website có sử dụng một số hình ảnh từ Câu lạc bộ Nhiếp ảnh - Specture và Câu lạc bộ Báo chí - Truyền thông
+                        {InitialVariable().activities[linkValues.indexOf(id as string)].bq}
                     </p>
 
-                    {
+                    {/* {
                         InitialVariable().activities[linkValues.indexOf(id as string)].linkFB && (
                             <a href={InitialVariable().activities[linkValues.indexOf(id as string)].linkFB} target='_blank' className="activityhot__link">
                                 Thông tin khác
                             </a>
                         )
-                    }
+                    } */}
 
                 </div>
                 <div className="activityhot__btnNext swiper-button-next">

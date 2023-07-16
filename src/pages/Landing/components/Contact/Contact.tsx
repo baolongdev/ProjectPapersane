@@ -8,7 +8,7 @@ function Contact({ initial }: any) {
         const sendEmail = (e: { preventDefault: () => void; }) => {
             e.preventDefault();
             emailjs
-                .sendForm('service_go52r4s', 'template_c48awlc', '#contact-form', 'rVVDXI6hJpjlepF4j')
+                .sendForm('service_mge5eei', 'template_z3tm64k', '#contact-form', 'ktSRLBoa5cQ2T85FR')
                 .then(
                     () => {
                         // Show sent message

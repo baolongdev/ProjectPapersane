@@ -81,7 +81,7 @@
 }
 .activityhot__title {
   color: #fff;
-  font-size: var(--big-font-size);
+  font-size: var(--h1-font-size);
   margin-bottom: var(--mb-2);
   font-weight: 800;
   line-height: 140%;
@@ -91,7 +91,7 @@
 .activityhot__description {
   color: #fff;
   /* max-width: 70%; */
-  font-size: var(--h2-font-size);
+  font-size: var(--h3-font-size);
   margin-bottom: 5rem;
   line-height: 140%;
   font-weight: 500;

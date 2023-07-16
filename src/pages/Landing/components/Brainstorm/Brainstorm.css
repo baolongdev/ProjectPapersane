@@ -118,6 +118,17 @@
     /* max-width: 37.5em !important; */
   }
 }
+@media screen and (max-width: 750px) {
+  .brainstorm__bq {
+    padding: 0 1rem;
+  }
+  .brainstorm__card {
+    font-size: 0.8rem;
+    width: 6em;
+    height: 6em;
+  }
+}
+
 @media screen and (max-width: 450px) {
   .brainstorm__draggable-image {
     width: auto;

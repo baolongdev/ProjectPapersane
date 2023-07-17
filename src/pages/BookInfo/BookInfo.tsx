@@ -21,14 +21,13 @@ const BookInfo = () => {
 
   const [bookTitle, setBookTitle] = useState("")
   const [bookAuthor, setBookAuthor] = useState("")
-  const [bookReview, setBookReview] = useState("")
+  const [bookPublishDate, setBookPublishDate] = useState("")
   const [bookReviewParagraphs, setBookReviewParagraphs] = useState<string[]>([])
   const [bookGenres, setBookGenres] = useState<string[]>([])
 
   useEffect(() => {
     readTextFile(`/bookflix-searchable-book-info/${bookId}/title.txt`).then((data) => setBookTitle(data.toUpperCase()))
     readTextFile(`/bookflix-searchable-book-info/${bookId}/review.txt`).then((data) => {
-      setBookReview(data)
       // Split with all kinds of "newline" character (according to ChatGPT, there are many, like \r \n idk)
       setBookReviewParagraphs(data.split(/\r\n|\r|\n/g))
     })
@@ -40,6 +39,9 @@ const BookInfo = () => {
           return firstLetter + restOfString
         })
       )
+    })
+    readTextFile(`/bookflix-searchable-book-info/${bookId}/publishdate.txt`).then((data) => {
+      setBookPublishDate(data)
     })
     readTextFile(`/bookflix-searchable-book-info/${bookId}/author.txt`).then((data) => setBookAuthor(data))
   }, [])
@@ -98,7 +100,7 @@ const BookInfo = () => {
             {/* Book publish date */}
             <Grid item alignSelf={{ xs: "flex-start", sm: "center" }}>
               <Typography variant="h5" color="black" fontFamily="Barlow, serif" fontSize={{ sm: 20, md: 25 }}>
-                <span style={{ fontWeight: "bold" }}>Ngày phát hành: </span> 19/19/2019
+                <span style={{ fontWeight: "bold" }}>Ngày phát hành: </span> {bookPublishDate}
               </Typography>
             </Grid>
 

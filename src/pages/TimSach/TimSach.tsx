@@ -20,7 +20,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import dayjs, { Dayjs } from "dayjs"
-import isBetween from "dayjs/plugin/isBetween"
 
 interface Book {
   id: string
@@ -46,11 +45,11 @@ function TimSach() {
   }
 
   const handleFilteredStartDateChange = (value: Dayjs | null) => {
-    setFilteredStartDate(dayjs(value))
+    setFilteredStartDate(value ? value.toDate() : new Date("2000/01/01"))
   }
 
   const handleFilteredEndDateChange = (value: Dayjs | null) => {
-    setFilteredEndDate(dayjs(value))
+    setFilteredEndDate(value ? value.toDate() : new Date("2000/01/01"))
   }
 
   const handleFilteredRatingChange = (event: any, value: number | number[]) => {
@@ -59,8 +58,8 @@ function TimSach() {
 
   const [filteredGenres, setFilteredGenres] = useState<string[]>([])
   const [filteredAuthors, setFilteredAuthors] = useState<string[]>([])
-  const [filteredStartDate, setFilteredStartDate] = useState<Dayjs>(dayjs("01-01-2000"))
-  const [filteredEndDate, setFilteredEndDate] = useState<Dayjs>(dayjs("01-01-2030"))
+  const [filteredStartDate, setFilteredStartDate] = useState<Date>(new Date("2000/01/01"))
+  const [filteredEndDate, setFilteredEndDate] = useState<Date>(new Date("2030/01/01"))
   const [filteredRating, setFilteredRating] = useState<number | number[]>([0, 5])
 
   const [bookSearchedInfo, setBookSearchedInfo] = useState<Book[]>([])
@@ -68,21 +67,27 @@ function TimSach() {
   const exampleGenres = ["Rất chi là hoang dã", "Ma quỷ", "Đáng sợ", "Tình yêu", "Lãng mạn", "Tâm thần"]
   const exampleAuthors = ["Nguyễn Nhật Ánh", "Trương Anh Ngọc", "Lucas Fermat", "Donald J. Trump"]
 
-  async function updateBookSearchedInfo() {
-    var newBookSearchedInfo = []
+  const updateBookSearchedInfo = async () => {
+    const checkDateBetween = ({ start, x, end }: { start: Date; x: Date; end: Date }) => {
+      return
+    }
+
+    var newBookSearchedInfo: Book[] = []
     for (const thisId of bookIdsList) {
       const thisTitle = await readTextFile(`/bookflix-searchable-book-info/${thisId}/title.txt`)
       const thisGenres = (await readTextFile(`/bookflix-searchable-book-info/${thisId}/genres.txt`)).split(",").map((genre) => genre.toLowerCase())
       const thisAuthor = await readTextFile(`/bookflix-searchable-book-info/${thisId}/author.txt`)
       const thisRating = parseFloat(await readTextFile(`/bookflix-searchable-book-info/${thisId}/rating.txt`))
-      const thisDate = dayjs(await readTextFile(`/bookflix-searchable-book-info/${thisId}/publishdate.txt`))
+      const thisDate = new Date(Date.parse(await readTextFile(`/bookflix-searchable-book-info/${thisId}/publishdate.txt`)))
       const thisCoverURL = `/bookflix-searchable-book-info/${thisId}/cover.png`
 
       const goodTitle = thisTitle.toLowerCase().includes(bookSearchValue.toLowerCase())
       const goodGenres = filteredGenres.every((value) => thisGenres.includes(value.toLowerCase()))
       const goodAuthor = filteredAuthors.length == 0 || filteredAuthors.includes(thisAuthor)
       const goodRating = (filteredRating as number[])[0] <= thisRating && thisRating <= (filteredRating as number[])[1]
-      const goodDate = thisDate.isBetween(filteredStartDate, filteredEndDate)
+      const goodDate = filteredStartDate <= thisDate && thisDate <= filteredEndDate
+
+      console.log([filteredStartDate, thisDate, filteredEndDate])
 
       if (goodTitle && goodGenres && goodAuthor && goodRating && goodDate) {
         const thisBook: Book = {
@@ -90,7 +95,7 @@ function TimSach() {
           title: thisTitle,
           author: thisAuthor,
           rating: thisRating,
-          publishDate: thisDate.toDate(),
+          publishDate: thisDate,
           bookCoverURL: thisCoverURL,
         }
         newBookSearchedInfo.push(thisBook)
@@ -132,7 +137,7 @@ function TimSach() {
                       bgcolor: "rgb(47, 62, 116)",
                       color: "white",
                       "&:hover": {
-                        bgcolor: 'rgb(27, 42, 86)',
+                        bgcolor: "rgb(27, 42, 86)",
                       },
                     }}
                   >
@@ -327,6 +332,7 @@ function TimSach() {
           </Typography>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
+              defaultValue={dayjs("01-01-2000")}
               value={dayjs(filteredStartDate)}
               onChange={handleFilteredStartDateChange}
               slotProps={{
@@ -370,6 +376,7 @@ function TimSach() {
           </Typography>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
+              defaultValue={dayjs("01-01-2030")}
               value={dayjs(filteredEndDate)}
               onChange={handleFilteredEndDateChange}
               slotProps={{

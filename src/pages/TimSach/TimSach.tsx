@@ -68,10 +68,6 @@ function TimSach() {
   const exampleAuthors = ["Nguyễn Nhật Ánh", "Trương Anh Ngọc", "Lucas Fermat", "Donald J. Trump"]
 
   const updateBookSearchedInfo = async () => {
-    const checkDateBetween = ({ start, x, end }: { start: Date; x: Date; end: Date }) => {
-      return
-    }
-
     var newBookSearchedInfo: Book[] = []
     for (const thisId of bookIdsList) {
       const thisTitle = await readTextFile(`/bookflix-searchable-book-info/${thisId}/title.txt`)

@@ -1,24 +1,24 @@
-const getSearchableBookIds = () => {
+const getSearchableBookIds = (): string[] => {
   const searchableBookIds = [
-    "BayLoaiHinhThongMinh",
-    "BinhMinhCuaCuocDoi",
+    //"BayLoaiHinhThongMinh",
+    //"BinhMinhCuaCuocDoi",
     "CaPheCungTony",
-    "CayCamNgotCuaToi",
+    //"CayCamNgotCuaToi",
     "ChuaRuoi",
     "ChuBeCoTaiMoKhoa",
-    "ConGaiCuaChimPhuongHoang",
+    //"ConGaiCuaChimPhuongHoang",
     "DaoMongMo",
     "DiQuaHaiMuaDich",
-    "Ikigai",
-    "MeCungTrongThuVienCuaNgaiLemoncello",
-    "NhatKyChuBeNhuNhat",
+    //"Ikigai",
+    //"MeCungTrongThuVienCuaNgaiLemoncello",
+    //"NhatKyChuBeNhuNhat",
     "SachNguocDoiXuoi",
-    "Sapiens",
+    //"Sapiens",
     "TatDen",
-    "TazakiTsuzukuKhongMauVaNhungNamThangHanhHuong",
+    //"TazakiTsuzukuKhongMauVaNhungNamThangHanhHuong",
     "TiengGoiNoiHoangDa",
     "TottoChanBenOCuaSo",
-    "YeuNhungDieuKhongHoanHao",
+    //"YeuNhungDieuKhongHoanHao",
   ]
   return searchableBookIds
 }

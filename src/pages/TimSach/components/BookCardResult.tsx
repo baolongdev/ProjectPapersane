@@ -13,6 +13,7 @@ interface Book {
   title: string
   author: string
   rating: number
+  publishDate: Date
   bookCoverURL: string
 }
 
@@ -39,6 +40,7 @@ const BookCardResult = ({ bookInfo }: { bookInfo: Book }) => {
           variant="h6"
           fontSize={{ xs: 15, lg: 20 }}
           fontWeight="bold"
+          fontFamily="Barlow, serif"
         >
           {bookInfo.title}
         </Typography>
@@ -46,6 +48,7 @@ const BookCardResult = ({ bookInfo }: { bookInfo: Book }) => {
           variant="subtitle1"
           color="text.secondary"
           fontSize={{ xs: 13, lg: 15 }}
+          fontFamily="Barlow, serif"
         >
           bởi {bookInfo.author}
         </Typography>
@@ -70,6 +73,7 @@ const BookCardResult = ({ bookInfo }: { bookInfo: Book }) => {
             boxShadow: "none",
             maxWidth: 200,
             fontSize: { xs: 10, sm: 15 },
+            fontFamily: "Barlow, serif",
             mt: 3,
             "&:hover": {
               backgroundColor: "rgb(224, 143, 120)",

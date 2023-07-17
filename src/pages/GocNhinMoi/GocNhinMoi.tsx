@@ -6,26 +6,52 @@ import Header from "../../Bookflix-Components/Header/Header"
 
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome"
 
+import getGocNhinMoiArticleIds from "../../store/getGocNhinMoiArticleIds"
+import readTextFile from "../../store/readTextFile"
+import { useEffect, useState } from "react"
+
+interface ArticleInfo {
+  id: string,
+  title: string,
+  author: string,
+  description: string,
+  imageURL: string,
+}
+
 function GocNhinMoi() {
-  const examplePosts = [
-    {
-      title: "Chiều sâu của tác phẩm Nguyễn Nhật Ánh",
-      author: "Thomas Edison",
-      description: "Nguyễn Nhật Ánh pro hơn chúng ta nghĩ...",
-      imageURL:
-        "https://nld.mediacdn.vn/291774122806476800/2021/4/8/can-anh-nguyen-nhat-anh-161786279961226510709.jpg",
-    },
-    {
-      title: "Độ dày cuốn sách và thời gian đọc sách",
-      author: "Trông Anh Ngược",
-      description: "Sách càng dày, đọc mới càng nhanh",
-      imageURL:
-        "https://c2thanglong.edu.vn/wp-content/uploads/2023/05/Trong-Anh-Nguoc-La-Gi-Nguoi-Nam-Giu-Bi-Thuat-Flexing-4.jpg",
-    },
-  ]
+  const articleIds = getGocNhinMoiArticleIds()
+
+  const temp : ArticleInfo[] = []
+
+  const [articles, setArticles] = useState<ArticleInfo[]>([])
+
+  const fetchArticles = async () => {
+    const articleData = await Promise.all(
+      articleIds.map(async (id) => {
+        const title = await readTextFile(`/GocNhinMoi-articles/${id}/title.txt`);
+        const author = await readTextFile(`/GocNhinMoi-articles/${id}/author.txt`);
+        const description = await readTextFile(`/GocNhinMoi-articles/${id}/description.txt`);
+        const imageURL = `/GocNhinMoi-articles/${id}/images/articleCover.jpg`;
+  
+        return {
+          id: id,
+          title,
+          author,
+          description,
+          imageURL
+        };
+      })
+    );
+  
+    setArticles(articleData);
+  };
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100%">
+    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" minWidth="100vw" width="100%">
       <Header activePage="GocNhinMoi" />
 
       <Typography
@@ -47,7 +73,7 @@ function GocNhinMoi() {
 
       <Box display="flex" gap={10} justifyContent="center" mx={2}>
         <Box flexBasis={{ xs: "100%", md: "60%" }}>
-          {examplePosts.map((post) => (
+          {articles.map((post) => (
             <PostPreviewCard postInfo={post} />
           ))}
         </Box>

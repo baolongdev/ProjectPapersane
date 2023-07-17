@@ -1,13 +1,4 @@
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  TextField,
-  InputAdornment,
-  IconButton,
-  Box,
-  Drawer,
-} from "@mui/material"
+import { AppBar, Toolbar, Typography, TextField, InputAdornment, IconButton, Box, Drawer } from "@mui/material"
 
 import HeaderButton from "./components/HeaderButton/HeaderButton"
 
@@ -20,7 +11,6 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-// Unfinished!
 function Header({ activePage }: { activePage: string }) {
   const [bookSearchValue, setBookSearchValue] = useState("")
   const [isHeaderDrawerOpen, setIsHeaderDrawerOpen] = useState(false)
@@ -42,22 +32,10 @@ function Header({ activePage }: { activePage: string }) {
           BOOKFLIX
         </Typography>
 
-        <Box display={{ xs: "none", xl: "block" }}>
-          <HeaderButton
-            buttonText="Trang Chủ"
-            buttonLink="/bookflix"
-            isActivePage={activePage === "TrangChu"}
-          />
-          <HeaderButton
-            buttonText="Tìm sách"
-            buttonLink="/bookflix/timsach"
-            isActivePage={activePage === "TimSach"}
-          />
-          <HeaderButton
-            buttonText="Góc nhìn mới"
-            buttonLink="/bookflix/gocnhinmoi"
-            isActivePage={activePage === "GocNhinMoi"}
-          />
+        <Box display={{ xs: "none", lg: "flex", alignItems: "center"}} gap={{lg: 1, xl: 5}}>
+          <HeaderButton buttonText="Trang Chủ" buttonLink="/bookflix" isActivePage={activePage === "TrangChu"} />
+          <HeaderButton buttonText="Tìm sách" buttonLink="/bookflix/timsach" isActivePage={activePage === "TimSach"} />
+          <HeaderButton buttonText="Góc nhìn mới" buttonLink="/bookflix/gocnhinmoi" isActivePage={activePage === "GocNhinMoi"} />
 
           <TextField
             label="Gõ tên sách"
@@ -69,7 +47,17 @@ function Header({ activePage }: { activePage: string }) {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton component={Link} to={`/bookflix/TimSach/${bookSearchValue}`}>
+                  <IconButton
+                    component={Link}
+                    to={`/bookflix/TimSach/${bookSearchValue}`}
+                    sx={{
+                      bgcolor: "rgb(47, 62, 116)",
+                      color: "white",
+                      "&:hover": {
+                        bgcolor: "rgb(27, 42, 86)",
+                      },
+                    }}
+                  >
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>
@@ -95,16 +83,13 @@ function Header({ activePage }: { activePage: string }) {
               "& label.Mui-focused": {
                 color: "rgb(47, 62, 116)",
               },
-              mr: 10,
+              mr: 5,
             }}
           />
         </Box>
 
-        <IconButton sx={{ display: { xs: "block", xl: "none" } }}>
-          <DehazeIcon
-            fontSize="large"
-            onClick={() => setIsHeaderDrawerOpen(true)}
-          />
+        <IconButton sx={{ display: { xs: "block", lg: "none" } }} onClick={() => setIsHeaderDrawerOpen(true)}>
+          <DehazeIcon fontSize="large" />
         </IconButton>
       </Toolbar>
 
@@ -116,28 +101,10 @@ function Header({ activePage }: { activePage: string }) {
           sx: { bgcolor: "var(--bookflix-background)" },
         }}
       >
-        <Box
-          p={5}
-          display="flex"
-          flexDirection="column"
-          gap={3}
-          alignItems="center"
-        >
-          <HeaderButton
-            buttonText="Trang Chủ"
-            buttonLink="/bookflix"
-            isActivePage={activePage === "TrangChu"}
-          />
-          <HeaderButton
-            buttonText="Tìm sách"
-            buttonLink="/bookflix/timsach"
-            isActivePage={activePage === "TimSach"}
-          />
-          <HeaderButton
-            buttonText="Góc nhìn mới"
-            buttonLink="/bookflix/gocnhinmoi"
-            isActivePage={activePage === "GocNhinMoi"}
-          />
+        <Box p={5} display="flex" flexDirection="column" gap={3} alignItems="center">
+          <HeaderButton buttonText="Trang Chủ" buttonLink="/bookflix" isActivePage={activePage === "TrangChu"} />
+          <HeaderButton buttonText="Tìm sách" buttonLink="/bookflix/timsach" isActivePage={activePage === "TimSach"} />
+          <HeaderButton buttonText="Góc nhìn mới" buttonLink="/bookflix/gocnhinmoi" isActivePage={activePage === "GocNhinMoi"} />
 
           <TextField
             label="Gõ tên sách"
@@ -149,7 +116,17 @@ function Header({ activePage }: { activePage: string }) {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton component={Link} to={`/bookflix/TimSach/${bookSearchValue}`}>
+                  <IconButton
+                    component={Link}
+                    to={`/bookflix/TimSach/${bookSearchValue}`}
+                    sx={{
+                      bgcolor: "rgb(47, 62, 116)",
+                      color: "white",
+                      "&:hover": {
+                        bgcolor: "rgb(27, 42, 86)",
+                      },
+                    }}
+                  >
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>
@@ -175,7 +152,6 @@ function Header({ activePage }: { activePage: string }) {
               "& label.Mui-focused": {
                 color: "rgb(47, 62, 116)",
               },
-              mr: 10,
             }}
           />
 

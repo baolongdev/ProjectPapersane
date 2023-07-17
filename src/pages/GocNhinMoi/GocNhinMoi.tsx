@@ -21,9 +21,7 @@ interface ArticleInfo {
 function GocNhinMoi() {
   const articleIds = getGocNhinMoiArticleIds()
 
-  const temp : ArticleInfo[] = []
-
-  const [articles, setArticles] = useState<ArticleInfo[]>([])
+  const [articles_stringified, setArticles_stringified] = useState<Set<string>>(new Set())
 
   const fetchArticles = async () => {
     const articleData = await Promise.all(
@@ -32,18 +30,18 @@ function GocNhinMoi() {
         const author = await readTextFile(`/GocNhinMoi-articles/${id}/author.txt`);
         const description = await readTextFile(`/GocNhinMoi-articles/${id}/description.txt`);
         const imageURL = `/GocNhinMoi-articles/${id}/images/articleCover.jpg`;
-  
-        return {
+
+        const thisArticle = {
           id: id,
-          title,
-          author,
-          description,
-          imageURL
-        };
+          title: title,
+          author: author,
+          description: description,
+          imageURL: imageURL,
+        }
+
+        setArticles_stringified(oldSet => new Set([...oldSet, JSON.stringify(thisArticle)]));
       })
     );
-  
-    setArticles(articleData);
   };
 
   useEffect(() => {
@@ -73,8 +71,8 @@ function GocNhinMoi() {
 
       <Box display="flex" gap={10} justifyContent="center" mx={2}>
         <Box flexBasis={{ xs: "100%", md: "60%" }}>
-          {articles.map((post) => (
-            <PostPreviewCard postInfo={post} />
+          {[...articles_stringified].map((post) => (
+            <PostPreviewCard postInfo={JSON.parse(post)} />
           ))}
         </Box>
 

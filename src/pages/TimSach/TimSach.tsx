@@ -65,13 +65,13 @@ function TimSach() {
   const [filteredEndDate, setFilteredEndDate] = useState<Date>(new Date(2030,0,1))
   const [filteredRating, setFilteredRating] = useState<number | number[]>([0, 5])
 
-  const [bookSearchedInfo, setBookSearchedInfo] = useState<Book[]>([])
+  const [bookSearchedInfo_stringified, setBookSearchedInfo_stringified] = useState<Set<string>>(new Set())
 
   const exampleGenres = ["Rất chi là hoang dã", "Ma quỷ", "Đáng sợ", "Tình yêu", "Lãng mạn", "Tâm thần"]
   const exampleAuthors = ["Nguyễn Nhật Ánh", "Trương Anh Ngọc", "Lucas Fermat", "Donald J. Trump"]
 
   const updateBookSearchedInfo = async () => {
-    var newBookSearchedInfo: Book[] = []
+    setBookSearchedInfo_stringified(new Set())
     for (const thisId of bookIdsList) {
       const thisTitle = await readTextFile(`/bookflix-searchable-book-info/${thisId}/title.txt`)
       const thisGenres = (await readTextFile(`/bookflix-searchable-book-info/${thisId}/genres.txt`)).split(",").map((genre) => genre.toLowerCase())
@@ -86,9 +86,8 @@ function TimSach() {
       const goodRating = (filteredRating as number[])[0] <= thisRating && thisRating <= (filteredRating as number[])[1]
       const goodDate = filteredStartDate.getTime() <= thisDate.getTime() && thisDate.getTime() <= filteredEndDate.getTime()
 
-      console.log([filteredStartDate, thisDate, filteredEndDate])
-
       if (goodTitle && goodGenres && goodAuthor && goodRating && goodDate) {
+        console.log(thisTitle)
         const thisBook: Book = {
           id: thisId,
           title: thisTitle,
@@ -97,10 +96,9 @@ function TimSach() {
           publishDate: thisDate,
           bookCoverURL: thisCoverURL,
         }
-        newBookSearchedInfo.push(thisBook)
+        setBookSearchedInfo_stringified((oldSet) => new Set([...oldSet, JSON.stringify(thisBook)]))
       }
     }
-    setBookSearchedInfo(newBookSearchedInfo)
   }
 
   useEffect(() => {
@@ -109,7 +107,6 @@ function TimSach() {
 
   return (
     <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100%">
-      ignoreMePls
       <Header activePage="TimSach" />
 
       <Box display="flex" justifyContent="space-evenly" mt={10}>
@@ -169,8 +166,8 @@ function TimSach() {
             }}
           />
 
-          {bookSearchedInfo.map((bookResult) => (
-            <BookCardResult bookInfo={bookResult} />
+          {[...bookSearchedInfo_stringified].map((bookResult) => (
+            <BookCardResult bookInfo={JSON.parse(bookResult)} />
           ))}
         </Box>
 

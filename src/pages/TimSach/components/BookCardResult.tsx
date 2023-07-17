@@ -22,6 +22,8 @@ const BookCardResult = ({ bookInfo }: { bookInfo: Book }) => {
     <Card
       sx={{
         display: "flex",
+        flexDirection: {xs: "column", sm: "row"},
+        alignItems: "center",
         boxShadow: "none",
         borderRadius: 0,
         marginTop: 5,
@@ -29,7 +31,7 @@ const BookCardResult = ({ bookInfo }: { bookInfo: Book }) => {
     >
       <CardMedia
         component="img"
-        sx={{ width: 150, objectFit: "contain" }}
+        sx={{ width: {xs: '100%', sm: 150}, objectFit: "cover" }}
         image={bookInfo.bookCoverURL}
         alt="Image"
       />
@@ -38,7 +40,7 @@ const BookCardResult = ({ bookInfo }: { bookInfo: Book }) => {
       >
         <Typography
           variant="h6"
-          fontSize={{ xs: 15, lg: 20 }}
+          fontSize={{ xs: 30, lg: 30 }}
           fontWeight="bold"
           fontFamily="Barlow, serif"
         >
@@ -47,7 +49,7 @@ const BookCardResult = ({ bookInfo }: { bookInfo: Book }) => {
         <Typography
           variant="subtitle1"
           color="text.secondary"
-          fontSize={{ xs: 13, lg: 15 }}
+          fontSize={{ xs: 20, lg: 20 }}
           fontFamily="Barlow, serif"
         >
           bởi {bookInfo.author}
@@ -58,7 +60,7 @@ const BookCardResult = ({ bookInfo }: { bookInfo: Book }) => {
           precision={0.5}
           readOnly
           sx={{
-            fontSize: { xs: 15, sm: 20 },
+            fontSize: { xs: 15, sm: 15 },
           }}
         />
 
@@ -72,7 +74,7 @@ const BookCardResult = ({ bookInfo }: { bookInfo: Book }) => {
             borderRadius: "20px 0 0 20px",
             boxShadow: "none",
             maxWidth: 200,
-            fontSize: { xs: 10, sm: 15 },
+            fontSize: { xs: 15, sm: 15 },
             fontFamily: "Barlow, serif",
             mt: 3,
             "&:hover": {

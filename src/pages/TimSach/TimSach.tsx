@@ -12,14 +12,17 @@ import IconButton from "@mui/material/IconButton"
 
 import TuneIcon from "@mui/icons-material/Tune"
 
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+
 import getSearchableBookIds from "../../store/getSearchableBookIds"
 
 import readTextFile from "../../store/readTextFile"
 import FilterAutocomplete from "./components/FilterAutocomplete"
 import { LocalizationProvider } from "@mui/x-date-pickers"
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
-import dayjs, { Dayjs } from "dayjs"
+
+import { toDate, format, parse } from 'date-fns';
 
 interface Book {
   id: string
@@ -44,12 +47,12 @@ function TimSach() {
     setFilteredAuthors(value)
   }
 
-  const handleFilteredStartDateChange = (value: Dayjs | null) => {
-    setFilteredStartDate(value ? value.toDate() : new Date("2000/01/01"))
+  const handleFilteredStartDateChange = (value: Date | null) => {
+    setFilteredStartDate(value ? toDate(value) : new Date(2000,0,1))
   }
 
-  const handleFilteredEndDateChange = (value: Dayjs | null) => {
-    setFilteredEndDate(value ? value.toDate() : new Date("2000/01/01"))
+  const handleFilteredEndDateChange = (value: Date | null) => {
+    setFilteredEndDate(value ? toDate(value) : new Date(2000,0,1))
   }
 
   const handleFilteredRatingChange = (event: any, value: number | number[]) => {
@@ -58,8 +61,8 @@ function TimSach() {
 
   const [filteredGenres, setFilteredGenres] = useState<string[]>([])
   const [filteredAuthors, setFilteredAuthors] = useState<string[]>([])
-  const [filteredStartDate, setFilteredStartDate] = useState<Date>(new Date("2000/01/01"))
-  const [filteredEndDate, setFilteredEndDate] = useState<Date>(new Date("2030/01/01"))
+  const [filteredStartDate, setFilteredStartDate] = useState<Date>(new Date(2000,0,1))
+  const [filteredEndDate, setFilteredEndDate] = useState<Date>(new Date(2030,0,1))
   const [filteredRating, setFilteredRating] = useState<number | number[]>([0, 5])
 
   const [bookSearchedInfo, setBookSearchedInfo] = useState<Book[]>([])
@@ -74,14 +77,14 @@ function TimSach() {
       const thisGenres = (await readTextFile(`/bookflix-searchable-book-info/${thisId}/genres.txt`)).split(",").map((genre) => genre.toLowerCase())
       const thisAuthor = await readTextFile(`/bookflix-searchable-book-info/${thisId}/author.txt`)
       const thisRating = parseFloat(await readTextFile(`/bookflix-searchable-book-info/${thisId}/rating.txt`))
-      const thisDate = new Date(Date.parse(await readTextFile(`/bookflix-searchable-book-info/${thisId}/publishdate.txt`)))
+      const thisDate = parse(await readTextFile(`/bookflix-searchable-book-info/${thisId}/publishdate.txt`), 'yyyy/MM/dd', new Date())
       const thisCoverURL = `/bookflix-searchable-book-info/${thisId}/cover.png`
 
       const goodTitle = thisTitle.toLowerCase().includes(bookSearchValue.toLowerCase())
       const goodGenres = filteredGenres.every((value) => thisGenres.includes(value.toLowerCase()))
       const goodAuthor = filteredAuthors.length == 0 || filteredAuthors.includes(thisAuthor)
       const goodRating = (filteredRating as number[])[0] <= thisRating && thisRating <= (filteredRating as number[])[1]
-      const goodDate = filteredStartDate <= thisDate && thisDate <= filteredEndDate
+      const goodDate = filteredStartDate.getTime() <= thisDate.getTime() && thisDate.getTime() <= filteredEndDate.getTime()
 
       console.log([filteredStartDate, thisDate, filteredEndDate])
 
@@ -106,6 +109,7 @@ function TimSach() {
 
   return (
     <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100%">
+      ignoreMePls
       <Header activePage="TimSach" />
 
       <Box display="flex" justifyContent="space-evenly" mt={10}>
@@ -199,9 +203,9 @@ function TimSach() {
           >
             Xuất bản từ
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              value={dayjs(filteredStartDate)}
+              value={filteredStartDate}
               onChange={handleFilteredStartDateChange}
               slotProps={{
                 desktopPaper: {
@@ -242,9 +246,9 @@ function TimSach() {
           >
             Đến
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              value={dayjs(filteredEndDate)}
+              value={filteredEndDate}
               onChange={handleFilteredEndDateChange}
               slotProps={{
                 desktopPaper: {
@@ -297,6 +301,10 @@ function TimSach() {
           sx: { bgcolor: "var(--bookflix-background)" },
         }}
       >
+        <IconButton onClick={() => setIsFilterDrawerOpen(false)}>
+          <KeyboardArrowDownIcon fontSize="large" sx={{ mx: "auto" }} />
+        </IconButton>
+
         <Box p={3} bgcolor="rgb(249, 243, 238)">
           <Typography
             variant="h4"
@@ -326,10 +334,9 @@ function TimSach() {
           >
             Xuất bản từ
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              defaultValue={dayjs("01-01-2000")}
-              value={dayjs(filteredStartDate)}
+              value={filteredStartDate}
               onChange={handleFilteredStartDateChange}
               slotProps={{
                 desktopPaper: {
@@ -370,10 +377,9 @@ function TimSach() {
           >
             Đến
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              defaultValue={dayjs("01-01-2030")}
-              value={dayjs(filteredEndDate)}
+              value={filteredEndDate}
               onChange={handleFilteredEndDateChange}
               slotProps={{
                 desktopPaper: {

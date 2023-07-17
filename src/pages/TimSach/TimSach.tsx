@@ -109,7 +109,7 @@ function TimSach() {
   }, [])
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" minWidth="100vw" width="100%">
+    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100%">
       <Header activePage="TimSach" />
 
       <Box display="flex" justifyContent="space-evenly" mt={10}>

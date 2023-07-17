@@ -18,81 +18,39 @@ import getBookIdsForSurpriseMeSwiper from "../../store/getBookIdsForSurpriseMeSw
 
 import getSearchableBookIds from "../../store/getSearchableBookIds"
 
+import { useEffect, useState } from "react"
+import readTextFile from "../../store/readTextFile"
+import getBookInfoForTopRatedSwiper from "../../store/getBookInfoForTopRatedSwiper"
+import getArticleInfoForRecommendedForYou from "../../store/getArticleInfoForRecommendedForYou"
+
 function BookflixLanding() {
   const allBookIds = getSearchableBookIds()
 
   const bookIdsSurpriseMe = getBookIdsForSurpriseMeSwiper()
 
-  const bookCoversSurpriseMe = bookIdsSurpriseMe.map(
-    (id) => `/bookflix-searchable-book-info/${id}/cover.png`
-  )
+  const bookCoversSurpriseMe = bookIdsSurpriseMe.map((id) => `/bookflix-searchable-book-info/${id}/cover.png`)
 
-  const booksNewRelease = [
-    {
-      title: "Book 1",
-      author: "Author 1",
-      imageUrl:
-        "https://pm1.aminoapps.com/7577/7bb6da4a6a80790aff0186e7cf156798315f355ar1-1357-2048v2_uhq.jpg",
-    },
-    {
-      title: "Book 2",
-      author: "Author 2",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    {
-      title: "Book 3",
-      author: "Author 3",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    {
-      title: "Book 4",
-      author: "Author 4",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    {
-      title: "Book 5",
-      author: "Author 5",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    {
-      title: "Book 6",
-      author: "Author 6",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    {
-      title: "Book 7",
-      author: "Author 7",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    {
-      title: "Book 8",
-      author: "Author 8",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    {
-      title: "Book 9",
-      author: "Author 9",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    {
-      title: "Book 10",
-      author: "Author 10",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    {
-      title: "Book 11",
-      author: "Author 11",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    // Add more book objects here...
-  ]
+  const [quoteTxtLines, setQuoteTxtLines] = useState<string[]>([])
+
+  useEffect(() => {
+    readTextFile(`/bookflix-others/quotes.txt`).then((data) => {
+      setQuoteTxtLines(data.split("\n"))
+    })
+  }, [])
+
+  const date0 = new Date("2023-07-13")
+  const daysSinceDate0 = new Date().getDate() - date0.getDate()
+  const quoteIdx = daysSinceDate0 % 100
+
+  const TopRatedBookInfo = getBookInfoForTopRatedSwiper()
+
+  const RecommendedArticles = getArticleInfoForRecommendedForYou()
 
   const booksRecommended = [
     {
       title: "Book 1 recommended",
       author: "Author 1",
-      imageUrl:
-        "https://pm1.aminoapps.com/7577/7bb6da4a6a80790aff0186e7cf156798315f355ar1-1357-2048v2_uhq.jpg",
+      imageUrl: "https://pm1.aminoapps.com/7577/7bb6da4a6a80790aff0186e7cf156798315f355ar1-1357-2048v2_uhq.jpg",
     },
     {
       title: "Book 2 recommended",
@@ -118,8 +76,8 @@ function BookflixLanding() {
   ]
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100vw">
-      <Header activePage="TrangChu"/>
+    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" minWidth="100vw" width="100%">
+      <Header activePage="TrangChu" />
 
       <Grid container columns={24} justifyContent="center" spacing={10}>
         <Grid item xs={22} sm={22} md={14} lg={10} alignSelf="center">
@@ -136,20 +94,14 @@ function BookflixLanding() {
               fontSize: { xs: 35, lg: 40 },
             }}
           >
-            Bookflix là chất kích thích, tick tock tick tock đọc ngay anh em.
-            hehehehe
+            Yêu sách từ đầu sao thật khó
+            <br />
+            Đừng từ bỏ, có Bookflix lo!
           </Typography>
         </Grid>
 
         <Grid item xs={15} sm={15} md={8} lg={6} mt={10}>
-          <Swiper
-            slidesPerView={1}
-            loop
-            autoplay={{ delay: 2500 }}
-            modules={[Autoplay]}
-            noSwiping={true}
-            noSwipingClass="swiper-slide"
-          >
+          <Swiper slidesPerView={1} loop autoplay={{ delay: 2500 }} modules={[Autoplay]} noSwiping={true} noSwipingClass="swiper-slide">
             {bookCoversSurpriseMe.map((bookCoverURL) => (
               <SwiperSlide>
                 <img
@@ -168,8 +120,8 @@ function BookflixLanding() {
           <Button
             fullWidth
             onClick={() => {
-              const randomId = allBookIds[Math.floor(Math.random() * allBookIds.length)];
-              window.open(`/bookflix/bookinfo/${randomId}`, '_blank');
+              const randomId = allBookIds[Math.floor(Math.random() * allBookIds.length)]
+              window.open(`/bookflix/bookinfo/${randomId}`, "_blank")
             }}
             sx={{
               mt: 1,
@@ -200,13 +152,10 @@ function BookflixLanding() {
             fontStyle: "italic",
           }}
         >
-          New release
+          Top rated
         </Typography>
 
-        <BookSlider
-          booksInfo={booksNewRelease}
-          cardColor="rgb(204, 223, 230)"
-        />
+        <BookSlider booksInfo={TopRatedBookInfo} cardColor="rgb(204, 223, 230)" />
       </Box>
 
       {/* <Box> for Recommended for you */}
@@ -223,10 +172,7 @@ function BookflixLanding() {
           Recommended for you
         </Typography>
 
-        <BookSlider
-          booksInfo={booksRecommended}
-          cardColor="RGB(210, 239, 173)"
-        />
+        <BookSlider booksInfo={RecommendedArticles} cardColor="RGB(210, 239, 173)" />
       </Box>
 
       <Typography
@@ -243,12 +189,7 @@ function BookflixLanding() {
         QUOTE OF THE DAY
       </Typography>
 
-      <Box
-        display="flex"
-        justifyContent="space-evenly"
-        alignItems="center"
-        mt={5}
-      >
+      <Box display="flex" justifyContent="space-evenly" alignItems="center" mt={5}>
         <Typography
           variant="h5"
           align="center"
@@ -265,10 +206,9 @@ function BookflixLanding() {
             fontSize: { xs: 20, lg: 25 },
           }}
         >
-          "He never went out without a book under his arm, and he often came
-          back with two."
+          {quoteTxtLines[quoteIdx * 2]}
           <br />
-          -Victor Hugo, Les Miserablés-
+          {`- ${quoteTxtLines[quoteIdx * 2 + 1]}`}
         </Typography>
       </Box>
     </Box>

@@ -3,6 +3,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 interface postInfoProp {
+  id: string,
   title: string
   author: string
   description: string
@@ -14,6 +15,7 @@ const PostPreviewCard = ({ postInfo }: { postInfo: postInfoProp }) => {
     <Card
       sx={{
         display: "flex",
+        flexDirection: {xs: "column", sm: "row"},
         boxShadow: "none",
         border: "1px solid rgb(153, 153, 153)",
         borderRadius: 0,
@@ -22,7 +24,7 @@ const PostPreviewCard = ({ postInfo }: { postInfo: postInfoProp }) => {
     >
       <CardMedia
         component="img"
-        sx={{ width: { xs: 100, sm: 150 }, objectFit: "cover" }}
+        sx={{ width: { xs: "auto", sm: 200 }, objectFit: "cover" }}
         image={postInfo.imageURL}
         alt="Image"
       />
@@ -47,7 +49,7 @@ const PostPreviewCard = ({ postInfo }: { postInfo: postInfoProp }) => {
         </Typography>
         <Button
           component={Link}
-          to="/bookflix/baiviet"
+          to={`/bookflix/baiviet/${postInfo.id}`}
           variant="contained"
           color="primary"
           sx={{

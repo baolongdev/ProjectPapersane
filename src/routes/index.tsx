@@ -23,7 +23,7 @@ const publicRoutes = [
     { path: "/bookflix", compnent: BookflixLanding },
     { path: "/bookflix/gocnhinmoi", compnent: GocNhinMoi },
     { path: "/bookflix/timsach/:searchQueryInURL?", compnent: TimSach },
-    { path: "/bookflix/baiviet", compnent: BaiVietGocNhinMoi },
+    { path: "/bookflix/baiviet/:articleId", compnent: BaiVietGocNhinMoi },
     { path: "/login&register", compnent: LoginRegister },
     { path: "/bookflix/bookinfo/:bookId", compnent: BookInfo },
     { path: "*", compnent: Notfound },

@@ -7,11 +7,30 @@ import ShareIcon from "@mui/icons-material/Share"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
-import { Link } from "react-router-dom"
+
+import { Link, useParams } from "react-router-dom"
+
+import { Suspense, lazy, useEffect, useState } from "react"
+import readTextFile from "../../store/readTextFile"
 
 function BaiVietGocNhinMoi() {
+  const { articleId } = useParams()
+  const [articleTitle, setArticleTitle] = useState("")
+  const [articleAuthor, setArticleAuthor] = useState("")
+  const [articlePublishDate, setArticlePublishDate] = useState("")
+  const [articleAvatarURL, setArticleAvatarURL] = useState("")
+  // "lazy()" is made to load components dynamically, it seems
+  const ArticleComponent = lazy(() => import(`../../../public/GocNhinMoi-articles/${articleId}/Article.tsx`));
+
+  useEffect(() => {
+    readTextFile(`/GocNhinMoi-articles/${articleId}/title.txt`).then((data) => setArticleTitle(data))
+    readTextFile(`/GocNhinMoi-articles/${articleId}/author.txt`).then((data) => setArticleAuthor(data))
+    readTextFile(`/GocNhinMoi-articles/${articleId}/publishdate.txt`).then((data) => setArticlePublishDate(data))
+    setArticleAvatarURL(`/GocNhinMoi-articles/${articleId}/images/articleCover.jpg`)
+  }, [])
+
   return (
-    <Box sx={{ backgroundColor: "rgb(249, 243, 238)" }}>
+    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" minWidth="100vw" width="100%">
       <Header activePage="GocNhinMoi" />
 
       <Box
@@ -19,12 +38,12 @@ function BaiVietGocNhinMoi() {
           display: "flex",
           gap: 7,
           justifyContent: "center",
-          flexWrap: "wrap",
+          flexDirection: { xs: "column", md: "row" },
           mt: 10,
           mx: 2,
         }}
       >
-        <Box sx={{ flexBasis: "20%", minWidth: 300 }}>
+        <Box sx={{ flexBasis: { xs: "auto", md: "20%" } }}>
           <Button
             component={Link}
             to="/bookflix/gocnhinmoi"
@@ -42,7 +61,7 @@ function BaiVietGocNhinMoi() {
             GÓC NHÌN MỚI
           </Button>
           <img
-            src="https://profilemagazine.com/wp-content/uploads/2020/04/Ajmere-Dale-Square-thumbnail.jpg"
+            src={articleAvatarURL}
             style={{
               marginTop: 10,
               borderRadius: "0 30px 0 0",
@@ -50,30 +69,26 @@ function BaiVietGocNhinMoi() {
             }}
           />
 
-          <Box
-            sx={{ display: "flex", gap: 5, justifyContent: "center", mt: 5 }}
-          >
+          <Box sx={{ display: "flex", gap: 5, justifyContent: "center", mt: 5 }}>
             <FavoriteIcon fontSize="large" />
             <ShareIcon fontSize="large" />
           </Box>
         </Box>
 
-        <Box sx={{ flexBasis: { xs: "100%", md: "70%" }, minWidth: 300 }}>
+        <Box sx={{ flexBasis: { xs: "auto", md: "70%" } }}>
           <Typography
             variant="h3"
             sx={{
               fontFamily: "Barlow, sans-serif",
               fontStyle: "italic",
               fontWeight: "bold",
+              fontSize: {xs: 40, md: 50},
             }}
           >
-            Bài viết 1
+            {articleTitle}
           </Typography>
-          <Typography
-            variant="h6"
-            sx={{ fontFamily: "Barlow, sans-serif", fontWeight: "normal" }}
-          >
-            Đăng bởi Thomas Edison vào 31/5/2023
+          <Typography variant="h6" sx={{ fontFamily: "Barlow, sans-serif", fontWeight: "normal",}}>
+            {`Đăng bởi ${articleAuthor} vào ${articlePublishDate}`}
           </Typography>
 
           <Box sx={{ bgcolor: "rgb(174, 170, 166)", height: 4, my: 3 }}></Box>
@@ -87,48 +102,9 @@ function BaiVietGocNhinMoi() {
               gap: 3,
             }}
           >
-            <Typography variant="subtitle1">
-              Sample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample text
-            </Typography>
-            <img
-              src="https://www.hindustantimes.com/ht-img/img/2023/02/20/1600x900/minecraft_1676880562368_1676880570924_1676880570924.jpg"
-              style={{ alignSelf: "center" }}
-            />
-            <Typography variant="subtitle1">
-              Sample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample textSample
-              textSample textSample textSample textSample textSample text
-            </Typography>
+            <Suspense>
+              <ArticleComponent />
+            </Suspense>
           </Box>
         </Box>
       </Box>

@@ -16,7 +16,6 @@ function HeaderButton({buttonText, buttonLink, isActivePage} : HeaderButtonProp)
       sx={{
         p: 2,
         px: 3,
-        mr: 5,
         fontSize: "20px",
         fontFamily: "Barlow",
         borderRadius: "50px",

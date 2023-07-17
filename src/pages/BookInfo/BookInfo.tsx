@@ -26,30 +26,22 @@ const BookInfo = () => {
   const [bookGenres, setBookGenres] = useState<string[]>([])
 
   useEffect(() => {
-    readTextFile(`/bookflix-searchable-book-info/${bookId}/title.txt`).then(
-      (data) => setBookTitle(data.toUpperCase())
-    )
-    readTextFile(`/bookflix-searchable-book-info/${bookId}/review.txt`).then(
-      (data) => {
-        setBookReview(data)
-        // Split with all kinds of "newline" character (according to ChatGPT, there are many, like \r \n idk)
-        setBookReviewParagraphs(data.split(/\r\n|\r|\n/g))
-      }
-    )
-    readTextFile(`/bookflix-searchable-book-info/${bookId}/genres.txt`).then(
-      (data) => {
-        setBookGenres(
-          data.split(",").map((item) => {
-            const firstLetter = item.charAt(0).toUpperCase()
-            const restOfString = item.slice(1).toLowerCase()
-            return firstLetter + restOfString
-          })
-        )
-      }
-    )
-    readTextFile(`/bookflix-searchable-book-info/${bookId}/author.txt`).then(
-      (data) => setBookAuthor(data)
-    )
+    readTextFile(`/bookflix-searchable-book-info/${bookId}/title.txt`).then((data) => setBookTitle(data.toUpperCase()))
+    readTextFile(`/bookflix-searchable-book-info/${bookId}/review.txt`).then((data) => {
+      setBookReview(data)
+      // Split with all kinds of "newline" character (according to ChatGPT, there are many, like \r \n idk)
+      setBookReviewParagraphs(data.split(/\r\n|\r|\n/g))
+    })
+    readTextFile(`/bookflix-searchable-book-info/${bookId}/genres.txt`).then((data) => {
+      setBookGenres(
+        data.split(",").map((item) => {
+          const firstLetter = item.charAt(0).toUpperCase()
+          const restOfString = item.slice(1).toLowerCase()
+          return firstLetter + restOfString
+        })
+      )
+    })
+    readTextFile(`/bookflix-searchable-book-info/${bookId}/author.txt`).then((data) => setBookAuthor(data))
   }, [])
 
   return (
@@ -59,7 +51,7 @@ const BookInfo = () => {
       <Button
         onClick={() => window.history.back()}
         sx={{
-          ml: 10,
+          ml: 3,
           mt: 2,
           fontFamily: "Barlow, sans-serif",
           color: "rgb(47, 62, 116)",
@@ -74,27 +66,13 @@ const BookInfo = () => {
       </Button>
 
       <Box mx={{ xs: 1, sm: 3, md: 3, lg: 10, xl: 30 }} mt={10}>
-        <Grid
-          container
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-        >
+        <Grid container direction="row" alignItems="center" justifyContent="center">
           {/* Book cover */}
           <Grid item xs={10} md={3}>
             <img src={`/bookflix-searchable-book-info/${bookId}/cover.png`} />
           </Grid>
 
-          <Grid
-            container
-            item
-            direction="column"
-            xs={12}
-            md={9}
-            mt={{ xs: 5, md: 0 }}
-            alignSelf="center"
-            rowSpacing={{ xs: 2, sm: 1, md: 2, lg: 3 }}
-          >
+          <Grid container item direction="column" xs={12} md={9} mt={{ xs: 5, md: 0 }} alignSelf="center" rowSpacing={{ xs: 2, sm: 1, md: 2, lg: 3 }}>
             {/* Book title */}
             <Grid item alignSelf="center">
               <Typography
@@ -111,12 +89,7 @@ const BookInfo = () => {
 
             {/* Book author */}
             <Grid item alignSelf={{ xs: "flex-start", sm: "center" }}>
-              <Typography
-                variant="h5"
-                color="black"
-                fontFamily="Barlow, serif"
-                fontSize={{ sm: 20, md: 25 }}
-              >
+              <Typography variant="h5" color="black" fontFamily="Barlow, serif" fontSize={{ sm: 20, md: 25 }}>
                 <span style={{ fontWeight: "bold" }}>Tác giả: </span>
                 {bookAuthor}
               </Typography>
@@ -124,31 +97,15 @@ const BookInfo = () => {
 
             {/* Book publish date */}
             <Grid item alignSelf={{ xs: "flex-start", sm: "center" }}>
-              <Typography
-                variant="h5"
-                color="black"
-                fontFamily="Barlow, serif"
-                fontSize={{ sm: 20, md: 25 }}
-              >
-                <span style={{ fontWeight: "bold" }}>Ngày phát hành: </span>{" "}
-                19/19/2019
+              <Typography variant="h5" color="black" fontFamily="Barlow, serif" fontSize={{ sm: 20, md: 25 }}>
+                <span style={{ fontWeight: "bold" }}>Ngày phát hành: </span> 19/19/2019
               </Typography>
             </Grid>
 
             {/* Book genre */}
             <Grid item mt={5} ml={{ xs: 1, md: 10 }}>
-              <Box
-                display="flex"
-                flexWrap="wrap"
-                alignItems="center"
-                justifyContent="flex-start"
-                gap={2}
-              >
-                <Typography
-                  variant="h5"
-                  sx={{ color: "rgb(184, 88, 91)", fontWeight: "bold" }}
-                  fontSize={{ md: 25, lg: 35 }}
-                >
+              <Box display="flex" flexWrap="wrap" alignItems="center" justifyContent="flex-start" gap={2}>
+                <Typography variant="h5" sx={{ color: "rgb(184, 88, 91)", fontWeight: "bold" }} fontSize={{ md: 25, lg: 35 }}>
                   Thể loại:
                 </Typography>
 
@@ -176,21 +133,10 @@ const BookInfo = () => {
             {/* Book rating */}
             <Grid item ml={{ xs: 1, md: 10 }}>
               <Box display="flex" alignItems="center" gap={2} mt={3}>
-                <Typography
-                  variant="h5"
-                  fontFamily="Barlow, serif"
-                  fontStyle="italic"
-                  color="black"
-                  fontSize={{ md: 25, lg: 30 }}
-                >
+                <Typography variant="h5" fontFamily="Barlow, serif" fontStyle="italic" color="black" fontSize={{ md: 25, lg: 30 }}>
                   Đánh giá:{" "}
                 </Typography>
-                <Rating
-                  defaultValue={4}
-                  precision={0.5}
-                  readOnly
-                  sx={{ fontSize: { md: 30, lg: 40 } }}
-                />
+                <Rating defaultValue={4} precision={0.5} readOnly sx={{ fontSize: { md: 30, lg: 40 } }} />
               </Box>
             </Grid>
           </Grid>
@@ -212,12 +158,7 @@ const BookInfo = () => {
             <img src="\bookflix-ui-pics\SummaryIcon.png" />
           </Box>
           <Box>
-            <Typography
-              variant="subtitle1"
-              color="black"
-              fontFamily="Playfair Display, serif"
-              fontSize={{ xs: 15, sm: 15, md: 18, lg: 22 }}
-            >
+            <Typography variant="subtitle1" color="black" fontFamily="Playfair Display, serif" fontSize={{ xs: 15, sm: 15, md: 18, lg: 22 }}>
               {bookReviewParagraphs.map((para) => (
                 <>
                   {para} <br /> <br />{" "}

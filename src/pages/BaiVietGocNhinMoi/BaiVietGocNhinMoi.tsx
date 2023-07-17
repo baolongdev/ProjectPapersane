@@ -30,7 +30,7 @@ function BaiVietGocNhinMoi() {
   }, [])
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" minWidth="100vw" width="100%">
+    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100%">
       <Header activePage="GocNhinMoi" />
 
       <Box

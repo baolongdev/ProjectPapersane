@@ -10,6 +10,7 @@ import getSearchableBookIds from "../../store/getSearchableBookIds"
 import { useState, useEffect } from "react"
 
 import readTextFile from "../../store/readTextFile"
+import readJsonFile from "../../store/readJsonFile"
 
 const BookInfo = () => {
   const searchableBookIds = getSearchableBookIds()
@@ -26,24 +27,18 @@ const BookInfo = () => {
   const [bookGenres, setBookGenres] = useState<string[]>([])
 
   useEffect(() => {
-    readTextFile(`/bookflix-searchable-book-info/${bookId}/title.txt`).then((data) => setBookTitle(data.toUpperCase()))
+    readJsonFile(`/bookflix-searchable-book-info/${bookId}/info.json`).then((infoJson) => {
+      setBookTitle(infoJson["title"].toUpperCase())
+      setBookGenres(infoJson["genres"])
+      setBookPublishDate(infoJson["publishdate"])
+      setBookAuthor(infoJson["author"])
+      console.log(infoJson)
+    })
+
     readTextFile(`/bookflix-searchable-book-info/${bookId}/review.txt`).then((data) => {
       // Split with all kinds of "newline" character (according to ChatGPT, there are many, like \r \n idk)
       setBookReviewParagraphs(data.split(/\r\n|\r|\n/g))
     })
-    readTextFile(`/bookflix-searchable-book-info/${bookId}/genres.txt`).then((data) => {
-      setBookGenres(
-        data.split(",").map((item) => {
-          const firstLetter = item.charAt(0).toUpperCase()
-          const restOfString = item.slice(1).toLowerCase()
-          return firstLetter + restOfString
-        })
-      )
-    })
-    readTextFile(`/bookflix-searchable-book-info/${bookId}/publishdate.txt`).then((data) => {
-      setBookPublishDate(data)
-    })
-    readTextFile(`/bookflix-searchable-book-info/${bookId}/author.txt`).then((data) => setBookAuthor(data))
   }, [])
 
   return (

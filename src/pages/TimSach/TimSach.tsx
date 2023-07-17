@@ -23,6 +23,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 
 import { toDate, format, parse } from 'date-fns';
+import readJsonFile from "../../store/readJsonFile"
 
 interface Book {
   id: string
@@ -73,11 +74,15 @@ function TimSach() {
   const updateBookSearchedInfo = async () => {
     setBookSearchedInfo_stringified(new Set())
     for (const thisId of bookIdsList) {
-      const thisTitle = await readTextFile(`/bookflix-searchable-book-info/${thisId}/title.txt`)
-      const thisGenres = (await readTextFile(`/bookflix-searchable-book-info/${thisId}/genres.txt`)).split(",").map((genre) => genre.toLowerCase())
-      const thisAuthor = await readTextFile(`/bookflix-searchable-book-info/${thisId}/author.txt`)
-      const thisRating = parseFloat(await readTextFile(`/bookflix-searchable-book-info/${thisId}/rating.txt`))
-      const thisDate = parse(await readTextFile(`/bookflix-searchable-book-info/${thisId}/publishdate.txt`), 'yyyy/MM/dd', new Date())
+      const infoJson = await readJsonFile(`/bookflix-searchable-book-info/${thisId}/info.json`)
+
+      console.log(infoJson)
+
+      const thisTitle = infoJson['title']
+      const thisGenres = infoJson['genres']
+      const thisAuthor = infoJson['author']
+      const thisRating = infoJson['rating']
+      const thisDate = parse(infoJson["publishdate"], 'yyyy/MM/dd', new Date())
       const thisCoverURL = `/bookflix-searchable-book-info/${thisId}/cover.png`
 
       const goodTitle = thisTitle.toLowerCase().includes(bookSearchValue.toLowerCase())

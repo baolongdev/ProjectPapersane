@@ -76,8 +76,6 @@ function TimSach() {
     for (const thisId of bookIdsList) {
       const infoJson = await readJsonFile(`/bookflix-searchable-book-info/${thisId}/info.json`)
 
-      console.log(infoJson)
-
       const thisTitle = infoJson['title']
       const thisGenres = infoJson['genres']
       const thisAuthor = infoJson['author']

@@ -1,26 +1,26 @@
+// Literally the same as FilterAutocomplete.tsx, but multiple={false}
+
 import { Autocomplete, Chip, TextField, Paper, PaperProps } from "@mui/material"
 
 interface FilterAutocompleteProps {
-  value: string[]
+  value: string
   options: string[]
   placeholder: string
   sx: Record<string, any> | undefined
-  onChange: (event: any, value: string[]) => void
+  onChange: (event: any, value: string | null) => void
 }
 
 const CustomPaper = (props: PaperProps) => {
   return <Paper elevation={0} sx={{ borderRadius: 0, fontFamily: "Barlow, serif" }} {...props}></Paper>
 }
 
-const FilterAutocomplete = ({ value, options, placeholder, sx, onChange }: FilterAutocompleteProps) => {
+const FilterAutocompleteSingular = ({ value, options, placeholder, sx, onChange }: FilterAutocompleteProps) => {
   return (
     <Autocomplete
       value={value}
-      multiple
       options={options}
       PaperComponent={CustomPaper}
       onChange={onChange}
-      filterOptions={(option) => option}
       renderTags={(value: readonly string[], getTagProps) =>
         value.map((option: string, index: number) => (
           <Chip
@@ -64,4 +64,4 @@ const FilterAutocomplete = ({ value, options, placeholder, sx, onChange }: Filte
   )
 }
 
-export default FilterAutocomplete
+export default FilterAutocompleteSingular

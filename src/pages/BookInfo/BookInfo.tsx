@@ -1,14 +1,11 @@
-import { Box, Button, Grid, Rating, Typography } from "@mui/material"
-import Header from "../../Bookflix-Components/Header/Header"
+import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { Notfound } from "../../pages"
-
+import { Box, Button, Grid, Rating, Typography } from "@mui/material"
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
 
+import Header from "../../Bookflix-Components/Header/Header"
+import { Notfound } from "../../pages"
 import getSearchableBookIds from "../../store/getSearchableBookIds"
-
-import { useState, useEffect } from "react"
-
 import readTextFile from "../../store/readTextFile"
 import readJsonFile from "../../store/readJsonFile"
 
@@ -22,7 +19,7 @@ const BookInfo = () => {
 
   const [bookTitle, setBookTitle] = useState("")
   const [bookAuthor, setBookAuthor] = useState("")
-  const [bookPublishDate, setBookPublishDate] = useState("")
+  const [bookPublishYear, setBookPublishYear] = useState("")
   const [bookReviewParagraphs, setBookReviewParagraphs] = useState<string[]>([])
   const [bookGenres, setBookGenres] = useState<string[]>([])
 
@@ -30,7 +27,7 @@ const BookInfo = () => {
     readJsonFile(`/bookflix-searchable-book-info/${bookId}/info.json`).then((infoJson) => {
       setBookTitle(infoJson["title"].toUpperCase())
       setBookGenres(infoJson["genres"])
-      setBookPublishDate(infoJson["publishdate"])
+      setBookPublishYear(infoJson["publishdate"])
       setBookAuthor(infoJson["author"])
       console.log(infoJson)
     })
@@ -95,7 +92,7 @@ const BookInfo = () => {
             {/* Book publish date */}
             <Grid item alignSelf={{ xs: "flex-start", sm: "center" }}>
               <Typography variant="h5" color="black" fontFamily="Barlow, serif" fontSize={{ sm: 20, md: 25 }}>
-                <span style={{ fontWeight: "bold" }}>Ngày phát hành: </span> {bookPublishDate}
+                <span style={{ fontWeight: "bold" }}>Năm phát hành: </span> {bookPublishYear}
               </Typography>
             </Grid>
 

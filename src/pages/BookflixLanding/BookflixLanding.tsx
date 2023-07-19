@@ -1,24 +1,14 @@
-import Header from "../../Bookflix-Components/Header/Header"
-
+import React, { useEffect, useState } from "react"
 import { Typography, Button, Box, Grid } from "@mui/material"
-
+import Header from "../../Bookflix-Components/Header/Header"
 import BookSlider from "./components/BookSlider/BookSlider"
-
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react"
-
-// import required modules
 import { Autoplay } from "swiper"
-
-// Import Swiper styles
 import "swiper/css"
 import "swiper/css/autoplay"
 
 import getBookIdsForSurpriseMeSwiper from "../../store/getBookIdsForSurpriseMeSwiper"
-
 import getSearchableBookIds from "../../store/getSearchableBookIds"
-
-import { useEffect, useState } from "react"
 import readTextFile from "../../store/readTextFile"
 import getBookInfoForTopRatedSwiper from "../../store/getBookInfoForTopRatedSwiper"
 import getArticleInfoForRecommendedForYou from "../../store/getArticleInfoForRecommendedForYou"

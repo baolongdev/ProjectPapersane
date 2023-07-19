@@ -1,38 +1,37 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { Typography, TextField, Box, InputAdornment, Drawer, Hidden, Slider } from "@mui/material"
+import { LocalizationProvider } from "@mui/x-date-pickers"
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
+import { DatePicker } from "@mui/x-date-pickers/DatePicker"
+import SearchIcon from "@mui/icons-material/Search"
+import IconButton from "@mui/material/IconButton"
+import TuneIcon from "@mui/icons-material/Tune"
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 
 import Header from "../../Bookflix-Components/Header/Header"
-
 import BookCardResult from "./components/BookCardResult"
-
-import SearchIcon from "@mui/icons-material/Search"
-
-import IconButton from "@mui/material/IconButton"
-
-import TuneIcon from "@mui/icons-material/Tune"
+import FilterAutocomplete from "./components/FilterAutocomplete"
+import FilterAutocompleteSingular from "./components/FilterAutocompleteSingular"
 
 import getSearchableBookIds from "../../store/getSearchableBookIds"
-
-import readTextFile from "../../store/readTextFile"
-import FilterAutocomplete from "./components/FilterAutocomplete"
-import { LocalizationProvider } from "@mui/x-date-pickers"
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
-import { DatePicker } from "@mui/x-date-pickers/DatePicker"
-import dayjs, { Dayjs } from "dayjs"
+import readJsonFile from "../../store/readJsonFile"
+import getAllGenres from "../../store/getAllGenres"
+import getAllAuthors from "../../store/getAllAuthors"
 
 interface Book {
   id: string
   title: string
   author: string
   rating: number
-  publishDate: Date
   bookCoverURL: string
 }
 
 function TimSach() {
   const { searchQueryInURL } = useParams()
   const bookIdsList = getSearchableBookIds()
+  const genresList = getAllGenres()
+  const authorsList = [...getAllAuthors(), ""]
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false)
   const [bookSearchValue, setBookSearchValue] = useState(searchQueryInURL ? searchQueryInURL : "")
 
@@ -40,16 +39,16 @@ function TimSach() {
     setFilteredGenres(value)
   }
 
-  const handleAuthorChange = (event: any, value: string[]) => {
-    setFilteredAuthors(value)
+  const handleAuthorChange = (event: any, value: string | null) => {
+    setFilteredAuthor(value as string)
   }
 
-  const handleFilteredStartDateChange = (value: Dayjs | null) => {
-    setFilteredStartDate(value ? value.toDate() : new Date("2000/01/01"))
+  const handleFilteredStartYearChange = (value: Date | null) => {
+    setFilteredStartYear(value ? value.getFullYear() : 1980)
   }
 
-  const handleFilteredEndDateChange = (value: Dayjs | null) => {
-    setFilteredEndDate(value ? value.toDate() : new Date("2000/01/01"))
+  const handleFilteredEndYearChange = (value: Date | null) => {
+    setFilteredEndYear(value ? value.getFullYear : 2030)
   }
 
   const handleFilteredRatingChange = (event: any, value: number | number[]) => {
@@ -57,33 +56,30 @@ function TimSach() {
   }
 
   const [filteredGenres, setFilteredGenres] = useState<string[]>([])
-  const [filteredAuthors, setFilteredAuthors] = useState<string[]>([])
-  const [filteredStartDate, setFilteredStartDate] = useState<Date>(new Date("2000/01/01"))
-  const [filteredEndDate, setFilteredEndDate] = useState<Date>(new Date("2030/01/01"))
+  const [filteredAuthor, setFilteredAuthor] = useState<string>("")
+  const [filteredStartYear, setFilteredStartYear] = useState<number>(1900)
+  const [filteredEndYear, setFilteredEndYear] = useState<number>(2030)
   const [filteredRating, setFilteredRating] = useState<number | number[]>([0, 5])
 
-  const [bookSearchedInfo, setBookSearchedInfo] = useState<Book[]>([])
-
-  const exampleGenres = ["Rất chi là hoang dã", "Ma quỷ", "Đáng sợ", "Tình yêu", "Lãng mạn", "Tâm thần"]
-  const exampleAuthors = ["Nguyễn Nhật Ánh", "Trương Anh Ngọc", "Lucas Fermat", "Donald J. Trump"]
+  const [bookSearchedInfo_stringified, setBookSearchedInfo_stringified] = useState<Set<string>>(new Set())
 
   const updateBookSearchedInfo = async () => {
-    var newBookSearchedInfo: Book[] = []
+    setBookSearchedInfo_stringified(new Set())
     for (const thisId of bookIdsList) {
-      const thisTitle = await readTextFile(`/bookflix-searchable-book-info/${thisId}/title.txt`)
-      const thisGenres = (await readTextFile(`/bookflix-searchable-book-info/${thisId}/genres.txt`)).split(",").map((genre) => genre.toLowerCase())
-      const thisAuthor = await readTextFile(`/bookflix-searchable-book-info/${thisId}/author.txt`)
-      const thisRating = parseFloat(await readTextFile(`/bookflix-searchable-book-info/${thisId}/rating.txt`))
-      const thisDate = new Date(Date.parse(await readTextFile(`/bookflix-searchable-book-info/${thisId}/publishdate.txt`)))
+      const infoJson = await readJsonFile(`/bookflix-searchable-book-info/${thisId}/info.json`)
+
+      const thisTitle = infoJson["title"]
+      const thisGenres = infoJson["genres"]
+      const thisAuthor = infoJson["author"]
+      const thisRating = infoJson["rating"]
+      const thisYear = parseInt(infoJson["publishdate"])
       const thisCoverURL = `/bookflix-searchable-book-info/${thisId}/cover.png`
 
       const goodTitle = thisTitle.toLowerCase().includes(bookSearchValue.toLowerCase())
-      const goodGenres = filteredGenres.every((value) => thisGenres.includes(value.toLowerCase()))
-      const goodAuthor = filteredAuthors.length == 0 || filteredAuthors.includes(thisAuthor)
+      const goodGenres = filteredGenres.every((value) => thisGenres.includes(value))
+      const goodAuthor = !filteredAuthor || filteredAuthor === thisAuthor
       const goodRating = (filteredRating as number[])[0] <= thisRating && thisRating <= (filteredRating as number[])[1]
-      const goodDate = filteredStartDate <= thisDate && thisDate <= filteredEndDate
-
-      console.log([filteredStartDate, thisDate, filteredEndDate])
+      const goodDate = filteredStartYear <= thisYear && thisYear <= filteredEndYear
 
       if (goodTitle && goodGenres && goodAuthor && goodRating && goodDate) {
         const thisBook: Book = {
@@ -91,13 +87,12 @@ function TimSach() {
           title: thisTitle,
           author: thisAuthor,
           rating: thisRating,
-          publishDate: thisDate,
+          //publishDate: thisYear,
           bookCoverURL: thisCoverURL,
         }
-        newBookSearchedInfo.push(thisBook)
+        setBookSearchedInfo_stringified((oldSet) => new Set([...oldSet, JSON.stringify(thisBook)]))
       }
     }
-    setBookSearchedInfo(newBookSearchedInfo)
   }
 
   useEffect(() => {
@@ -165,8 +160,8 @@ function TimSach() {
             }}
           />
 
-          {bookSearchedInfo.map((bookResult) => (
-            <BookCardResult bookInfo={bookResult} />
+          {[...bookSearchedInfo_stringified].map((bookResult) => (
+            <BookCardResult bookInfo={JSON.parse(bookResult)} />
           ))}
         </Box>
 
@@ -184,9 +179,9 @@ function TimSach() {
 
           <Box bgcolor="rgb(174, 170, 166)" height={4} my={3}></Box>
 
-          <FilterAutocomplete value={filteredGenres} options={exampleGenres} placeholder="Thể loại" sx={undefined} onChange={handleGenreChange} />
+          <FilterAutocomplete value={filteredGenres} options={genresList} placeholder="Thể loại" sx={undefined} onChange={handleGenreChange} />
 
-          <FilterAutocomplete value={filteredAuthors} options={exampleAuthors} placeholder="Tác giả" sx={{ mt: 3 }} onChange={handleAuthorChange} />
+          <FilterAutocompleteSingular value={filteredAuthor} options={authorsList} placeholder="Tác giả" sx={{ mt: 3 }} onChange={handleAuthorChange} />
 
           <Typography
             variant="h5"
@@ -199,10 +194,11 @@ function TimSach() {
           >
             Xuất bản từ
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              value={dayjs(filteredStartDate)}
-              onChange={handleFilteredStartDateChange}
+              views={["year"]}
+              value={new Date(filteredStartYear, 0, 1)}
+              onChange={handleFilteredStartYearChange}
               slotProps={{
                 desktopPaper: {
                   elevation: 0,
@@ -242,10 +238,11 @@ function TimSach() {
           >
             Đến
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              value={dayjs(filteredEndDate)}
-              onChange={handleFilteredEndDateChange}
+              views={["year"]}
+              value={new Date(filteredEndYear, 0, 1)}
+              onChange={handleFilteredEndYearChange}
               slotProps={{
                 desktopPaper: {
                   elevation: 0,
@@ -297,6 +294,10 @@ function TimSach() {
           sx: { bgcolor: "var(--bookflix-background)" },
         }}
       >
+        <IconButton onClick={() => setIsFilterDrawerOpen(false)}>
+          <KeyboardArrowDownIcon fontSize="large" sx={{ mx: "auto" }} />
+        </IconButton>
+
         <Box p={3} bgcolor="rgb(249, 243, 238)">
           <Typography
             variant="h4"
@@ -311,9 +312,9 @@ function TimSach() {
 
           <Box bgcolor="rgb(174, 170, 166)" height={4} my={3}></Box>
 
-          <FilterAutocomplete value={filteredGenres} options={exampleGenres} placeholder="Thể loại" sx={undefined} onChange={handleGenreChange} />
+          <FilterAutocomplete value={filteredGenres} options={genresList} placeholder="Thể loại" sx={undefined} onChange={handleGenreChange} />
 
-          <FilterAutocomplete value={filteredAuthors} options={exampleAuthors} placeholder="Tác giả" sx={{ mt: 3 }} onChange={handleAuthorChange} />
+          <FilterAutocompleteSingular value={filteredAuthor} options={authorsList} placeholder="Tác giả" sx={{ mt: 3 }} onChange={handleAuthorChange} />
 
           <Typography
             variant="h5"
@@ -326,11 +327,11 @@ function TimSach() {
           >
             Xuất bản từ
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              defaultValue={dayjs("01-01-2000")}
-              value={dayjs(filteredStartDate)}
-              onChange={handleFilteredStartDateChange}
+              views={["year"]}
+              value={new Date(filteredStartYear, 0, 1)}
+              onChange={handleFilteredStartYearChange}
               slotProps={{
                 desktopPaper: {
                   elevation: 0,
@@ -370,11 +371,11 @@ function TimSach() {
           >
             Đến
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              defaultValue={dayjs("01-01-2030")}
-              value={dayjs(filteredEndDate)}
-              onChange={handleFilteredEndDateChange}
+              views={["year"]}
+              value={new Date(filteredEndYear, 0, 1)}
+              onChange={handleFilteredEndYearChange}
               slotProps={{
                 desktopPaper: {
                   elevation: 0,

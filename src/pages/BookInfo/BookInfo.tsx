@@ -1,15 +1,13 @@
-import { Box, Button, Grid, Rating, Typography } from "@mui/material"
-import Header from "../../Bookflix-Components/Header/Header"
+import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { Notfound } from "../../pages"
-
+import { Box, Button, Grid, Rating, Typography } from "@mui/material"
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
 
+import Header from "../../Bookflix-Components/Header/Header"
+import { Notfound } from "../../pages"
 import getSearchableBookIds from "../../store/getSearchableBookIds"
-
-import { useState, useEffect } from "react"
-
 import readTextFile from "../../store/readTextFile"
+import readJsonFile from "../../store/readJsonFile"
 
 const BookInfo = () => {
   const searchableBookIds = getSearchableBookIds()
@@ -21,29 +19,23 @@ const BookInfo = () => {
 
   const [bookTitle, setBookTitle] = useState("")
   const [bookAuthor, setBookAuthor] = useState("")
-  const [bookPublishDate, setBookPublishDate] = useState("")
+  const [bookPublishYear, setBookPublishYear] = useState("")
   const [bookReviewParagraphs, setBookReviewParagraphs] = useState<string[]>([])
   const [bookGenres, setBookGenres] = useState<string[]>([])
 
   useEffect(() => {
-    readTextFile(`/bookflix-searchable-book-info/${bookId}/title.txt`).then((data) => setBookTitle(data.toUpperCase()))
+    readJsonFile(`/bookflix-searchable-book-info/${bookId}/info.json`).then((infoJson) => {
+      setBookTitle(infoJson["title"].toUpperCase())
+      setBookGenres(infoJson["genres"])
+      setBookPublishYear(infoJson["publishdate"])
+      setBookAuthor(infoJson["author"])
+      console.log(infoJson)
+    })
+
     readTextFile(`/bookflix-searchable-book-info/${bookId}/review.txt`).then((data) => {
       // Split with all kinds of "newline" character (according to ChatGPT, there are many, like \r \n idk)
       setBookReviewParagraphs(data.split(/\r\n|\r|\n/g))
     })
-    readTextFile(`/bookflix-searchable-book-info/${bookId}/genres.txt`).then((data) => {
-      setBookGenres(
-        data.split(",").map((item) => {
-          const firstLetter = item.charAt(0).toUpperCase()
-          const restOfString = item.slice(1).toLowerCase()
-          return firstLetter + restOfString
-        })
-      )
-    })
-    readTextFile(`/bookflix-searchable-book-info/${bookId}/publishdate.txt`).then((data) => {
-      setBookPublishDate(data)
-    })
-    readTextFile(`/bookflix-searchable-book-info/${bookId}/author.txt`).then((data) => setBookAuthor(data))
   }, [])
 
   return (
@@ -100,7 +92,7 @@ const BookInfo = () => {
             {/* Book publish date */}
             <Grid item alignSelf={{ xs: "flex-start", sm: "center" }}>
               <Typography variant="h5" color="black" fontFamily="Barlow, serif" fontSize={{ sm: 20, md: 25 }}>
-                <span style={{ fontWeight: "bold" }}>Ngày phát hành: </span> {bookPublishDate}
+                <span style={{ fontWeight: "bold" }}>Năm phát hành: </span> {bookPublishYear}
               </Typography>
             </Grid>
 

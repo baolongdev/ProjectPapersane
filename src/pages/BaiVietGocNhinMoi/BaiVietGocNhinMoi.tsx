@@ -1,16 +1,10 @@
+import React, { useEffect, useState, Suspense, lazy } from "react"
 import { Typography, Button, Box } from "@mui/material"
-
-import Header from "../../Bookflix-Components/Header/Header"
-
-import ShareIcon from "@mui/icons-material/Share"
-
-import FavoriteIcon from "@mui/icons-material/Favorite"
-
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
-
 import { Link, useParams } from "react-router-dom"
-
-import { Suspense, lazy, useEffect, useState } from "react"
+import Header from "../../Bookflix-Components/Header/Header"
+import ShareIcon from "@mui/icons-material/Share"
+import FavoriteIcon from "@mui/icons-material/Favorite"
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
 import readTextFile from "../../store/readTextFile"
 
 function BaiVietGocNhinMoi() {
@@ -20,7 +14,7 @@ function BaiVietGocNhinMoi() {
   const [articlePublishDate, setArticlePublishDate] = useState("")
   const [articleAvatarURL, setArticleAvatarURL] = useState("")
   // "lazy()" is made to load components dynamically, it seems
-  const ArticleComponent = lazy(() => import(`../../../public/GocNhinMoi-articles/${articleId}/Article.tsx`));
+  const ArticleComponent = lazy(() => import(`../../../public/GocNhinMoi-articles/${articleId}/Article.tsx`))
 
   useEffect(() => {
     readTextFile(`/GocNhinMoi-articles/${articleId}/title.txt`).then((data) => setArticleTitle(data))
@@ -82,12 +76,12 @@ function BaiVietGocNhinMoi() {
               fontFamily: "Barlow, sans-serif",
               fontStyle: "italic",
               fontWeight: "bold",
-              fontSize: {xs: 40, md: 50},
+              fontSize: { xs: 40, md: 50 },
             }}
           >
             {articleTitle}
           </Typography>
-          <Typography variant="h6" sx={{ fontFamily: "Barlow, sans-serif", fontWeight: "normal",}}>
+          <Typography variant="h6" sx={{ fontFamily: "Barlow, sans-serif", fontWeight: "normal" }}>
             {`Đăng bởi ${articleAuthor} vào ${articlePublishDate}`}
           </Typography>
 

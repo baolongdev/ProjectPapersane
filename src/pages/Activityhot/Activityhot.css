@@ -92,12 +92,13 @@
   color: #fff;
   /* max-width: 70%; */
   font-size: var(--h3-font-size);
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   line-height: 140%;
   font-weight: 500;
 }
 .activityhot__bq {
   color: #fff;
+  font-style: italic;
 }
 .activityhot__letter {
   position: relative;
@@ -191,7 +192,7 @@
     font-size: var(--h1-font-size);
   }
   .activityhot__description {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     font-size: var(--normal-font-size);
   }
 

@@ -76,7 +76,7 @@ const InitialVariable = () => {
             img: "/activities/2.jpg",
             title: "Lễ tri ân /và trưởng thành",
             subtitle: "",
-            bq: "Website có sử dụng một số hình ảnh từ Dự án khối 12 - Câu lạc bộ Nhiếp ảnh - Specture và Câu lạc bộ Báo chí - Truyền thông",
+            bq: "Website có sử dụng một số hình ảnh từ Dự án khối 12, Câu lạc bộ Nhiếp ảnh - Specture và Câu lạc bộ Báo chí - Truyền thông",
             link: "hots/lta&th",
             // linkFB: "https://www.facebook.com/576520341290807"
         },

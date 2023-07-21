@@ -5,7 +5,7 @@ import Header from "../../Bookflix-Components/Header/Header"
 import ShareIcon from "@mui/icons-material/Share"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
-import readTextFile from "../../store/readTextFile"
+import readJsonFile from "../../store/readJsonFile"
 
 function BaiVietGocNhinMoi() {
   const { articleId } = useParams()
@@ -17,10 +17,17 @@ function BaiVietGocNhinMoi() {
   const ArticleComponent = lazy(() => import(`../../../public/GocNhinMoi-articles/${articleId}/Article.tsx`))
 
   useEffect(() => {
-    readTextFile(`/GocNhinMoi-articles/${articleId}/title.txt`).then((data) => setArticleTitle(data))
-    readTextFile(`/GocNhinMoi-articles/${articleId}/author.txt`).then((data) => setArticleAuthor(data))
-    readTextFile(`/GocNhinMoi-articles/${articleId}/publishdate.txt`).then((data) => setArticlePublishDate(data))
+    readJsonFile(`/GocNhinMoi-articles/${articleId}/info.json`).then((data) => {
+      setArticleTitle(data["title"])
+      setArticleAuthor(data["author"])
+      const publishDateSplitted = data["publishdate"].split("-")
+      setArticlePublishDate(`${publishDateSplitted[2]}/${publishDateSplitted[1]}/${publishDateSplitted[0]}`)
+    })
     setArticleAvatarURL(`/GocNhinMoi-articles/${articleId}/images/articleCover.jpg`)
+    // readTextFile(`/GocNhinMoi-articles/${articleId}/title.txt`).then((data) => setArticleTitle(data))
+    // readTextFile(`/GocNhinMoi-articles/${articleId}/author.txt`).then((data) => setArticleAuthor(data))
+    // readTextFile(`/GocNhinMoi-articles/${articleId}/publishdate.txt`).then((data) => setArticlePublishDate(data))
+    // setArticleAvatarURL(`/GocNhinMoi-articles/${articleId}/images/articleCover.jpg`)
   }, [])
 
   return (

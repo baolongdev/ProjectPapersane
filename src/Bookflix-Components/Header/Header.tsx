@@ -9,9 +9,10 @@ import DehazeIcon from "@mui/icons-material/Dehaze"
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 function Header({ activePage }: { activePage: string }) {
+  const navigate = useNavigate()
   const [bookSearchValue, setBookSearchValue] = useState("")
   const [isHeaderDrawerOpen, setIsHeaderDrawerOpen] = useState(false)
 
@@ -32,7 +33,7 @@ function Header({ activePage }: { activePage: string }) {
           BOOKFLIX
         </Typography>
 
-        <Box display={{ xs: "none", lg: "flex", alignItems: "center"}} gap={{lg: 1, xl: 5}}>
+        <Box display={{ xs: "none", lg: "flex", alignItems: "center" }} gap={{ lg: 1, xl: 5 }}>
           <HeaderButton buttonText="Trang Chủ" buttonLink="/bookflix" isActivePage={activePage === "TrangChu"} />
           <HeaderButton buttonText="Tìm sách" buttonLink="/bookflix/timsach" isActivePage={activePage === "TimSach"} />
           <HeaderButton buttonText="Góc nhìn mới" buttonLink="/bookflix/gocnhinmoi" isActivePage={activePage === "GocNhinMoi"} />
@@ -41,6 +42,11 @@ function Header({ activePage }: { activePage: string }) {
             label="Gõ tên sách"
             variant="outlined"
             onChange={(e) => setBookSearchValue(e.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                navigate(`/bookflix/TimSach/${bookSearchValue}`)
+              }
+            }}
             InputLabelProps={{
               sx: { fontFamily: "Barlow" },
             }}
@@ -109,6 +115,11 @@ function Header({ activePage }: { activePage: string }) {
           <TextField
             label="Gõ tên sách"
             onChange={(e) => setBookSearchValue(e.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                navigate(`/bookflix/TimSach/${bookSearchValue}`)
+              }
+            }}
             variant="outlined"
             InputLabelProps={{
               sx: { fontFamily: "Barlow" },

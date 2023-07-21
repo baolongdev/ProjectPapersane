@@ -22,6 +22,7 @@ const BookInfo = () => {
   const [bookPublishYear, setBookPublishYear] = useState("")
   const [bookReviewParagraphs, setBookReviewParagraphs] = useState<string[]>([])
   const [bookGenres, setBookGenres] = useState<string[]>([])
+  const [bookRating, setBookRating] = useState(0)
 
   useEffect(() => {
     readJsonFile(`/bookflix-searchable-book-info/${bookId}/info.json`).then((infoJson) => {
@@ -29,6 +30,7 @@ const BookInfo = () => {
       setBookGenres(infoJson["genres"])
       setBookPublishYear(infoJson["publishdate"])
       setBookAuthor(infoJson["author"])
+      setBookRating(parseFloat(infoJson["rating"]))
       console.log(infoJson)
     })
 
@@ -105,6 +107,7 @@ const BookInfo = () => {
 
                 {bookGenres.map((genre) => (
                   <Typography
+                    key={genre}
                     variant="h6"
                     sx={{
                       fontFamily: "Barlow, serif",
@@ -130,7 +133,7 @@ const BookInfo = () => {
                 <Typography variant="h5" fontFamily="Barlow, serif" fontStyle="italic" color="black" fontSize={{ md: 25, lg: 30 }}>
                   Đánh giá:{" "}
                 </Typography>
-                <Rating defaultValue={4} precision={0.5} readOnly sx={{ fontSize: { md: 30, lg: 40 } }} />
+                <Rating value={bookRating} precision={0.25} readOnly sx={{ fontSize: { md: 30, lg: 40 } }} />
               </Box>
             </Grid>
           </Grid>
@@ -154,9 +157,9 @@ const BookInfo = () => {
           <Box>
             <Typography variant="subtitle1" color="black" fontFamily="Playfair Display, serif" fontSize={{ xs: 15, sm: 15, md: 18, lg: 22 }}>
               {bookReviewParagraphs.map((para) => (
-                <>
+                <React.Fragment key={para}>
                   {para} <br /> <br />{" "}
-                </>
+                </React.Fragment>
               ))}
             </Typography>
           </Box>

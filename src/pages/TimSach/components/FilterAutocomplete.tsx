@@ -20,7 +20,6 @@ const FilterAutocomplete = ({ value, options, placeholder, sx, onChange }: Filte
       options={options}
       PaperComponent={CustomPaper}
       onChange={onChange}
-      filterOptions={(option) => option}
       renderTags={(value: readonly string[], getTagProps) =>
         value.map((option: string, index: number) => (
           <Chip

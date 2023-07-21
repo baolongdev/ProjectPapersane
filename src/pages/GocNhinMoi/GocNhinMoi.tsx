@@ -4,7 +4,7 @@ import Header from "../../Bookflix-Components/Header/Header"
 import PostPreviewCard from "./components/PostPreviewCard/PostPreviewCard"
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome"
 import getGocNhinMoiArticleIds from "../../store/getGocNhinMoiArticleIds"
-import readTextFile from "../../store/readTextFile"
+import readJsonFile from "../../store/readJsonFile"
 
 interface ArticleInfo {
   id: string
@@ -20,24 +20,20 @@ function GocNhinMoi() {
   const [articles_stringified, setArticles_stringified] = useState<Set<string>>(new Set())
 
   const fetchArticles = async () => {
-    const articleData = await Promise.all(
-      articleIds.map(async (id) => {
-        const title = await readTextFile(`/GocNhinMoi-articles/${id}/title.txt`)
-        const author = await readTextFile(`/GocNhinMoi-articles/${id}/author.txt`)
-        const description = await readTextFile(`/GocNhinMoi-articles/${id}/description.txt`)
-        const imageURL = `/GocNhinMoi-articles/${id}/images/articleCover.jpg`
+    articleIds.map(async (id) => {
+      const infoJson = await readJsonFile(`/GocNhinMoi-articles/${id}/info.json`)
+      const imageURL = `/GocNhinMoi-articles/${id}/images/articleCover.jpg`
 
-        const thisArticle = {
-          id: id,
-          title: title,
-          author: author,
-          description: description,
-          imageURL: imageURL,
-        }
+      const thisArticle = {
+        id: id,
+        title: infoJson["title"],
+        author: infoJson["author"],
+        description: infoJson["description"],
+        imageURL: imageURL,
+      }
 
-        setArticles_stringified((oldSet) => new Set([...oldSet, JSON.stringify(thisArticle)]))
-      })
-    )
+      setArticles_stringified((oldSet) => new Set([...oldSet, JSON.stringify(thisArticle)]))
+    })
   }
 
   useEffect(() => {
@@ -66,7 +62,7 @@ function GocNhinMoi() {
       <Box display="flex" gap={10} justifyContent="center" mx={2}>
         <Box flexBasis={{ xs: "100%", md: "60%" }}>
           {[...articles_stringified].map((post) => (
-            <PostPreviewCard postInfo={JSON.parse(post)} />
+            <PostPreviewCard postInfo={JSON.parse(post)} key={JSON.parse(post).id} />
           ))}
         </Box>
 

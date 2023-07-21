@@ -44,8 +44,8 @@ const BookSlider = ({ booksInfo, cardColor }: { booksInfo: Book[]; cardColor: st
       //   onSlideChange={() => console.log("slide change")}
       //   onSwiper={(swiper) => console.log(swiper)}
     >
-      {booksInfo.map((book, index) => (
-        <SwiperSlide key={index}>
+      {booksInfo.map((book) => (
+        <SwiperSlide key={book.link}>
           <Link to={book.link}>
             <Card
               elevation={0}

@@ -1,4 +1,3 @@
-// written by ChatGPT
 function readJsonFile(filePath : string) {
   return fetch(filePath)
     .then((response) => {

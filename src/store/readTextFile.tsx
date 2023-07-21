@@ -1,4 +1,4 @@
-// written by ChatGPT, can be confidently used to read .txt files
+// used to read .txt files
 async function readTextFile(filePath: string) {
   try {
     const response = await fetch(filePath)

@@ -93,7 +93,7 @@ function BookflixLanding() {
         <Grid item xs={15} sm={15} md={8} lg={6} mt={10}>
           <Swiper slidesPerView={1} loop autoplay={{ delay: 2500 }} modules={[Autoplay]} noSwiping={true} noSwipingClass="swiper-slide">
             {bookCoversSurpriseMe.map((bookCoverURL) => (
-              <SwiperSlide>
+              <SwiperSlide key={bookCoverURL}>
                 <img
                   src={bookCoverURL}
                   style={{

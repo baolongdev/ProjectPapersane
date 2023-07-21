@@ -10,6 +10,7 @@ const getAllGenres = () => {
     "Trẻ em",
     "Học đường",
     "Giáo dục",
+    "Truyện dài",
   ]
   return allGenres
 }

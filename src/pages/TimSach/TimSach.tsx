@@ -8,6 +8,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import IconButton from "@mui/material/IconButton"
 import TuneIcon from "@mui/icons-material/Tune"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
+import { ThemeProvider, createTheme } from "@mui/material/styles"
 
 import Header from "../../Bookflix-Components/Header/Header"
 import BookCardResult from "./components/BookCardResult"
@@ -48,7 +49,7 @@ function TimSach() {
   }
 
   const handleFilteredEndYearChange = (value: Date | null) => {
-    setFilteredEndYear(value ? value.getFullYear : 2030)
+    setFilteredEndYear(value ? value.getFullYear() : 2030)
   }
 
   const handleFilteredRatingChange = (event: any, value: number | number[]) => {
@@ -63,6 +64,10 @@ function TimSach() {
 
   const [bookSearchedInfo_stringified, setBookSearchedInfo_stringified] = useState<Set<string>>(new Set())
 
+  function roundToNearestQuarter(value: number): number {
+    return Math.round(value * 4) / 4
+  }
+
   const updateBookSearchedInfo = async () => {
     setBookSearchedInfo_stringified(new Set())
     for (const thisId of bookIdsList) {
@@ -71,7 +76,7 @@ function TimSach() {
       const thisTitle = infoJson["title"]
       const thisGenres = infoJson["genres"]
       const thisAuthor = infoJson["author"]
-      const thisRating = infoJson["rating"]
+      const thisRating = roundToNearestQuarter(infoJson["rating"])
       const thisYear = parseInt(infoJson["publishdate"])
       const thisCoverURL = `/bookflix-searchable-book-info/${thisId}/cover.png`
 
@@ -111,6 +116,11 @@ function TimSach() {
             label="Gõ tên sách"
             variant="outlined"
             onChange={(e) => setBookSearchValue(e.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                updateBookSearchedInfo()
+              }
+            }}
             InputLabelProps={{
               sx: { fontFamily: "Barlow, sans-serif" },
             }}
@@ -161,7 +171,7 @@ function TimSach() {
           />
 
           {[...bookSearchedInfo_stringified].map((bookResult) => (
-            <BookCardResult bookInfo={JSON.parse(bookResult)} />
+            <BookCardResult bookInfo={JSON.parse(bookResult)} key={JSON.parse(bookResult).id} />
           ))}
         </Box>
 
@@ -194,7 +204,8 @@ function TimSach() {
           >
             Xuất bản từ
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
+
+          <LocalizationProvider dateAdapter={AdapterDateFns} localeText={{ datePickerToolbarTitle: "Chọn năm", cancelButtonLabel: "Hủy" }}>
             <DatePicker
               views={["year"]}
               value={new Date(filteredStartYear, 0, 1)}
@@ -238,7 +249,7 @@ function TimSach() {
           >
             Đến
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <LocalizationProvider dateAdapter={AdapterDateFns} localeText={{ datePickerToolbarTitle: "Chọn năm", cancelButtonLabel: "Hủy" }}>
             <DatePicker
               views={["year"]}
               value={new Date(filteredEndYear, 0, 1)}
@@ -327,10 +338,10 @@ function TimSach() {
           >
             Xuất bản từ
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <LocalizationProvider dateAdapter={AdapterDateFns} localeText={{ datePickerToolbarTitle: "Chọn năm", cancelButtonLabel: "Hủy" }}>
             <DatePicker
               views={["year"]}
-              value={new Date(filteredStartYear, 0, 1)}
+              value={new Date(filteredEndYear, 0, 1)}
               onChange={handleFilteredStartYearChange}
               slotProps={{
                 desktopPaper: {
@@ -364,14 +375,14 @@ function TimSach() {
             variant="h5"
             sx={{
               fontWeight: "bold",
-              fontFamily: "Barlow, serif",
+              fontFamily: "Barlow, sans-serif",
               color: "rgb(47, 62, 116)",
               mt: 3,
             }}
           >
             Đến
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <LocalizationProvider dateAdapter={AdapterDateFns} localeText={{ datePickerToolbarTitle: "Chọn năm", cancelButtonLabel: "Hủy" }}>
             <DatePicker
               views={["year"]}
               value={new Date(filteredEndYear, 0, 1)}

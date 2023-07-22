@@ -31,7 +31,7 @@ function BaiVietGocNhinMoi() {
   }, [])
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100%">
+    <Box bgcolor="var(--bookflix-background)" minHeight="100vh" height="100%" width="100%">
       <Header activePage="GocNhinMoi" />
 
       <Box
@@ -49,7 +49,7 @@ function BaiVietGocNhinMoi() {
             component={Link}
             to="/bookflix/gocnhinmoi"
             sx={{
-              fontFamily: "Barlow, sans-serif",
+              fontFamily: "var(--body-font-bookflix)",
               color: "rgb(232, 129, 119)",
               fontWeight: "bold",
               fontSize: 30,
@@ -77,18 +77,10 @@ function BaiVietGocNhinMoi() {
         </Box>
 
         <Box sx={{ flexBasis: { xs: "auto", md: "70%" } }}>
-          <Typography
-            variant="h3"
-            sx={{
-              fontFamily: "Barlow, sans-serif",
-              fontStyle: "italic",
-              fontWeight: "bold",
-              fontSize: { xs: 40, md: 50 },
-            }}
-          >
+          <Typography variant="h3" fontFamily="var(--body-font-bookflix)" fontStyle="italic" fontWeight="bold" fontSize={{ xs: 40, md: 50 }}>
             {articleTitle}
           </Typography>
-          <Typography variant="h6" sx={{ fontFamily: "Barlow, sans-serif", fontWeight: "normal" }}>
+          <Typography variant="h6" fontFamily="var(--body-font-bookflix)" fontWeight="normal">
             {`Đăng bởi ${articleAuthor} vào ${articlePublishDate}`}
           </Typography>
 

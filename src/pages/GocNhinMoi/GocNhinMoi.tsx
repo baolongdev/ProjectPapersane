@@ -6,14 +6,6 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome"
 import getGocNhinMoiArticleIds from "../../store/getGocNhinMoiArticleIds"
 import readJsonFile from "../../store/readJsonFile"
 
-interface ArticleInfo {
-  id: string
-  title: string
-  author: string
-  description: string
-  imageURL: string
-}
-
 function GocNhinMoi() {
   const articleIds = getGocNhinMoiArticleIds()
 
@@ -23,7 +15,6 @@ function GocNhinMoi() {
     articleIds.map(async (id) => {
       const infoJson = await readJsonFile(`/GocNhinMoi-articles/${id}/info.json`)
       const imageURL = `/GocNhinMoi-articles/${id}/images/articleCover.jpg`
-
       const thisArticle = {
         id: id,
         title: infoJson["title"],
@@ -31,7 +22,6 @@ function GocNhinMoi() {
         description: infoJson["description"],
         imageURL: imageURL,
       }
-
       setArticles_stringified((oldSet) => new Set([...oldSet, JSON.stringify(thisArticle)]))
     })
   }
@@ -41,19 +31,17 @@ function GocNhinMoi() {
   }, [])
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100%">
+    <Box bgcolor="var(--bookflix-background)" minHeight="100vh" height="100%" width="100%">
       <Header activePage="GocNhinMoi" />
 
       <Typography
         variant="h1"
         align="center"
-        sx={{
-          fontFamily: "Barlow, sans-serif",
-          color: "rgb(232, 129, 119)",
-          fontWeight: "bold",
-          marginTop: 5,
-          fontSize: { xs: 30, sm: 50 },
-        }}
+        fontFamily="var(--body-font-bookflix)"
+        color="rgb(232, 129, 119)"
+        fontWeight="bold"
+        mt={5}
+        fontSize={{ xs: 30, sm: 50 }}
       >
         <AutoAwesomeIcon sx={{ color: "yellow", fontSize: { xs: 25, sm: 45 } }} />
         {" GÓC NHÌN MỚI"}

@@ -41,7 +41,7 @@ const BookInfo = () => {
   }, [])
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" height="100%" width="100%">
+    <Box bgcolor="var(--bookflix-background)" minHeight="100vh" height="100%" width="100%">
       <Header activePage="TimSach" />
 
       <Button
@@ -49,8 +49,8 @@ const BookInfo = () => {
         sx={{
           ml: 3,
           mt: 2,
-          fontFamily: "Barlow, sans-serif",
-          color: "rgb(47, 62, 116)",
+          fontFamily: "var(--body-font-bookflix)",
+          color: "var(--bookflix-logo-color)",
           fontSize: 30,
           "&:hover": {
             bgcolor: "transparent",
@@ -64,19 +64,21 @@ const BookInfo = () => {
       <Box mx={{ xs: 1, sm: 3, md: 3, lg: 10, xl: 30 }} mt={10}>
         <Grid container direction="row" alignItems="center" justifyContent="center">
           {/* Book cover */}
-          <Grid item xs={10} md={3}>
-            <img src={`/bookflix-searchable-book-info/${bookId}/cover.png`} />
+          <Grid item xs={10} md={4}>
+            <Box width={{ xs: "100%", md: "80%" }}>
+              <img src={`/bookflix-searchable-book-info/${bookId}/cover.png`} style={{ width: "100%", objectFit: "contain" }} />
+            </Box>
           </Grid>
 
-          <Grid container item direction="column" xs={12} md={9} mt={{ xs: 5, md: 0 }} alignSelf="center" rowSpacing={{ xs: 2, sm: 1, md: 2, lg: 3 }}>
+          <Grid container item direction="column" xs={12} md={8} mt={{ xs: 5, md: 0 }} alignSelf="center" rowSpacing={{ xs: 2, sm: 1, md: 2, lg: 3 }}>
             {/* Book title */}
             <Grid item alignSelf="center">
               <Typography
                 variant="h3"
                 fontSize={{ xs: 40, lg: 45, xl: 50 }}
-                fontFamily="Barlow, serif"
+                fontFamily="var(--body-font-bookflix)"
                 fontWeight="bold"
-                color="rgb(47, 62, 116)"
+                color="var(--bookflix-logo-color)"
                 align="center"
               >
                 {bookTitle}
@@ -84,16 +86,16 @@ const BookInfo = () => {
             </Grid>
 
             {/* Book author */}
-            <Grid item alignSelf={{ xs: "flex-start", sm: "center" }}>
-              <Typography variant="h5" color="black" fontFamily="Barlow, serif" fontSize={{ sm: 20, md: 25 }}>
+            <Grid item alignSelf={{ xs: "center", sm: "center" }}>
+              <Typography variant="h5" color="black" fontFamily="var(--body-font-bookflix)" fontSize={{ sm: 20, md: 25 }}>
                 <span style={{ fontWeight: "bold" }}>Tác giả: </span>
                 {bookAuthor}
               </Typography>
             </Grid>
 
             {/* Book publish date */}
-            <Grid item alignSelf={{ xs: "flex-start", sm: "center" }}>
-              <Typography variant="h5" color="black" fontFamily="Barlow, serif" fontSize={{ sm: 20, md: 25 }}>
+            <Grid item alignSelf={{ xs: "center", sm: "center" }}>
+              <Typography variant="h5" color="black" fontFamily="var(--body-font-bookflix)" fontSize={{ sm: 20, md: 25 }}>
                 <span style={{ fontWeight: "bold" }}>Năm phát hành: </span> {bookPublishYear}
               </Typography>
             </Grid>
@@ -110,7 +112,7 @@ const BookInfo = () => {
                     key={genre}
                     variant="h6"
                     sx={{
-                      fontFamily: "Barlow, serif",
+                      fontFamily: "var(--body-font-bookflix)",
                       border: "1px solid rgb(132, 163, 219)",
                       borderRadius: 20,
                       px: 2,
@@ -130,7 +132,7 @@ const BookInfo = () => {
             {/* Book rating */}
             <Grid item ml={{ xs: 1, md: 10 }}>
               <Box display="flex" alignItems="center" gap={2} mt={3}>
-                <Typography variant="h5" fontFamily="Barlow, serif" fontStyle="italic" color="black" fontSize={{ md: 25, lg: 30 }}>
+                <Typography variant="h5" fontFamily="var(--body-font-bookflix)" fontStyle="italic" color="black" fontSize={{ md: 25, lg: 30 }}>
                   Đánh giá:{" "}
                 </Typography>
                 <Rating value={bookRating} precision={0.25} readOnly sx={{ fontSize: { md: 30, lg: 40 } }} />
@@ -155,10 +157,10 @@ const BookInfo = () => {
             <img src="\bookflix-ui-pics\SummaryIcon.png" />
           </Box>
           <Box>
-            <Typography variant="subtitle1" color="black" fontFamily="Playfair Display, serif" fontSize={{ xs: 15, sm: 15, md: 18, lg: 22 }}>
+            <Typography variant="subtitle1" color="black" fontFamily="var(--review-font-bookflix)" fontSize={{ xs: 15, sm: 15, md: 18, lg: 22 }}>
               {bookReviewParagraphs.map((para) => (
                 <React.Fragment key={para}>
-                  {para} <br /> <br />{" "}
+                  {para} <br /> <br />
                 </React.Fragment>
               ))}
             </Typography>

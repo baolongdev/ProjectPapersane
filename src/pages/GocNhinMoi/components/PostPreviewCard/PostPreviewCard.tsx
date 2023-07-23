@@ -32,7 +32,7 @@ const PostPreviewCard = ({ postInfo }: { postInfo: postInfoProp }) => {
           variant="h6"
           component="div"
           sx={{ fontSize: { xs: 15, sm: 17, lg: 20 }, fontStyle: "italic", fontWeight: 'bold' }}
-          fontFamily="Barlow, serif"
+          fontFamily="var(--body-font-bookflix)"
         >
           {postInfo.title}
         </Typography>
@@ -41,7 +41,7 @@ const PostPreviewCard = ({ postInfo }: { postInfo: postInfoProp }) => {
           component="div"
           color="text.secondary"
           sx={{ fontSize: { xs: 12, sm: 15, lg: 17 } }}
-          fontFamily="Barlow, serif"
+          fontFamily="var(--body-font-bookflix)"
         >
           bởi {postInfo.author}
         </Typography>
@@ -57,7 +57,7 @@ const PostPreviewCard = ({ postInfo }: { postInfo: postInfoProp }) => {
             backgroundColor: "rgb(224, 143, 120)",
             borderRadius: "20px 0 0 20px",
             boxShadow: "none",
-            fontFamily: "Barlow, serif",
+            fontFamily: "var(--body-font-bookflix)",
             "&:hover": {
               backgroundColor: "rgb(224, 143, 120)",
               boxShadow: "none",

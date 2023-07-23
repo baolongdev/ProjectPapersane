@@ -17,13 +17,13 @@ function HeaderButton({buttonText, buttonLink, isActivePage} : HeaderButtonProp)
         p: 2,
         px: 3,
         fontSize: "20px",
-        fontFamily: "Barlow",
+        fontFamily: "var(--body-font-bookflix)",
         borderRadius: "50px",
-        backgroundColor: isActivePage ? "rgb(47, 62, 116)" : "transparent",
+        backgroundColor: isActivePage ? "var(--bookflix-logo-color)" : "transparent",
         color: isActivePage ? "white" : "black",
         "&:hover": {
           backgroundColor: isActivePage
-            ? "rgb(47, 62, 116)"
+            ? "var(--bookflix-logo-color)"
             : "rgba(0, 0, 0, 0.04)",
         },
       }}

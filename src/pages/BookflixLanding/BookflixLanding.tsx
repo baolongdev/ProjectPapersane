@@ -12,12 +12,11 @@ import getSearchableBookIds from "../../store/getSearchableBookIds"
 import readTextFile from "../../store/readTextFile"
 import getBookInfoForTopRatedSwiper from "../../store/getBookInfoForTopRatedSwiper"
 import getArticleInfoForRecommendedForYou from "../../store/getArticleInfoForRecommendedForYou"
+import BookSliderBox from "./components/BookSliderBox/BookSliderBox"
 
 function BookflixLanding() {
   const allBookIds = getSearchableBookIds()
-
   const bookIdsSurpriseMe = getBookIdsForSurpriseMeSwiper()
-
   const bookCoversSurpriseMe = bookIdsSurpriseMe.map((id) => `/bookflix-searchable-book-info/${id}/cover.png`)
 
   const [quoteTxtLines, setQuoteTxtLines] = useState<string[]>([])
@@ -28,45 +27,15 @@ function BookflixLanding() {
     })
   }, [])
 
-  const date0 = new Date("2023-07-13")
+  const date0 = new Date(2023, 6, 13)
   const daysSinceDate0 = new Date().getDate() - date0.getDate()
   const quoteIdx = daysSinceDate0 % 100
 
   const TopRatedBookInfo = getBookInfoForTopRatedSwiper()
-
   const RecommendedArticles = getArticleInfoForRecommendedForYou()
 
-  const booksRecommended = [
-    {
-      title: "Book 1 recommended",
-      author: "Author 1",
-      imageUrl: "https://pm1.aminoapps.com/7577/7bb6da4a6a80790aff0186e7cf156798315f355ar1-1357-2048v2_uhq.jpg",
-    },
-    {
-      title: "Book 2 recommended",
-      author: "Author 2",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    {
-      title: "Book 3 recommended",
-      author: "Author 3",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    {
-      title: "Book 4 recommended",
-      author: "Author 4",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    {
-      title: "Book 5 recommended",
-      author: "Author 5",
-      imageUrl: "https://cdn-amz.woka.io/images/I/710sLNJVC7L.jpg",
-    },
-    // Add more book objects here...
-  ]
-
   return (
-    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100%">
+    <Box bgcolor="var(--bookflix-background)" minHeight="100vh" height="100%" width="100%">
       <Header activePage="TrangChu" />
 
       <Grid container columns={24} justifyContent="center" spacing={10}>
@@ -74,15 +43,13 @@ function BookflixLanding() {
           <Typography
             variant="h4"
             align="center"
-            sx={{
-              fontFamily: "var(--normal-font-bookflix)",
-              color: "black",
-              bgcolor: "white",
-              borderRadius: "30px",
-              p: 5,
-              mt: 5,
-              fontSize: { xs: 35, lg: 40 },
-            }}
+            fontFamily="var(--review-font-bookflix)"
+            color="black"
+            bgcolor="white"
+            borderRadius="30px"
+            p={5}
+            mt={5}
+            fontSize={{xs: 35, md: "3vw" ,lg: "2.41vw"}}
           >
             Yêu sách từ đầu sao thật khó
             <br />
@@ -118,7 +85,7 @@ function BookflixLanding() {
               bgcolor: "rgb(250, 222, 220)",
               color: "rgb(184, 88, 91)",
               borderRadius: 20,
-              fontFamily: "Barlow, sans-serif",
+              fontFamily: "var(--body-font-bookflix)",
               fontWeight: "bold",
               fontSize: "1rem",
               "&:hover": {
@@ -131,50 +98,18 @@ function BookflixLanding() {
         </Grid>
       </Grid>
 
-      {/* <Box> for New release */}
-      <Box p={2} ml={5} mr={5} mt={10}>
-        <Typography
-          variant="h4"
-          sx={{
-            mb: 5,
-            color: "black",
-            fontWeight: "bold",
-            fontStyle: "italic",
-          }}
-        >
-          Top rated
-        </Typography>
+      <BookSliderBox title="Top rated" BookSliderComponent={<BookSlider booksInfo={TopRatedBookInfo} cardColor="rgb(204, 223, 230)" />} />
 
-        <BookSlider booksInfo={TopRatedBookInfo} cardColor="rgb(204, 223, 230)" />
-      </Box>
-
-      {/* <Box> for Recommended for you */}
-      <Box p={2} ml={5} mr={5} mt={7}>
-        <Typography
-          variant="h4"
-          sx={{
-            mb: 5,
-            color: "black",
-            fontWeight: "bold",
-            fontStyle: "italic",
-          }}
-        >
-          Recommended for you
-        </Typography>
-
-        <BookSlider booksInfo={RecommendedArticles} cardColor="RGB(210, 239, 173)" />
-      </Box>
+      <BookSliderBox title="Recommended for you" BookSliderComponent={<BookSlider booksInfo={RecommendedArticles} cardColor="rgb(210, 239, 173)" />} />
 
       <Typography
         variant="h3"
         align="center"
-        sx={{
-          mt: 10,
-          color: "red",
-          fontFamily: "Barlow",
-          fontWeight: "bold",
-          fontSize: { xs: 30, sm: 35, md: 50 },
-        }}
+        mt={10}
+        color="var(--bookflix-logo-color)"
+        fontFamily="var(--body-font-bookflix)"
+        fontWeight="bold"
+        fontSize={{ xs: 30, sm: 35, md: 50 }}
       >
         QUOTE OF THE DAY
       </Typography>
@@ -183,18 +118,16 @@ function BookflixLanding() {
         <Typography
           variant="h5"
           align="center"
-          sx={{
-            fontFamily: "Barlow",
-            fontStyle: "italic",
-            border: "3px solid rgb(48, 48, 48)",
-            backgroundColor: "white",
-            color: "black",
-            borderRadius: "30px",
-            p: 5,
-            mb: 5,
-            mx: 2,
-            fontSize: { xs: 20, lg: 25 },
-          }}
+          fontFamily="var(--body-font-bookflix)"
+          fontStyle="italic"
+          border="3px solid rgb(48, 48, 48)"
+          bgcolor="white"
+          color="black"
+          borderRadius="30px"
+          p={5}
+          mb={5}
+          mx={2}
+          fontSize={{ xs: 20, lg: 25 }}
         >
           {quoteTxtLines[quoteIdx * 2]}
           <br />

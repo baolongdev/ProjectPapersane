@@ -9,7 +9,7 @@ interface FilterAutocompleteProps {
 }
 
 const CustomPaper = (props: PaperProps) => {
-  return <Paper elevation={0} sx={{ borderRadius: 0, fontFamily: "Barlow, serif" }} {...props}></Paper>
+  return <Paper elevation={0} sx={{ borderRadius: 0, fontFamily: "var(--body-font-bookflix)" }} {...props}></Paper>
 }
 
 const FilterAutocomplete = ({ value, options, placeholder, sx, onChange }: FilterAutocompleteProps) => {
@@ -29,7 +29,7 @@ const FilterAutocomplete = ({ value, options, placeholder, sx, onChange }: Filte
             sx={{
               fontWeight: "bold",
               fontSize: "15px",
-              fontFamily: "Barlow, serif",
+              fontFamily: "var(--body-font-bookflix)",
               color: "white",
               bgcolor: "rgb(132, 163, 219)",
             }}
@@ -43,7 +43,7 @@ const FilterAutocomplete = ({ value, options, placeholder, sx, onChange }: Filte
           placeholder={placeholder}
           sx={{
             ...sx,
-            fontFamily: "Barlow, serif",
+            fontFamily: "var(--body-font-bookflix)",
             bgcolor: "white",
             "& .MuiOutlinedInput-root": {
               "& fieldset": {

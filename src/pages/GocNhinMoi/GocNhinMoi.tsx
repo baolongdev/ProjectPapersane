@@ -12,7 +12,7 @@ function GocNhinMoi() {
   const [articles_stringified, setArticles_stringified] = useState<Set<string>>(new Set())
 
   const fetchArticles = async () => {
-    articleIds.map(async (id) => {
+    articleIds.forEach(async (id) => {
       const infoJson = await readJsonFile(`/GocNhinMoi-articles/${id}/info.json`)
       const imageURL = `/GocNhinMoi-articles/${id}/images/articleCover.jpg`
       const thisArticle = {

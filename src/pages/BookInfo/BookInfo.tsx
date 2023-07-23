@@ -41,7 +41,7 @@ const BookInfo = () => {
   }, [])
 
   return (
-    <Box bgcolor="var(--bookflix-background)" height="100%" width="100%">
+    <Box bgcolor="var(--bookflix-background)" minHeight="100vh" height="100%" width="100%">
       <Header activePage="TimSach" />
 
       <Button
@@ -64,11 +64,13 @@ const BookInfo = () => {
       <Box mx={{ xs: 1, sm: 3, md: 3, lg: 10, xl: 30 }} mt={10}>
         <Grid container direction="row" alignItems="center" justifyContent="center">
           {/* Book cover */}
-          <Grid item xs={10} md={3}>
-            <img src={`/bookflix-searchable-book-info/${bookId}/cover.png`} />
+          <Grid item xs={10} md={4}>
+            <Box width={{ xs: "100%", md: "80%" }}>
+              <img src={`/bookflix-searchable-book-info/${bookId}/cover.png`} style={{ width: "100%", objectFit: "contain" }} />
+            </Box>
           </Grid>
 
-          <Grid container item direction="column" xs={12} md={9} mt={{ xs: 5, md: 0 }} alignSelf="center" rowSpacing={{ xs: 2, sm: 1, md: 2, lg: 3 }}>
+          <Grid container item direction="column" xs={12} md={8} mt={{ xs: 5, md: 0 }} alignSelf="center" rowSpacing={{ xs: 2, sm: 1, md: 2, lg: 3 }}>
             {/* Book title */}
             <Grid item alignSelf="center">
               <Typography
@@ -84,7 +86,7 @@ const BookInfo = () => {
             </Grid>
 
             {/* Book author */}
-            <Grid item alignSelf={{ xs: "flex-start", sm: "center" }}>
+            <Grid item alignSelf={{ xs: "center", sm: "center" }}>
               <Typography variant="h5" color="black" fontFamily="var(--body-font-bookflix)" fontSize={{ sm: 20, md: 25 }}>
                 <span style={{ fontWeight: "bold" }}>Tác giả: </span>
                 {bookAuthor}
@@ -92,7 +94,7 @@ const BookInfo = () => {
             </Grid>
 
             {/* Book publish date */}
-            <Grid item alignSelf={{ xs: "flex-start", sm: "center" }}>
+            <Grid item alignSelf={{ xs: "center", sm: "center" }}>
               <Typography variant="h5" color="black" fontFamily="var(--body-font-bookflix)" fontSize={{ sm: 20, md: 25 }}>
                 <span style={{ fontWeight: "bold" }}>Năm phát hành: </span> {bookPublishYear}
               </Typography>
@@ -158,7 +160,7 @@ const BookInfo = () => {
             <Typography variant="subtitle1" color="black" fontFamily="var(--review-font-bookflix)" fontSize={{ xs: 15, sm: 15, md: 18, lg: 22 }}>
               {bookReviewParagraphs.map((para) => (
                 <React.Fragment key={para}>
-                  {para} <br /> <br />{" "}
+                  {para} <br /> <br />
                 </React.Fragment>
               ))}
             </Typography>

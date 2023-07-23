@@ -49,7 +49,7 @@ function BookflixLanding() {
             borderRadius="30px"
             p={5}
             mt={5}
-            fontSize={{ xs: 35, lg: 40 }}
+            fontSize={{xs: 35, md: "3vw" ,lg: "2.41vw"}}
           >
             Yêu sách từ đầu sao thật khó
             <br />
@@ -106,7 +106,7 @@ function BookflixLanding() {
         variant="h3"
         align="center"
         mt={10}
-        color="red"
+        color="var(--bookflix-logo-color)"
         fontFamily="var(--body-font-bookflix)"
         fontWeight="bold"
         fontSize={{ xs: 30, sm: 35, md: 50 }}

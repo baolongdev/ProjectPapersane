@@ -4,6 +4,7 @@ const getSearchableBookIds = (): string[] => {
     //"BinhMinhCuaCuocDoi",
     "CaPheCungTony",
     //"CayCamNgotCuaToi",
+    "ChinChinChinLaThuGuiChoChinhMinhTapMot",
     "ChuaRuoi",
     "ChuBeCoTaiMoKhoa",
     //"ConGaiCuaChimPhuongHoang",

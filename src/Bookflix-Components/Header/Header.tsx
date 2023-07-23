@@ -27,7 +27,7 @@ function Header({ activePage }: { activePage: string }) {
           BOOKFLIX
         </Typography>
 
-        <Box display={{ xs: "none", lg: "flex", alignItems: "center" }} gap={{ lg: 1, xl: 5 }} mr={5}>
+        <Box display={{ xs: "none", lg: "flex", alignItems: "center" }} gap={{ lg: 3, xl: 5 }} mr={5}>
           <HeaderButton buttonText="Trang Chủ" buttonLink="/bookflix" isActivePage={activePage === "TrangChu"} />
           <HeaderButton buttonText="Tìm sách" buttonLink="/bookflix/timsach" isActivePage={activePage === "TimSach"} />
           <HeaderButton buttonText="Góc nhìn mới" buttonLink="/bookflix/gocnhinmoi" isActivePage={activePage === "GocNhinMoi"} />

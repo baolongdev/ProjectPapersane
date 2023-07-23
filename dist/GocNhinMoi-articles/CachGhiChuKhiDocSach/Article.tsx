@@ -10,7 +10,7 @@ function Article() {
   
   function HeadingSection({ children }: { children: React.ReactNode }) {
     return (
-      <Typography variant="h4" align="center" fontFamily="Barlow, serif" color="black" fontWeight="normal">
+      <Typography variant="h4" align="center" fontFamily="var(--body-font-bookflix)" color="black" fontWeight="normal">
         {children}
       </Typography>
     )
@@ -18,7 +18,7 @@ function Article() {
   
   function BodyTextSection({ children }: { children: React.ReactNode }) {
     return (
-      <Typography variant="h6" fontFamily="Barlow, serif" color="black" fontWeight="normal">
+      <Typography variant="h6" fontFamily="var(--body-font-bookflix)" color="black" fontWeight="normal">
         {children}
       </Typography>
     )

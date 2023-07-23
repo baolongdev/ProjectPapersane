@@ -1,18 +1,12 @@
-import { AppBar, Toolbar, Typography, TextField, InputAdornment, IconButton, Box, Drawer } from "@mui/material"
-
+import { AppBar, Toolbar, Typography, IconButton, Box, Drawer } from "@mui/material"
 import HeaderButton from "./components/HeaderButton/HeaderButton"
-
-import SearchIcon from "@mui/icons-material/Search"
-
 import DehazeIcon from "@mui/icons-material/Dehaze"
-
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import TextFieldForBookSearch from "./components/TextFieldForBookSearch/TextFieldForBookSearch"
 
 function Header({ activePage }: { activePage: string }) {
-  const navigate = useNavigate()
   const [bookSearchValue, setBookSearchValue] = useState("")
   const [isHeaderDrawerOpen, setIsHeaderDrawerOpen] = useState(false)
 
@@ -24,8 +18,8 @@ function Header({ activePage }: { activePage: string }) {
           sx={{
             flexGrow: 1,
             fontWeight: "bold",
-            color: "rgb(47, 62, 116)",
-            fontFamily: "Barlow",
+            color: "var(--bookflix-logo-color)",
+            fontFamily: "var(--body-font-bookflix)",
             ml: 3,
             fontSize: { xs: 30, sm: 50 },
           }}
@@ -33,65 +27,11 @@ function Header({ activePage }: { activePage: string }) {
           BOOKFLIX
         </Typography>
 
-        <Box display={{ xs: "none", lg: "flex", alignItems: "center" }} gap={{ lg: 1, xl: 5 }}>
+        <Box display={{ xs: "none", lg: "flex", alignItems: "center" }} gap={{ lg: 3, xl: 5 }} mr={5}>
           <HeaderButton buttonText="Trang Chủ" buttonLink="/bookflix" isActivePage={activePage === "TrangChu"} />
           <HeaderButton buttonText="Tìm sách" buttonLink="/bookflix/timsach" isActivePage={activePage === "TimSach"} />
           <HeaderButton buttonText="Góc nhìn mới" buttonLink="/bookflix/gocnhinmoi" isActivePage={activePage === "GocNhinMoi"} />
-
-          <TextField
-            label="Gõ tên sách"
-            variant="outlined"
-            onChange={(e) => setBookSearchValue(e.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                navigate(`/bookflix/TimSach/${bookSearchValue}`)
-              }
-            }}
-            InputLabelProps={{
-              sx: { fontFamily: "Barlow" },
-            }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    component={Link}
-                    to={`/bookflix/TimSach/${bookSearchValue}`}
-                    sx={{
-                      bgcolor: "rgb(47, 62, 116)",
-                      color: "white",
-                      "&:hover": {
-                        bgcolor: "rgb(27, 42, 86)",
-                      },
-                    }}
-                  >
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "50px",
-                backgroundColor: "white",
-                "& fieldset": {
-                  borderColor: "rgb(47, 62, 116)",
-                  borderWidth: "2px",
-                },
-                "&:hover fieldset": {
-                  borderColor: "rgb(47, 62, 116)",
-                  borderWidth: "2px",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "rgb(47, 62, 116)",
-                  borderWidth: "2px",
-                },
-              },
-              "& label.Mui-focused": {
-                color: "rgb(47, 62, 116)",
-              },
-              mr: 5,
-            }}
-          />
+          <TextFieldForBookSearch setBookSearchValue={setBookSearchValue} bookSearchValue={bookSearchValue} />
         </Box>
 
         <IconButton sx={{ display: { xs: "block", lg: "none" } }} onClick={() => setIsHeaderDrawerOpen(true)}>
@@ -111,61 +51,7 @@ function Header({ activePage }: { activePage: string }) {
           <HeaderButton buttonText="Trang Chủ" buttonLink="/bookflix" isActivePage={activePage === "TrangChu"} />
           <HeaderButton buttonText="Tìm sách" buttonLink="/bookflix/timsach" isActivePage={activePage === "TimSach"} />
           <HeaderButton buttonText="Góc nhìn mới" buttonLink="/bookflix/gocnhinmoi" isActivePage={activePage === "GocNhinMoi"} />
-
-          <TextField
-            label="Gõ tên sách"
-            onChange={(e) => setBookSearchValue(e.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                navigate(`/bookflix/TimSach/${bookSearchValue}`)
-              }
-            }}
-            variant="outlined"
-            InputLabelProps={{
-              sx: { fontFamily: "Barlow" },
-            }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    component={Link}
-                    to={`/bookflix/TimSach/${bookSearchValue}`}
-                    sx={{
-                      bgcolor: "rgb(47, 62, 116)",
-                      color: "white",
-                      "&:hover": {
-                        bgcolor: "rgb(27, 42, 86)",
-                      },
-                    }}
-                  >
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "50px",
-                backgroundColor: "white",
-                "& fieldset": {
-                  borderColor: "rgb(47, 62, 116)",
-                  borderWidth: "2px",
-                },
-                "&:hover fieldset": {
-                  borderColor: "rgb(47, 62, 116)",
-                  borderWidth: "2px",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "rgb(47, 62, 116)",
-                  borderWidth: "2px",
-                },
-              },
-              "& label.Mui-focused": {
-                color: "rgb(47, 62, 116)",
-              },
-            }}
-          />
-
+          <TextFieldForBookSearch setBookSearchValue={setBookSearchValue} bookSearchValue={bookSearchValue} />
           <IconButton onClick={() => setIsHeaderDrawerOpen(false)}>
             <ArrowForwardIosIcon />
           </IconButton>

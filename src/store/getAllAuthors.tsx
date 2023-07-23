@@ -10,6 +10,7 @@ const getAllAuthors = () => {
     "Nguyễn Nhật Ánh",
     "Kuroyanagi Tetsuko",
     "Nguyễn Ngọc Thuần",
+    "Miêu Công Tử",
   ]
   return allAuthors
 }

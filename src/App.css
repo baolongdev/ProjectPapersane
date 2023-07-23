@@ -13,6 +13,7 @@
   /*========== Colors ==========*/
   /* ======= Color bookflix ======= */
   --bookflix-background: rgb(249, 243, 238);
+  --bookflix-logo-color: rgb(47, 62, 116);
 
   /*Color mode HSL(hue, saturation, lightness)*/
   --hue: 219;
@@ -30,8 +31,8 @@
 
   /*========== Font and typography ==========*/
   /* =============== Font bookflix =============== */
-  --body-font-bookflix: "Barlow";
-  --normal-font-bookflix: "Playfair Display, serif";
+  --body-font-bookflix: "Barlow", sans-serif;
+  --review-font-bookflix: "Playfair Display", serif;
   /*.5rem = 8px | 1rem = 16px ...*/
   --body-font: "Montserrat", sans-serif;
   --big-font-size: 2rem;

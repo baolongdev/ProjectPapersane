@@ -1,14 +1,10 @@
-import React from "react"
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react"
-
-// import required modules
-import { Autoplay } from "swiper"
 
 // Import Swiper styles
 import "swiper/css"
 import "swiper/css/autoplay"
+
 import { Card, CardContent, CardMedia, Typography } from "@mui/material"
 import { Link } from "react-router-dom"
 
@@ -39,11 +35,7 @@ const BookSlider = ({ booksInfo, cardColor }: { booksInfo: Book[]; cardColor: st
   }
 
   return (
-    <Swiper
-      breakpoints={swiperBreakpoint}
-      //   onSlideChange={() => console.log("slide change")}
-      //   onSwiper={(swiper) => console.log(swiper)}
-    >
+    <Swiper breakpoints={swiperBreakpoint}>
       {booksInfo.map((book) => (
         <SwiperSlide key={book.link}>
           <Link to={book.link}>
@@ -57,8 +49,12 @@ const BookSlider = ({ booksInfo, cardColor }: { booksInfo: Book[]; cardColor: st
             >
               <CardMedia component="img" image={book.imageUrl} alt={book.title} />
               <CardContent>
-                <Typography variant="h5" fontFamily="Barlow, serif" fontWeight="500">{book.title}</Typography>
-                <Typography variant="subtitle1" fontFamily="Barlow, serif">{book.author}</Typography>
+                <Typography variant="h5" fontFamily="var(--body-font-bookflix)" fontWeight="500">
+                  {book.title}
+                </Typography>
+                <Typography variant="subtitle1" fontFamily="var(--body-font-bookflix)">
+                  {book.author}
+                </Typography>
               </CardContent>
             </Card>
           </Link>

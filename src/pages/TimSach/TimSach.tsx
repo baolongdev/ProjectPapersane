@@ -15,10 +15,12 @@ import BookCardResult from "./components/BookCardResult"
 import FilterAutocomplete from "./components/FilterAutocomplete"
 import FilterAutocompleteSingular from "./components/FilterAutocompleteSingular"
 
-import getSearchableBookIds from "../../store/getSearchableBookIds"
 import readJsonFile from "../../store/readJsonFile"
+import getSearchableBookIds from "../../store/getSearchableBookIds"
 import getAllGenres from "../../store/getAllGenres"
 import getAllAuthors from "../../store/getAllAuthors"
+import DatePickerComponent from "./components/DatePickerComponent"
+import TextFieldForBookSearch from "./components/TextFieldForBookSearch"
 
 interface Book {
   id: string
@@ -105,69 +107,16 @@ function TimSach() {
   }, [])
 
   return (
-    <Box bgcolor="rgb(249, 243, 238)" minHeight="100vh" height="100%" width="100%">
+    <Box bgcolor="var(--bookflix-background)" minHeight="100vh" height="100%" width="100%">
       <Header activePage="TimSach" />
 
       <Box display="flex" justifyContent="space-evenly" mt={10}>
         <Box flexBasis={{ xs: "90%", md: "60%" }}>
-          <TextField
-            fullWidth
-            value={bookSearchValue}
-            label="Gõ tên sách"
-            variant="outlined"
-            onChange={(e) => setBookSearchValue(e.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                updateBookSearchedInfo()
-              }
-            }}
-            InputLabelProps={{
-              sx: { fontFamily: "Barlow, sans-serif" },
-            }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Hidden mdUp>
-                    <IconButton onClick={() => setIsFilterDrawerOpen(true)}>
-                      <TuneIcon />
-                    </IconButton>
-                  </Hidden>
-                  <IconButton
-                    onClick={() => updateBookSearchedInfo()}
-                    sx={{
-                      bgcolor: "rgb(47, 62, 116)",
-                      color: "white",
-                      "&:hover": {
-                        bgcolor: "rgb(27, 42, 86)",
-                      },
-                    }}
-                  >
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "50px",
-                backgroundColor: "white",
-                "& fieldset": {
-                  borderColor: "rgb(47, 62, 116)",
-                  borderWidth: "2px",
-                },
-                "&:hover fieldset": {
-                  borderColor: "rgb(47, 62, 116)",
-                  borderWidth: "2px",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "rgb(47, 62, 116)",
-                  borderWidth: "2px",
-                },
-              },
-              "& label.Mui-focused": {
-                color: "rgb(47, 62, 116)",
-              },
-            }}
+          <TextFieldForBookSearch
+            bookSearchValue={bookSearchValue}
+            setBookSearchValue={setBookSearchValue}
+            updateBookSearchedInfo={updateBookSearchedInfo}
+            setIsFilterDrawerOpen={setIsFilterDrawerOpen}
           />
 
           {[...bookSearchedInfo_stringified].map((bookResult) => (
@@ -176,14 +125,7 @@ function TimSach() {
         </Box>
 
         <Box flexBasis="20%" display={{ xs: "none", md: "block" }}>
-          <Typography
-            variant="h4"
-            sx={{
-              color: "rgb(47, 62, 116)",
-              fontWeight: "bold",
-              fontFamily: "Barlow, sans-serif",
-            }}
-          >
+          <Typography variant="h4" color="var(--bookflix-logo-color)" fontWeight="bold" fontFamily="var(--body-font-bookflix)">
             FILTER
           </Typography>
 
@@ -193,104 +135,19 @@ function TimSach() {
 
           <FilterAutocompleteSingular value={filteredAuthor} options={authorsList} placeholder="Tác giả" sx={{ mt: 3 }} onChange={handleAuthorChange} />
 
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: "bold",
-              fontFamily: "Barlow, serif",
-              color: "rgb(47, 62, 116)",
-              mt: 3,
-            }}
-          >
+          <Typography variant="h5" fontWeight="bold" fontFamily="var(--body-font-bookflix)" color="var(--bookflix-logo-color)" mt={3}>
             Xuất bản từ
           </Typography>
 
-          <LocalizationProvider dateAdapter={AdapterDateFns} localeText={{ datePickerToolbarTitle: "Chọn năm", cancelButtonLabel: "Hủy" }}>
-            <DatePicker
-              views={["year"]}
-              value={new Date(filteredStartYear, 0, 1)}
-              onChange={handleFilteredStartYearChange}
-              slotProps={{
-                desktopPaper: {
-                  elevation: 0,
-                },
-                textField: {
-                  fullWidth: true,
-                },
-              }}
-              sx={{
-                mt: 1,
-                bgcolor: "white",
-                flexGrow: 1,
-                borderColor: "transparent",
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "transparent",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "transparent",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "transparent",
-                  },
-                },
-              }}
-            ></DatePicker>
-          </LocalizationProvider>
+          <DatePickerComponent year={filteredStartYear} handleYearChange={handleFilteredStartYearChange} />
 
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: "bold",
-              fontFamily: "Barlow, serif",
-              color: "rgb(47, 62, 116)",
-              mt: 3,
-            }}
-          >
+          <Typography variant="h5" fontWeight="bold" fontFamily="var(--body-font-bookflix)" color="var(--bookflix-logo-color)" mt={3}>
             Đến
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDateFns} localeText={{ datePickerToolbarTitle: "Chọn năm", cancelButtonLabel: "Hủy" }}>
-            <DatePicker
-              views={["year"]}
-              value={new Date(filteredEndYear, 0, 1)}
-              onChange={handleFilteredEndYearChange}
-              slotProps={{
-                desktopPaper: {
-                  elevation: 0,
-                },
-                textField: {
-                  fullWidth: true,
-                },
-              }}
-              sx={{
-                mt: 1,
-                bgcolor: "white",
-                flexGrow: 1,
-                borderColor: "transparent",
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "transparent",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "transparent",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "transparent",
-                  },
-                },
-              }}
-            ></DatePicker>
-          </LocalizationProvider>
 
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: "bold",
-              fontFamily: "Barlow, serif",
-              color: "rgb(47, 62, 116)",
-              mt: 3,
-            }}
-          >
+          <DatePickerComponent year={filteredEndYear} handleYearChange={handleFilteredEndYearChange} />
+
+          <Typography variant="h5" fontWeight="bold" fontFamily="var(--body-font-bookflix)" color="var(--bookflix-logo-color)" mt={3}>
             Đánh giá
           </Typography>
           <Slider value={filteredRating} step={0.25} min={0} max={5} valueLabelDisplay="auto" onChange={handleFilteredRatingChange} sx={{ mt: 1 }} />
@@ -309,15 +166,8 @@ function TimSach() {
           <KeyboardArrowDownIcon fontSize="large" sx={{ mx: "auto" }} />
         </IconButton>
 
-        <Box p={3} bgcolor="rgb(249, 243, 238)">
-          <Typography
-            variant="h4"
-            sx={{
-              color: "rgb(47, 62, 116)",
-              fontWeight: "bold",
-              fontFamily: "Barlow, sans-serif",
-            }}
-          >
+        <Box p={3} bgcolor="var(--bookflix-background)">
+          <Typography variant="h4" color="var(--bookflix-logo-color)" fontWeight="bold" fontFamily="var(--body-font-bookflix)">
             THỂ LOẠI
           </Typography>
 
@@ -327,103 +177,19 @@ function TimSach() {
 
           <FilterAutocompleteSingular value={filteredAuthor} options={authorsList} placeholder="Tác giả" sx={{ mt: 3 }} onChange={handleAuthorChange} />
 
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: "bold",
-              fontFamily: "Barlow, serif",
-              color: "rgb(47, 62, 116)",
-              mt: 3,
-            }}
-          >
+          <Typography variant="h5" fontWeight="bold" fontFamily="var(--body-font-bookflix)" color="var(--bookflix-logo-color)" mt={3}>
             Xuất bản từ
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDateFns} localeText={{ datePickerToolbarTitle: "Chọn năm", cancelButtonLabel: "Hủy" }}>
-            <DatePicker
-              views={["year"]}
-              value={new Date(filteredEndYear, 0, 1)}
-              onChange={handleFilteredStartYearChange}
-              slotProps={{
-                desktopPaper: {
-                  elevation: 0,
-                },
-                textField: {
-                  fullWidth: true,
-                },
-              }}
-              sx={{
-                mt: 1,
-                bgcolor: "white",
-                flexGrow: 1,
-                borderColor: "transparent",
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "transparent",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "transparent",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "transparent",
-                  },
-                },
-              }}
-            ></DatePicker>
-          </LocalizationProvider>
 
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: "bold",
-              fontFamily: "Barlow, sans-serif",
-              color: "rgb(47, 62, 116)",
-              mt: 3,
-            }}
-          >
+          <DatePickerComponent year={filteredStartYear} handleYearChange={handleFilteredStartYearChange} />
+
+          <Typography variant="h5" fontWeight="bold" fontFamily="var(--body-font-bookflix)" color="var(--bookflix-logo-color)" mt={3}>
             Đến
           </Typography>
-          <LocalizationProvider dateAdapter={AdapterDateFns} localeText={{ datePickerToolbarTitle: "Chọn năm", cancelButtonLabel: "Hủy" }}>
-            <DatePicker
-              views={["year"]}
-              value={new Date(filteredEndYear, 0, 1)}
-              onChange={handleFilteredEndYearChange}
-              slotProps={{
-                desktopPaper: {
-                  elevation: 0,
-                },
-                textField: {
-                  fullWidth: true,
-                },
-              }}
-              sx={{
-                mt: 1,
-                bgcolor: "white",
-                flexGrow: 1,
-                borderColor: "transparent",
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "transparent",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "transparent",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "transparent",
-                  },
-                },
-              }}
-            ></DatePicker>
-          </LocalizationProvider>
 
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: "bold",
-              fontFamily: "Barlow, serif",
-              color: "rgb(47, 62, 116)",
-              mt: 3,
-            }}
-          >
+          <DatePickerComponent year={filteredEndYear} handleYearChange={handleFilteredEndYearChange} />
+
+          <Typography variant="h5" fontWeight="bold" fontFamily="var(--body-font-bookflix)" color="var(--bookflix-logo-color)" mt={3}>
             Đánh giá
           </Typography>
           <Slider value={filteredRating} step={0.25} min={0} max={5} valueLabelDisplay="auto" onChange={handleFilteredRatingChange} sx={{ mt: 1 }} />

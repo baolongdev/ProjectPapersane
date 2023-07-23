@@ -39,21 +39,24 @@ function Contact({ initial }: any) {
 
                 <div className="contact__data">
                     <div className="contact__information">
-                        <h3 className="contact__subtitle">Phone</h3>
-                        <span className="contact__description">
-                            <i className="ri-phone-line contact__icon"></i>
-                            070 280 6028 (Cô Phúc)
-                        </span>
-                        <br />
-                        <span className="contact__description">
-                            <i className="ri-phone-line contact__icon"></i>
-                            0944 461 267 (Thầy Phương)
+                        <h3 className="contact__subtitle">Fanpage</h3>
+                        <span className="contact__description"
+                            onClick={() => {
+                                window.open("https://www.facebook.com/doantruongtdn");
+                            }}
+                        >
+                            <i className="ri-facebook-fill contact__icon"></i>
+                            https://www.facebook.com/doantruongtdn
                         </span>
                     </div>
 
                     <div className="contact__information">
                         <h3 className="contact__subtitle">Email</h3>
-                        <span className="contact__description">
+                        <span className="contact__description"
+                            onClick={() => {
+                                window.open("mailto:doantruongtdn@trandainghia.edu.vn");
+                            }}
+                        >
                             <i className="ri-mail-line contact__icon"></i>
                             doantruongtdn@trandainghia.edu.vn
                         </span>
@@ -85,7 +88,7 @@ function Contact({ initial }: any) {
                 </button>
             </form>
         </div>
-    </section>
+    </section >
 }
 
 export default Contact

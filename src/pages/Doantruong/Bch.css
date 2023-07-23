@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   gap: 3rem;
+  padding-bottom: 3.5rem;
 }
 .bch__data {
   display: flex;
@@ -72,6 +73,7 @@
 .bch__img {
 }
 .bch__card-title {
+  text-wrap: nowrap;
   font-size: var(--normal-font-size);
   line-height: 1.75rem;
   font-weight: 700;

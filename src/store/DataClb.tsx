@@ -184,7 +184,7 @@ const DataClb = () => {
         {
             id: "truyenthonghocduongtdn",
             tag: "httt clb",
-            name: "CÂU LẠC BỘ Truyền thông học đường",
+            name: "CÂU LẠC BỘ/Truyền thông học đường",
             link: "https://www.facebook.com/truyenthonghocduongtdn",
             TextColor: " ",
             BgColor: "#FFEED9",
@@ -211,7 +211,7 @@ const DataClb = () => {
         {
             id: "themersyact",
             tag: "khxhda da",
-            name: "Dự án Tâm lý - The Mersy Act",
+            name: "Dự án Tâm lý/The Mersy Act",
             link: "https://www.facebook.com/themersyact",
             TextColor: " ",
             BgColor: "#FDCA48",

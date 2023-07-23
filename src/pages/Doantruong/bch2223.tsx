@@ -77,5 +77,29 @@ const bch2224 = [
         job: " ỦY VIÊN BCH",
         color: "#4672c3",
     },
+    {
+        name: "Lê Tấn Dũng ",
+        class: " 10A1",
+        job: " CỘNG TÁC VIÊN",
+        color: "#4672c3",
+    },
+    {
+        name: "Nguyễn Hoàng Ngọc Linh ",
+        class: " 10CL",
+        job: " CỘNG TÁC VIÊN",
+        color: "#4672c3",
+    },
+    {
+        name: "Trần Ngọc Trà My ",
+        class: " 10CV",
+        job: " CỘNG TÁC VIÊN",
+        color: "#4672c3",
+    },
+    {
+        name: "Trần Thị Yến Nhi ",
+        class: " 10CS",
+        job: " CỘNG TÁC VIÊN",
+        color: "#4672c3",
+    },
 ]
 export default bch2224

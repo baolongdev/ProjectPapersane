@@ -58,7 +58,7 @@ function bch() {
                 </div>
                 <div className='bch__teams gridCol__4'>
                     {
-                        [...Array(8)].map((_, i) => (
+                        [...Array(12)].map((_, i) => (
                             <div key={i} className='bch__card'>
                                 <div className="bch__card-img">
                                     <img src={`/bch/bch2223/${i + 6}.jpg`} alt="" className="bch__img" />

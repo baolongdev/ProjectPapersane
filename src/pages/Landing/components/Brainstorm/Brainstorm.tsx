@@ -120,7 +120,7 @@ function Brainstorm({ initial }: any) {
                 }
             }
             if (count == 6) {
-                result.innerHTML = `You Won! <br/> số lần sai: ${steps}`;
+                result.innerHTML = `YOU WON! <br/> Steps: ${steps}`;
                 startBtn.innerText = "Restart Game"
                 dragContainer.classList.add("hide")
                 stopGame();
@@ -194,7 +194,7 @@ function Brainstorm({ initial }: any) {
     return <section className="brainstorm" id="brainstorm">
         <div className="brainstorm__data">
             <h1 className="brainstorm__title">
-                6 giá trị học hiệu
+                6 core values
             </h1>
         </div>
         <div className="brainstorm__controls">
@@ -207,9 +207,9 @@ function Brainstorm({ initial }: any) {
 
         </div>
 
-        <p className="brainstorm__bq">
+        {/* <p className="brainstorm__bq">
             Website có sử dụng một số hình ảnh từ Câu lạc bộ Truyền thông học đường
-        </p>
+        </p> */}
     </section>
 }
 

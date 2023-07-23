@@ -254,9 +254,9 @@ function Activityhot({ match }: any) {
                     <p className="activityhot__description">
                         {docxText}
                     </p>
-                    <p className="activityhot__bq">
+                    {/* <p className="activityhot__bq">
                         {InitialVariable().activities[linkValues.indexOf(id as string)].bq}
-                    </p>
+                    </p> */}
 
                     {/* {
                         InitialVariable().activities[linkValues.indexOf(id as string)].linkFB && (

@@ -1,0 +1,130 @@
+.trian {
+  max-width: 1200px !important;
+  /* width: 100% !important; */
+}
+
+.trian__card {
+  display: grid;
+  place-items: center;
+  /* background: var(--body-gradient); */
+  padding-block: 4.5rem;
+  border-radius: 1rem;
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
+}
+.card__container {
+  margin-inline: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 2rem;
+  justify-items: center;
+}
+
+.card__article {
+  position: relative;
+  /* background-color: var(--container-color-1); */
+  padding: 2.5rem;
+  border-radius: 2rem;
+  text-align: center;
+  /* box-shadow: 0 20px 24px hsla(235, 32%, 15%, 0.2); */
+  overflow: hidden;
+}
+.card__img {
+  width: 200px;
+  margin-bottom: 1rem;
+  /* border-color: var(--container-color-1);
+  border-style: solid; */
+  border-radius: 1rem;
+
+  /* animation: float-img 2.5s ease-in-out infinite; */
+}
+.card__mission {
+  /* color: #fff; */
+  font-size: var(--h2-font-size);
+  line-height: 100%;
+  margin-bottom: 0.75rem;
+}
+.card__title {
+  /* color: #fff; */
+  font-size: var(--h1-font-size);
+  line-height: 100%;
+  font-weight: 800;
+  /* margin-bottom: 1rem; */
+}
+.card__title2 {
+  /* color: #fff; */
+  font-size: var(--h2-font-size);
+  line-height: 100%;
+  font-weight: 800;
+  /* margin-bottom: 1rem; */
+}
+.card__support {
+  text-align: center;
+  width: 50rem;
+  font-size: var(--h3-font-size);
+}
+.card__name {
+  /* color: #fff; */
+  font-size: var(--h2-font-size);
+  line-height: 100%;
+  text-wrap: nowrap;
+  /* margin-bottom: 1rem; */
+}
+.card__description {
+  font-size: var(--normal-font-size);
+  color: #666b89;
+}
+.card__data {
+  position: relative;
+  z-index: 10;
+}
+
+/* @keyframes float-img {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.75rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+} */
+
+@media screen and (min-width: 340px) {
+  .card__container {
+    grid-template-columns: 150px;
+  }
+  .card__support {
+    width: auto;
+  }
+}
+@media screen and (max-width: 340px) {
+  .card__support {
+    width: auto;
+  }
+}
+@media screen and (min-width: 768px) {
+  .card__container {
+    grid-template-columns: repeat(2, 328px);
+    column-gap: 2rem;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .trian__card {
+    height: 100vh;
+  }
+  .card__container {
+    grid-template-columns: repeat(3, 328px);
+  }
+}
+
+#canvas {
+  /* background-color: rgb(17, 17, 22); */
+  position: absolute;
+}
+.card__title,
+.card__title2,
+.card__support {
+  z-index: 1;
+}

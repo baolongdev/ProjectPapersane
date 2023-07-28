@@ -27,6 +27,13 @@
   --text-color: hsl(var(--hue), 4%, 35%);
   --text-color-light: hsl(var(--hue), 4%, 55%);
   --body-color: hsl(var(--hue), 0%, 100%);
+  --shape-gradient: linear-gradient(
+    90deg,
+    hsl(300, 76%, 60%),
+    hsl(57, 81%, 60%)
+  );
+  --body-gradient: linear-gradient(180deg, #bdbdbd, #d3d3d3);
+  --container-color-1: hsl(235, 32%, 10%);
   --container-color: #fff;
 
   /*========== Font and typography ==========*/
@@ -138,8 +145,7 @@ body.dark-theme {
 
 /*========== Button Dark/Light ==========*/
 .change-theme {
-  color: #fff;
-  /* color: var(--title-color); */
+  color: var(--title-color);
   font-size: 1.15rem;
   cursor: pointer;
 }

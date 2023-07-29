@@ -11,6 +11,7 @@ const getAllAuthors = () => {
     "Kuroyanagi Tetsuko",
     "Nguyễn Ngọc Thuần",
     "Miêu Công Tử",
+    "John Green",
   ]
   return allAuthors
 }

@@ -12,6 +12,8 @@ const getAllGenres = () => {
     "Giáo dục",
     "Truyện dài",
     "Kỹ năng sống",
+    "Tiểu thuyết dành cho giới trẻ",
+    "Tiểu thuyết lãng mạn",
   ]
   return allGenres
 }

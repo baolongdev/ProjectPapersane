@@ -21,6 +21,7 @@ function BaiVietGocNhinMoi() {
   const [articlePublishDate, setArticlePublishDate] = useState("")
   const [articleAvatarURL, setArticleAvatarURL] = useState("")
   const [articleParts, setArticleParts] = useState<string[]>([])
+  const [scrollHeightState, setScrollHeightState] = useState(document.documentElement.scrollHeight)
 
   const boxNeedsPinning = useRef(null)
 
@@ -35,6 +36,18 @@ function BaiVietGocNhinMoi() {
 
     return () => {
       window.removeEventListener("resize", handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScrollHeightState(document.documentElement.scrollHeight)
+    }
+
+    window.addEventListener("scroll", handleResize)
+
+    return () => {
+      window.removeEventListener("scroll", handleResize)
     }
   })
 
@@ -55,12 +68,13 @@ function BaiVietGocNhinMoi() {
   // scrolltrigger to make góc nhìn mới stay pin
   useEffect(() => {
     let mm = gsap.matchMedia()
+    console.log(scrollHeightState)
     mm.add("(min-width: 900px)", () => {
       gsap.to(boxNeedsPinning.current, {
         scrollTrigger: {
           trigger: boxNeedsPinning.current,
           //markers: true,
-          start: "top 10px",
+          start: "top 20px",
           pin: true,
           pinSpacing: false,
         },
@@ -68,7 +82,7 @@ function BaiVietGocNhinMoi() {
     })
 
     return () => mm.revert()
-  })
+  }, [scrollHeightState])
 
   return (
     <Box bgcolor="var(--bookflix-background)" minHeight="100vh" height="100%" width="100%">

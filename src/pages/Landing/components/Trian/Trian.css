@@ -72,7 +72,6 @@
 }
 .card__description {
   font-size: var(--normal-font-size);
-  color: #666b89;
 }
 .card__data {
   position: relative;
@@ -119,12 +118,20 @@
   }
 }
 
-#canvas {
-  /* background-color: rgb(17, 17, 22); */
+.trian__effect {
+  background-color: #ffc46f;
   position: absolute;
 }
 .card__title,
 .card__title2,
 .card__support {
   z-index: 1;
+}
+.card__description,
+.card__title,
+.card__title2,
+.card__support,
+.card__name,
+.card__mission {
+  color: #000;
 }

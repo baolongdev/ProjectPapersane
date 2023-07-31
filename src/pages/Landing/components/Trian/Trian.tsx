@@ -1,191 +1,387 @@
-import React, { useEffect, useRef } from 'react';
-
+import React, { useEffect, useRef, useState } from 'react';
+import { Observable, fromEvent, merge } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { TweenLite, Power1 } from 'gsap';
 import { trian } from '../../../../store';
 import "./Trian.css"
 
-
-interface Ball {
-    x: number;
-    y: number;
-    radius: number;
-    color: string;
-    speedX: number;
-    speedY: number;
-    update: () => void;
-    draw: () => void;
+enum SquiggleState {
+    ready,
+    animating,
+    ended
 }
 
-interface Circle {
+interface Position {
     x: number;
     y: number;
-    radius: number;
-    color: string;
-    lineWidth: number;
-    update: () => void;
-    draw: () => void;
 }
 
-const colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'];
+interface SquiggleSet {
+    path: SVGPathElement;
+    settings: SquiggleSettings;
+}
+
+interface SquiggleSettings {
+    x: number;
+    y: number;
+    directionX: number;
+    directionY: number;
+    length?: number;
+    sections: number;
+    width?: number;
+    chunkLength?: number;
+    color?: string;
+    progress?: number;
+    opacity?: number;
+}
 
 
 function Trian() {
     const trianData = trian.trianData
     const trianDatalist = trian.trianDatalist
-    const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const cardRef = useRef<HTMLDivElement | null>(null);
+    const boxRef = useRef<HTMLDivElement | null>(null);
+    const effectRef = useRef<HTMLDivElement | null>(null);
+    const svgRef = useRef<SVGSVGElement | null>(null);
+    const [boxWidth, setBoxWidth] = useState<number>(0);
+    const [boxHeight, setBoxHeight] = useState<number>(0);
+
+    class Squiggle {
+        private grid: number;
+        private stage: SVGSVGElement;
+        private sqwig!: SVGPathElement;
+        private sqwigs: SquiggleSet[] = [];
+        private settings!: SquiggleSettings;
+        public state: SquiggleState = SquiggleState.ready;
+
+        constructor(stage: SVGSVGElement, settings: SquiggleSettings, grid: number) {
+            this.grid = grid;
+            this.stage = stage;
+
+            settings.width = 0;
+            settings.opacity = 1;
+
+            this.state = SquiggleState.animating;
+            let path = this.createLine(settings);
+            let sqwigCount: number = 3;
+            for (let i = 0; i < sqwigCount; i++) {
+                this.createSqwig(i, sqwigCount, path, JSON.parse(JSON.stringify(settings)) as SquiggleSettings, i == sqwigCount - 1)
+            }
+        }
+
+        createSqwig(index: number, total: number, path: string, settings: SquiggleSettings, forceWhite: boolean) {
+            let sqwig = document.createElementNS("http://www.w3.org/2000/svg", 'path')
+            sqwig.setAttribute('d', path)
+            sqwig.style.fill = 'none';
+            sqwig.style.stroke = forceWhite ? '#303030' : this.getColor();
+            sqwig.style.strokeLinecap = "round"
+
+            settings.length = sqwig.getTotalLength();
+            settings.chunkLength = settings.length / 6; //(settings.sections * 2) + (Math.random() * 40);
+            settings.progress = settings.chunkLength;
+
+            sqwig.style.strokeDasharray = `${settings.chunkLength}, ${settings.length + settings.chunkLength}`
+            sqwig.style.strokeDashoffset = `${settings.progress}`
+
+            this.stage.appendChild(sqwig);
+
+            this.sqwigs.unshift({ path: sqwig, settings: settings });
+
+            TweenLite.to(settings, settings.sections * 0.1, {
+                progress: - settings.length,
+                width: settings.sections * 0.9,
+                ease: Power1.easeOut,
+                delay: index * (settings.sections * 0.01),
+                onComplete: () => {
+                    if (index = total - 1) this.state = SquiggleState.ended;
+                    sqwig.remove();
+                }
+            })
+        }
+
+        public update() {
+            this.sqwigs.map((set: SquiggleSet) => {
+                set.path.style.strokeDashoffset = `${set.settings.progress}`;
+                set.path.style.strokeWidth = `${set.settings.width}px`;
+                set.path.style.opacity = `${set.settings.opacity}`;
+            })
+
+        }
+
+        private createLine(settings: SquiggleSettings): string {
+            let x = settings.x;
+            let y = settings.y;
+            let dx = settings.directionX;
+            let dy = settings.directionY;
+            let path: string[] = [
+                'M',
+                '' + x,
+                '' + y,
+                "Q"
+            ];
+
+            let steps = settings.sections;
+            let step = 0;
+            let getNewDirection = (direction: string, goAnywhere: boolean) => {
+                if (!goAnywhere && settings.directionX !== 0) return settings.directionX;
+                return Math.random() < 0.5 ? -1 : 1;
+            };
+
+            while (step < steps * 2) {
+                step++;
+                x += (dx * (step / 30)) * this.grid;
+                y += (dy * (step / 30)) * this.grid;
+                if (step !== 1) path.push(',');
+                path.push('' + x);
+                path.push('' + y);
+
+                if (step % 2 !== 0) {
+                    dx = dx === 0 ? getNewDirection('x', step > 8) : 0;
+                    dy = dy === 0 ? getNewDirection('y', step > 8) : 0;
+                }
+            }
+
+            return path.join(' ');
+        }
+
+        private getColor(): string {
+            let offset = Math.round(Math.random() * 100)
+            var r = Math.sin(0.3 * offset) * 100 + 155;
+            var g = Math.sin(0.3 * offset + 2) * 100 + 155;
+            var b = Math.sin(0.3 * offset + 4) * 100 + 155;
+            return "#" + this.componentToHex(r) + this.componentToHex(g) + this.componentToHex(b);
+        }
+
+        private componentToHex(c: number) {
+            var hex = Math.round(c).toString(16);
+            return hex.length == 1 ? "0" + hex : hex;
+        }
+    }
+
+    class App {
+        private container: HTMLElement;
+        private svg: SVGSVGElement;
+        private squiggles: Squiggle[] = [];
+
+        private width: number = 600;
+        private height: number = 600;
+
+        private lastMousePosition: Position = { x: 0, y: 0 };
+        private direction!: Position;
+
+        private grid: number = 40;
+
+        constructor(container: HTMLElement) {
+            this.container = container;
+            this.svg = svgRef.current as SVGSVGElement;
+            this.onResize();
+
+            this.tick();
+
+            let input = new Input(this.container);
+
+            input.moves.subscribe((position: Position) => {
+                for (let i = 0; i < 3; i++) this.createSqwigFromMouse(position);
+            })
+
+            input.starts.subscribe((position: Position) => this.lastMousePosition = position)
+            input.ends.subscribe((position: Position) => this.burst(true))
+
+            if (location.pathname.match(/fullcpgrid/i)) setInterval(() => this.burst(false), 1000);
+
+            new Observable((observer) => {
+                const handleResize = () => {
+                    this.onResize();
+                    observer.next(); // Emit a value to signal the event
+                };
+
+                window.addEventListener("resize", handleResize);
+
+                // Cleanup the event listener on unsubscription
+                return () => {
+                    window.removeEventListener("resize", handleResize);
+                };
+            }).subscribe();
+        }
+
+        burst(fromMouse: boolean = false) {
+            for (let i = 0; i < 5; i++) this.createRandomSqwig(fromMouse);
+        }
+
+        createSqwigFromMouse(position: Position) {
+            let sections: number = 4;
+            if (this.lastMousePosition) {
+                let newDirection: Position = { x: 0, y: 0 };
+                let xAmount = Math.abs(this.lastMousePosition.x - position.x);
+                let yAmount = Math.abs(this.lastMousePosition.y - position.y);
+
+                if (xAmount > yAmount) {
+                    newDirection.x = this.lastMousePosition.x - position.x < 0 ? 1 : -1;
+                    sections += Math.round(xAmount / 4)
+                }
+                else {
+                    newDirection.y = this.lastMousePosition.y - position.y < 0 ? 1 : -1;
+                    sections += Math.round(yAmount / 4)
+                }
+                this.direction = newDirection;
+            }
+
+            if (this.direction) {
+                let settings: SquiggleSettings = {
+                    x: this.lastMousePosition.x,
+                    y: this.lastMousePosition.y,
+                    directionX: this.direction.x,
+                    directionY: this.direction.y,
+                    sections: sections > 20 ? 20 : sections
+                }
+                let newSqwig = new Squiggle(this.svg, settings, 10 + Math.random() * (sections * 1.5));
+                this.squiggles.push(newSqwig);
+            }
+
+            this.lastMousePosition = position;
+        }
+
+        createRandomSqwig(fromMouse: boolean = false) {
+            let dx = Math.random();
+            if (dx > 0.5) dx = dx > 0.75 ? 1 : -1;
+            else dx = 0;
+            let dy = 0;
+            if (dx == 0) dx = Math.random() > 0.5 ? 1 : -1;
+
+            let settings: SquiggleSettings = {
+                x: fromMouse ? this.lastMousePosition.x : this.width / 2, // Math.round(Math.random() * (this.width / this.grid))  * this.grid,
+                y: fromMouse ? this.lastMousePosition.y : this.height / 2, //Math.round(Math.random() * (this.height / this.grid)) * this.grid,
+                directionX: dx,
+                directionY: dy,
+                sections: 5 + Math.round(Math.random() * 15)
+            }
+            let newSqwig = new Squiggle(this.svg, settings, this.grid / 2 + Math.random() * this.grid / 2);
+            this.squiggles.push(newSqwig);
+        }
+
+        onResize() {
+            if (this.container && this.container.clientWidth && this.container.clientHeight) {
+                this.width = this.container.clientWidth;
+                this.height = this.container.clientHeight;
+
+                this.svg.setAttribute('width', String(this.width));
+                this.svg.setAttribute('height', String(this.height));
+            }
+        }
+
+        tick() {
+            let step = this.squiggles.length - 1;
+
+            while (step >= 0) {
+                if (this.squiggles[step].state != SquiggleState.ended) {
+                    this.squiggles[step].update();
+
+                }
+                else {
+                    // this.squiggles[step] = null;
+                    this.squiggles.splice(step, 1);
+                }
+
+                --step;
+            }
+
+            requestAnimationFrame(() => this.tick());
+        }
+    }
+
+    class Input {
+        private mouseDowns: Observable<Position>;
+        private mouseMoves: Observable<Position>;
+        private mouseUps: Observable<Position>;
+
+        private touchStarts: Observable<Position>;
+        private touchMoves: Observable<Position>;
+        private touchEnds: Observable<Position>;
+
+        public starts: Observable<Position>;
+        public moves: Observable<Position>;
+        public ends: Observable<Position>;
+
+        constructor(element: HTMLElement) {
+            this.mouseDowns = fromEvent<MouseEvent>(element, "mousedown").pipe(map(this.mouseEventToCoordinate));
+            this.mouseMoves = fromEvent<MouseEvent>(window, "mousemove").pipe(map(this.mouseEventToCoordinate));
+            this.mouseUps = fromEvent<MouseEvent>(window, "mouseup").pipe(map(this.mouseEventToCoordinate));
+
+            this.touchStarts = fromEvent<TouchEvent>(element, "touchstart").pipe(map(this.touchEventToCoordinate));
+            this.touchMoves = fromEvent<TouchEvent>(element, "touchmove").pipe(map(this.touchEventToCoordinate));
+            this.touchEnds = fromEvent<TouchEvent>(window, "touchend").pipe(map(this.touchEventToCoordinate));
+
+            this.starts = merge(this.mouseDowns, this.touchStarts);
+            this.moves = merge(this.mouseMoves, this.touchMoves);
+            this.ends = merge(this.mouseUps, this.touchEnds);
+        }
+
+        private mouseEventToCoordinate = (mouseEvent: MouseEvent) => {
+            mouseEvent.preventDefault();
+            return {
+                x: mouseEvent.clientX,
+                y: mouseEvent.clientY
+            };
+        };
+
+        private touchEventToCoordinate = (touchEvent: TouchEvent) => {
+            touchEvent.preventDefault();
+            return {
+                x: touchEvent.changedTouches[0].clientX,
+                y: touchEvent.changedTouches[0].clientY
+            };
+        };
+    }
+
+    let container = effectRef.current as HTMLElement;
+    if (container) {
+        let app = new App(container);
+    }
+
 
     useEffect(() => {
-        if (canvasRef.current) {
-            const canvas = canvasRef.current;
-            const context = canvas.getContext('2d');
-            const card = cardRef.current; // Get the .trian__card element
+        if (boxRef.current) {
+            const boxElement = boxRef.current;
 
-            // Set canvas dimensions to match .trian__card dimensions
-            canvas.width = card?.clientWidth || 0;
-            canvas.height = card?.clientHeight || 0;
+            // Function to update dimensions
+            const updateDimensions = () => {
+                setBoxWidth(boxElement.clientWidth);
+                setBoxHeight(boxElement.clientHeight);
+            };
 
-            let ballsArray: Ball[] = [];
-            let circlesArray: Circle[] = [];
+            // Initial update of dimensions
+            updateDimensions();
 
-            function Balls(this: Ball, x: number, y: number) {
+            // Add event listener for window resize
+            window.addEventListener('resize', updateDimensions);
 
-                this.x = x;
-                this.y = y;
-                this.radius = 20;
-                this.color = colors[Math.round(Math.random() * colors.length)];
-
-                //Speed of moving the balls position
-                this.speedX = Math.random() * 3 - 1.5;
-                this.speedY = Math.random() * 3 - 1.5;
-
-                this.update = () => {
-                    //If conditions are used to show a classic effect of balls
-                    if (this.radius >= 10) {
-                        this.x += this.speedX * 5;
-                        this.y += this.speedY * 5;
-                    }
-                    if (this.radius <= 9) {
-                        this.x += this.speedX * 2;
-                        this.y += this.speedY * 2;
-                    }
-                    if (this.radius > 4) {
-                        this.radius -= .7;
-                    }
-                    if (this.radius < 4) {
-                        this.radius -= .2;
-                    }
-                }
-
-                //Draw to render the balls on the canvas
-                this.draw = () => {
-                    if (context) {
-                        console.log(context);
-                        context.fillStyle = this.color;
-                        context.beginPath();
-                        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                        context.fill();
-                    }
-                };
-            }
-
-            //Function to render all the balls in the ball array
-            function renderBalls() {
-                for (let i = 0; i < ballsArray.length; i++) {
-                    ballsArray[i].draw();
-                    ballsArray[i].update();
-                    //Slice the ball when ball radius is less then .1
-                    if (ballsArray[i].radius <= .1) {
-                        ballsArray.splice(i, 1);
-                        i--;
-                    }
-                }
-            }
-
-            function Circle(this: Circle, x: number, y: number) {
-                this.x = x;
-                this.y = y;
-                this.radius = 1;
-                this.color = `rgba(255,255,255,.3)`;
-                //Circle stroke
-                this.lineWidth = 2;
-
-                this.update = () => {
-                    //If Condition for classic circle effect
-                    if (this.radius < 60) {
-                        this.radius += 10
-                    }
-                    if (this.radius > 60) {
-                        this.radius += 2;
-                        this.color = `rgba(255,255,255,.1)`;
-                    }
-                }
-
-                this.draw = () => {
-                    if (context) {
-                        context.strokeStyle = this.color;
-                        context.beginPath();
-                        context.lineWidth = this.lineWidth;
-                        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                        context.stroke();
-                    }
-                }
-            }
-
-            //Render function for circles to render all the circles in the circle array
-            function renderCircles() {
-                for (let i = 0; i < circlesArray.length; i++) {
-                    circlesArray[i].draw();
-                    circlesArray[i].update();
-                    if (circlesArray[i].radius >= 100) {
-                        circlesArray.splice(i, 1);
-                        i--;
-                    }
-                }
-            }
-
-            //Animate Function
-            function animate() {
-                if (context) {
-                    context.fillStyle = `rgba(255, 255, 255, 1)`;
-                    context.fillRect(0, 0, canvas.width, canvas.height);
-                    renderBalls();
-                    renderCircles();
-                    requestAnimationFrame(animate);
-                }
-            }
-
-            let mouseX = 0;
-            let mouseY = 0;
-
-            canvas.addEventListener('click', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                circlesArray.push(new (Circle as any)(mouseX, mouseY)); // Type assertion as any
-                // Push 20 Balls in the array and render on the canvas
-                for (let i = 0; i < 20; i++) {
-                    ballsArray.push(new (Balls as any)(mouseX, mouseY)); // Type assertion as any
-                }
-            });
-
-
-
-            // ... (rest of the functions and animate function)
-
-            // Always call the animate function at the bottom of the code!
-            animate();
+            // Clean up the event listener when component unmounts
+            return () => {
+                window.removeEventListener('resize', updateDimensions);
+            };
         }
-    }, []);
+    }, [boxRef]);
 
+    useEffect(() => {
+        if (effectRef.current && boxWidth && boxHeight) {
+            const effectElement = effectRef.current;
 
-    return <div ref={cardRef} className="trian__box">
-        <canvas id="canvas" ref={canvasRef}></canvas>
+            // Set the width and height of the effectRef element to match the boxRef dimensions
+            effectElement.style.width = `${boxWidth}px`;
+            effectElement.style.height = `${boxHeight}px`;
+        }
+    }, [boxWidth, boxHeight]);
+
+    return <div ref={boxRef} className="trian__box">
+        <div ref={effectRef} className="trian__effect">
+            <svg ref={svgRef} id="stage" width="200" height="200" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
         <section className="trian section container" id="trian">
             <div className="trian__card">
                 <h1 className="card__title"> OUR TEAM</h1>
                 <div className="card__container">
                     {
                         trianData.map((data, i) => (
-                            <article className="card__article">
+                            <article key={i} className="card__article">
                                 <div className="card__data">
                                     <h1 className="card__mission">{data.mission}</h1>
                                     <img src={`./trian/${data.id}.jpg`} alt="card image" className="card__img" />

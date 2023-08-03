@@ -65,7 +65,7 @@ function Header({ initial }: any) {
     return <header className="header" id="header">
         <nav className="nav container">
             <a href="#" className="nav__logo">
-                <img src="/LogoDoan.png" className='nav__logo-icon' alt="" />
+                <img src="/bch/LogoDoan.png" className='nav__logo-icon' alt="" />
                 Đoàn trường THPT chuyên <br /> Trần Đại Nghĩa
                 {/* <i className="ri-leaf-line nav__logo-icon"></i> */}
             </a>

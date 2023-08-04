@@ -28,7 +28,7 @@ function BookflixLanding() {
   }, [])
 
   const date0 = new Date(2023, 6, 13)
-  const daysSinceDate0 = new Date().getDate() - date0.getDate()
+  const daysSinceDate0 = Math.round((new Date().getTime() - date0.getTime()) / (1000*60*60*24))
   const quoteIdx = daysSinceDate0 % 100
 
   const TopRatedBookInfo = getBookInfoForTopRatedSwiper()

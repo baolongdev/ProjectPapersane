@@ -1,13 +1,19 @@
 const getBookIdsForSurpriseMeSwiper = () => {
   const ids = [
-    "BayLoaiHinhThongMinh",
-    "CayCamNgotCuaToi",
-    "ConGaiCuaChimPhuongHoang",
-    "Ikigai",
-    "MeCungTrongThuVienCuaNgaiLemoncello",
-    "NhatKyChuBeNhuNhat",
-    "Sapiens",
-    "YeuNhungDieuKhongHoanHao",
+    "CaPheCungTony",
+    "ChinChinChinLaThuGuiChoChinhMinhTapMot",
+    "ChuaRuoi",
+    "ChuBeCoTaiMoKhoa",
+    "DaoMongMo",
+    "DiQuaHaiMuaDich",
+    "KhiLoiThuocVeNhungViSao",
+    "SachNguocDoiXuoi",
+    "TatDen",
+    "TiengGoiNoiHoangDa",
+    "TottoChanBenOCuaSo",
+    "VuaMoMatVuaMoCuaSo",
+    "VoVanKietNguoiThapLua",
+    "KinhChaoTheHeThuTu",
   ]
   return ids
 }

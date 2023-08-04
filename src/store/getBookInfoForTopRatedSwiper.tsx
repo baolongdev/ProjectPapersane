@@ -1,6 +1,12 @@
 const getBookInfoForTopRatedSwiper = () => {
   const info = [
     {
+      title: "Võ Văn Kiệt: Người thắp lửa",
+      author: "Nhiều tác giả",
+      imageUrl: "/bookflix-searchable-book-info/VoVanKietNguoiThapLua/cover.png",
+      link: "/bookflix/bookinfo/VoVanKietNguoiThapLua",
+    },
+    {
       title: "Totto-chan bên cửa sổ",
       author: "Kuroyanagi Tetsuko",
       imageUrl: "/bookflix-searchable-book-info/TottoChanBenOCuaSo/cover.png",

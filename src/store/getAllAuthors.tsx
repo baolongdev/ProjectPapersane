@@ -12,6 +12,8 @@ const getAllAuthors = () => {
     "Nguyễn Ngọc Thuần",
     "Miêu Công Tử",
     "John Green",
+    "Nhiều tác giả",
+    "Võ Văn Kiệt",
   ]
   return allAuthors
 }

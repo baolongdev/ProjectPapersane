@@ -14,6 +14,7 @@ const getAllGenres = () => {
     "Kỹ năng sống",
     "Tiểu thuyết dành cho giới trẻ",
     "Tiểu thuyết lãng mạn",
+    "Tổng hợp các bài phát biểu của cố Thủ tướng Võ Văn Kiệt",
   ]
   return allGenres
 }

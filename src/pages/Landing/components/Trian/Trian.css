@@ -68,7 +68,13 @@
   padding: 0 2rem;
 }
 .card__description {
-  font-size: var(--h2-font-size);
+  font-size: var(--h3-font-size);
+  line-height: 120%;
+  margin-bottom: 3rem;
+  padding: 0 2rem;
+}
+.card__class {
+  font-size: var(--h3-font-size);
   line-height: 120%;
   margin-bottom: 3rem;
   padding: 0 2rem;
@@ -140,18 +146,14 @@
   background-color: #ffc46f;
   position: absolute;
 }
-.card__title,
-.card__title2,
-.card__support,
-.card__description {
-  z-index: 1;
-}
+
 .card__description,
 .card__title,
 .card__title2,
 .card__support,
 .card__name,
 .card__mission,
+.card__class,
 .card__description {
   color: #000;
 }

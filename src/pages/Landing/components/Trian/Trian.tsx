@@ -398,7 +398,7 @@ function Trian() {
                                         ))
                                     }</h1> */}
                                     <h1 className="card__name">{data.title}</h1>
-                                    <p className="card__description">{data.aboutTitle}</p>
+                                    <p className="card__class">{data.aboutTitle}</p>
                                 </div>
                             </article>
                         ))
@@ -407,7 +407,7 @@ function Trian() {
             </div>
             <p className="card__support">
                 <span className="card__support-bold">
-                    Và các bạn chiến sĩ thuộc đội hình chuyên Công dân số:
+                    Và các bạn chiến sĩ thuộc đội hình chuyên Công dân số:&nbsp;
                 </span>
                 Anh Thư (CH 2124), Quỳnh Vy (CA2 2225), Gia Huy (TH3 2124), Linh Mai (CA2 2225), Vy An (CH 2124), Phương Linh (CH 2124), Hoàng Thư (CH 2124)</p>
         </div>
